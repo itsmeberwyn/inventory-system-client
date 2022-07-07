@@ -7,11 +7,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material.modules';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
+// global components
 import { LoginInventoryComponent } from './login-inventory/login-inventory.component';
-import { MainComponent } from './main/main.component';
+
+// module components
+import { MainInventoryComponent } from './main-inventory/main-inventory.component';
+import { MainPointofsaleComponent } from './main-pointofsale/main-pointofsale.component';
+import { MainSalesreportComponent } from './main-salesreport/main-salesreport.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginInventoryComponent, MainComponent],
+  declarations: [
+    AppComponent,
+    LoginInventoryComponent,
+    MainInventoryComponent,
+    MainPointofsaleComponent,
+    MainSalesreportComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

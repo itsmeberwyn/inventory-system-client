@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css'],
+  selector: 'app-main-inventory',
+  templateUrl: './main-inventory.component.html',
+  styleUrls: ['./main-inventory.component.css'],
 })
-export class MainComponent implements OnInit {
+export class MainInventoryComponent implements OnInit {
   @ViewChild('drawer') drawer: any;
 
   isExpanded = false;
