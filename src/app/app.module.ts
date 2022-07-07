@@ -15,6 +15,8 @@ import { MainInventoryComponent } from './main-inventory/main-inventory.componen
 import { MainPointofsaleComponent } from './main-pointofsale/main-pointofsale.component';
 import { MainSalesreportComponent } from './main-salesreport/main-salesreport.component';
 
+import { SidebarComponent } from './reusable/sidebar/sidebar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,7 @@ import { MainSalesreportComponent } from './main-salesreport/main-salesreport.co
     MainInventoryComponent,
     MainPointofsaleComponent,
     MainSalesreportComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

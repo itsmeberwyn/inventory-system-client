@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main-inventory',
@@ -6,16 +6,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./main-inventory.component.css'],
 })
 export class MainInventoryComponent implements OnInit {
-  @ViewChild('drawer') drawer: any;
-
-  isExpanded = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit(): void {}
-
-  ngAfterViewInit() {
-    this.drawer.toggle();
-    this.cdr.detectChanges();
-  }
 }
