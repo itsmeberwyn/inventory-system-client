@@ -14,6 +14,8 @@ import { LoginInventoryComponent } from './login-inventory/login-inventory.compo
 import { MainInventoryComponent } from './main-inventory/main-inventory.component';
 import { MainPointofsaleComponent } from './main-pointofsale/main-pointofsale.component';
 import { MainSalesreportComponent } from './main-salesreport/main-salesreport.component';
+import { LoginPointofsaleComponent } from './login-pointofsale/login-pointofsale.component';
+import { LoginSalesreportComponent } from './login-salesreport/login-salesreport.component';
 
 import { SidebarComponent } from './reusable/sidebar/sidebar.component';
 
@@ -25,6 +27,8 @@ import { SidebarComponent } from './reusable/sidebar/sidebar.component';
     MainPointofsaleComponent,
     MainSalesreportComponent,
     SidebarComponent,
+    LoginPointofsaleComponent,
+    LoginSalesreportComponent,
   ],
   imports: [
     BrowserModule,

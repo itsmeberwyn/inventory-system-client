@@ -1,10 +1,15 @@
-import { MainSalesreportComponent } from './main-salesreport/main-salesreport.component';
-import { MainPointofsaleComponent } from './main-pointofsale/main-pointofsale.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MainInventoryComponent } from './main-inventory/main-inventory.component';
+// login component
 import { LoginInventoryComponent } from './login-inventory/login-inventory.component';
+import { LoginSalesreportComponent } from './login-salesreport/login-salesreport.component';
+import { LoginPointofsaleComponent } from './login-pointofsale/login-pointofsale.component';
+
+// main component
+import { MainInventoryComponent } from './main-inventory/main-inventory.component';
+import { MainSalesreportComponent } from './main-salesreport/main-salesreport.component';
+import { MainPointofsaleComponent } from './main-pointofsale/main-pointofsale.component';
 
 const routes: Routes = [
   {
@@ -49,6 +54,14 @@ const routes: Routes = [
   {
     path: '',
     component: LoginInventoryComponent,
+  },
+  {
+    path: 'pos-login',
+    component: LoginPointofsaleComponent,
+  },
+  {
+    path: 'sr-login',
+    component: LoginSalesreportComponent,
   },
 ];
 
