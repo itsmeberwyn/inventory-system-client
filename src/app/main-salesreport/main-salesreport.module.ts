@@ -5,9 +5,16 @@ import { MainSalesReportRoutingComponent } from './main-salesreport.routing.modu
 import { MaterialModule } from '../modules/material.modules';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { RevenueComponent } from './revenue/revenue.component';
+import { GrowthComponent } from './growth/growth.component';
+import { ReportComponent } from './report/report.component';
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [
+    DashboardComponent,
+    RevenueComponent,
+    GrowthComponent,
+    ReportComponent,
+  ],
   imports: [CommonModule, MaterialModule, MainSalesReportRoutingComponent],
 })
 export class MainSalesReportModule {}
