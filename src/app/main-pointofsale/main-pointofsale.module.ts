@@ -5,9 +5,10 @@ import { MainPointofSaleRoutingComponent } from './main-pointofsale.routing.modu
 import { MaterialModule } from '../modules/material.modules';
 
 import { HomeComponent } from './home/home.component';
-
+import { ProductsComponent } from './products/products.component';
+import { OrdersComponent } from './orders/orders.component';
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, ProductsComponent, OrdersComponent],
   imports: [CommonModule, MaterialModule, MainPointofSaleRoutingComponent],
 })
 export class MainPointofSaleModule {}
