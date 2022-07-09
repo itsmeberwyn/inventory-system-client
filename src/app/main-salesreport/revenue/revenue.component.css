@@ -1,0 +1,36 @@
+.bottom__container {
+  min-height: 280px;
+  max-height: 300px;
+  background-color: aqua;
+  /* width: 50%; */
+}
+
+h3 {
+  color: #5464ef;
+}
+
+.table {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.table thead th {
+  border-bottom: 2px solid #f1f1f1;
+}
+
+.table th {
+  color: #1c1c1c;
+}
+
+.table td {
+  color: #777777;
+}
+
+.table__container {
+  height: 220px;
+}
+
+.stick__header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
