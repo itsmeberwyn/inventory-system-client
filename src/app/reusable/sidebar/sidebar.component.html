@@ -1,5 +1,10 @@
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
+  <mat-drawer
+    [ngStyle]="isExpanded ? { width: '170px' } : { width: '75px' }"
+    #drawer
+    class="example-sidenav"
+    mode="side"
+  >
     <button
       mat-mini-fab
       (click)="isExpanded = !isExpanded"
@@ -9,22 +14,56 @@
       <mat-icon aria-label="Menu">menu</mat-icon>
     </button>
 
-    <mat-nav-list>
-      <mat-list-item>
+    <mat-nav-list *ngIf="currentRoute === 'inventory'" class="ms-1">
+      <mat-list-item routerLink="/inventory/">
         <mat-icon mat-list-icon>person</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Management A</h4>
+        <h4 mat-line *ngIf="isExpanded">Home</h4>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/inventory/product">
         <mat-icon mat-list-icon>assignment</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Management B</h4>
+        <h4 mat-line *ngIf="isExpanded">Product</h4>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/inventory/purchase">
         <mat-icon mat-list-icon>domain</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Management C</h4>
+        <h4 mat-line *ngIf="isExpanded">Purchase</h4>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/inventory/supplier">
         <mat-icon mat-list-icon>folder_shared</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Management X</h4>
+        <h4 mat-line *ngIf="isExpanded">Supplier</h4>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <mat-nav-list *ngIf="currentRoute === 'pointofsale'" class="ms-1">
+      <mat-list-item routerLink="/pointofsale/">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <h4 mat-line *ngIf="isExpanded">Home</h4>
+      </mat-list-item>
+      <mat-list-item routerLink="/pointofsale/product">
+        <mat-icon mat-list-icon>assignment</mat-icon>
+        <h4 mat-line *ngIf="isExpanded">Product</h4>
+      </mat-list-item>
+      <mat-list-item routerLink="/pointofsale/order">
+        <mat-icon mat-list-icon>domain</mat-icon>
+        <h4 mat-line *ngIf="isExpanded">Order</h4>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <mat-nav-list *ngIf="currentRoute === 'salesreport'" class="ms-1">
+      <mat-list-item routerLink="/salesreport/">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <h4 mat-line *ngIf="isExpanded">Dashboard</h4>
+      </mat-list-item>
+      <mat-list-item routerLink="/salesreport/revenue">
+        <mat-icon mat-list-icon>assignment</mat-icon>
+        <h4 mat-line *ngIf="isExpanded">Revenue</h4>
+      </mat-list-item>
+      <mat-list-item routerLink="/salesreport/growth">
+        <mat-icon mat-list-icon>domain</mat-icon>
+        <h4 mat-line *ngIf="isExpanded">Growth</h4>
+      </mat-list-item>
+      <mat-list-item routerLink="/salesreport/report">
+        <mat-icon mat-list-icon>folder_shared</mat-icon>
+        <h4 mat-line *ngIf="isExpanded">Report</h4>
       </mat-list-item>
     </mat-nav-list>
   </mat-drawer>

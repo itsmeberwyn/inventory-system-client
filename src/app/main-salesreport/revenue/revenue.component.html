@@ -1,10 +1,13 @@
 <div style="width: 95%" class="m-auto">
   <div class="d-flex flex-column flex-sm-row justify-content-between mt-3">
     <div
-      *ngFor="let items of [1, 2, 3, 4]; let i = index"
+      *ngFor="let items of header; let i = index"
       class="d-flex justify-content-center"
     >
-      <div class="card mb-3" style="max-width: 340px">
+      <div
+        class="card mb-3 d-flex justify-content-center"
+        style="max-width: 340px"
+      >
         <div class="row g-0 d-flex justify-content-center align-items-center">
           <div class="col-md-4 p-3 pe-1 d-flex justify-content-center">
             <img
@@ -17,7 +20,9 @@
               class="card-body d-flex flex-column align-items-center align-items-sm-start"
             >
               <h1 class="card-title fw-bold mb-1">P 9,000</h1>
-              <p class="card-text" style="font-size: 15px">Today's Sales</p>
+              <p class="card-text w-100" style="font-size: 15px">
+                {{ items.text }}
+              </p>
             </div>
           </div>
         </div>
