@@ -5,18 +5,47 @@
         <div
           class="first__container mb-3 mb-sm-0 ms-em-2 bg-white rounded w-100 shadow-sm"
         >
-          1
+          <div class="container">
+            <h3 class="mt-2 fw-bold">Total Sold Items (Today)</h3>
+            <h1 class="d-flex justify-content-center">5200</h1>
+          </div>
         </div>
         <div
           class="first__container mb-3 mb-sm-0 ms-sm-2 bg-white rounded w-100 shadow-sm"
         >
-          1
+          <div class="container">
+            <h3 class="mt-2 fw-bold">Total Customers (Today)</h3>
+            <h1 class="d-flex justify-content-center">406</h1>
+          </div>
         </div>
       </div>
       <div
         class="second__container mb-3 mb-sm-0 w-100 bg-white rounded shadow-sm"
       >
-        2
+        <div class="container">
+          <h3 class="pt-2 fw-bold">Top selling products (Today)</h3>
+
+          <div class="table__container overflow-auto">
+            <table class="table table-hover">
+              <thead class="stick__header">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Sold</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+                  <th scope="row">Faber Castel</th>
+                  <td>14</td>
+                  <td>32</td>
+                  <td>12</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -24,12 +53,48 @@
       <div
         class="third__container flex__container bg-white rounded mb-3 ms-sm-2 shadow-sm"
       >
-        3
+        <div class="container d-flex flex-column align-items-center pt-3">
+          <h2 class="mb-1">REVENUE</h2>
+          <p>Today</p>
+
+          <h1 class="my-3">20.04k</h1>
+
+          <div class="w-100 d-flex justify-content-between border-bottom mb-3">
+            <p class="m-0">Total Sales</p>
+            <span>23,050.00</span>
+          </div>
+          <div class="w-100 d-flex justify-content-between border-bottom mb-3">
+            <p class="m-0">Gross Profit</p>
+            <span>2,000.00</span>
+          </div>
+        </div>
       </div>
+
       <div
         class="fourth__container flex__container bg-white rounded mb-3 mb-sm-0 ms-sm-2 shadow-sm"
       >
-        4
+        <div class="container">
+          <h3 class="pt-2 fw-bold">Top selling products (Today)</h3>
+
+          <div class="prod__table__container overflow-auto">
+            <table class="table table-hover">
+              <thead class="stick__header">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Sales</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+                  <th scope="row">Faber Castel</th>
+                  <td>14</td>
+                  <td>12</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
