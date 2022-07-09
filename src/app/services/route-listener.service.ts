@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class RouteListenerService {
-  currentRoute = new BehaviorSubject<String>('');
+  currentRoute = new BehaviorSubject<any>([]);
 
   constructor() {}
 }

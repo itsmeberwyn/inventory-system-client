@@ -1,75 +1,152 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer
-    [ngStyle]="isExpanded ? { width: '170px' } : { width: '75px' }"
+    [ngStyle]="isExpanded ? { width: '200px' } : { width: '75px' }"
     #drawer
     class="example-sidenav"
     mode="side"
   >
-    <button
-      mat-mini-fab
-      (click)="isExpanded = !isExpanded"
-      color="warn"
-      style="margin: 15px"
-    >
-      <mat-icon aria-label="Menu">menu</mat-icon>
-    </button>
+    <div class="d-flex align-items-center">
+      <!-- <button
+        mat-mini-fab
+        (click)="isExpanded = !isExpanded"
+        color="warn"
+        style="margin: 15px 15px 15px 15px"
+      >
+        <mat-icon aria-label="Menu">menu</mat-icon>
+      </button> -->
+      <img
+        src="../../../assets/sidenav-assets/logo.png"
+        width="33"
+        style="margin: 20px"
+      />
+      <p class="text-light d-flex flex-column mt-2 fw-bold" *ngIf="isExpanded">
+        MORLYN’S
+        <span class="fw-normal">
+          {{
+            currentRoute[1] === "inventory"
+              ? "Inventory"
+              : currentRoute[1] === "pointofsale"
+              ? "Point of Sale"
+              : currentRoute[1] === "salesreport"
+              ? "Sales Report"
+              : "Error"
+          }}
+        </span>
+      </p>
+    </div>
 
-    <mat-nav-list *ngIf="currentRoute === 'inventory'" class="ms-1">
-      <mat-list-item routerLink="/inventory/">
-        <mat-icon mat-list-icon>person</mat-icon>
+    <mat-nav-list *ngIf="currentRoute[1] === 'inventory'">
+      <mat-list-item routerLink="/inventory/" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === undefined ? 'fill__icon' : ''"
+          >home</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Home</h4>
       </mat-list-item>
-      <mat-list-item routerLink="/inventory/product">
-        <mat-icon mat-list-icon>assignment</mat-icon>
+      <mat-list-item routerLink="/inventory/product" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === 'product' ? 'fill__icon' : ''"
+          >inventory_2</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Product</h4>
       </mat-list-item>
-      <mat-list-item routerLink="/inventory/purchase">
-        <mat-icon mat-list-icon>domain</mat-icon>
+      <mat-list-item routerLink="/inventory/purchase" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === 'purchase' ? 'fill__icon' : ''"
+          >sell</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Purchase</h4>
       </mat-list-item>
-      <mat-list-item routerLink="/inventory/supplier">
-        <mat-icon mat-list-icon>folder_shared</mat-icon>
+      <mat-list-item routerLink="/inventory/supplier" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === 'supplier' ? 'fill__icon' : ''"
+          >person</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Supplier</h4>
       </mat-list-item>
     </mat-nav-list>
 
-    <mat-nav-list *ngIf="currentRoute === 'pointofsale'" class="ms-1">
-      <mat-list-item routerLink="/pointofsale/">
-        <mat-icon mat-list-icon>person</mat-icon>
+    <mat-nav-list *ngIf="currentRoute[1] === 'pointofsale'">
+      <mat-list-item routerLink="/pointofsale/" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === undefined ? 'fill__icon' : ''"
+          >home</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Home</h4>
       </mat-list-item>
-      <mat-list-item routerLink="/pointofsale/product">
-        <mat-icon mat-list-icon>assignment</mat-icon>
+      <mat-list-item routerLink="/pointofsale/product" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === 'product' ? 'fill__icon' : ''"
+          >inventory_2</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Product</h4>
       </mat-list-item>
-      <mat-list-item routerLink="/pointofsale/order">
-        <mat-icon mat-list-icon>domain</mat-icon>
+      <mat-list-item routerLink="/pointofsale/order" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === 'order' ? 'fill__icon' : ''"
+          >sell</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Order</h4>
       </mat-list-item>
     </mat-nav-list>
 
-    <mat-nav-list *ngIf="currentRoute === 'salesreport'" class="ms-1">
-      <mat-list-item routerLink="/salesreport/">
-        <mat-icon mat-list-icon>person</mat-icon>
+    <mat-nav-list *ngIf="currentRoute[1] === 'salesreport'">
+      <mat-list-item routerLink="/salesreport/" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === undefined ? 'fill__icon' : ''"
+        >
+          dashboard
+        </mat-icon>
         <h4 mat-line *ngIf="isExpanded">Dashboard</h4>
       </mat-list-item>
-      <mat-list-item routerLink="/salesreport/revenue">
-        <mat-icon mat-list-icon>assignment</mat-icon>
+      <mat-list-item routerLink="/salesreport/revenue" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === 'revenue' ? 'fill__icon' : ''"
+          >trending_up</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Revenue</h4>
       </mat-list-item>
-      <mat-list-item routerLink="/salesreport/growth">
-        <mat-icon mat-list-icon>domain</mat-icon>
+      <mat-list-item routerLink="/salesreport/growth" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === 'growth' ? 'fill__icon' : ''"
+          >timeline</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Growth</h4>
       </mat-list-item>
-      <mat-list-item routerLink="/salesreport/report">
-        <mat-icon mat-list-icon>folder_shared</mat-icon>
+      <mat-list-item routerLink="/salesreport/report" class="hover__nav">
+        <mat-icon
+          mat-list-icon
+          class="material-symbols-outlined"
+          [ngClass]="currentRoute[2] === 'report' ? 'fill__icon' : ''"
+          >assignment</mat-icon
+        >
         <h4 mat-line *ngIf="isExpanded">Report</h4>
       </mat-list-item>
     </mat-nav-list>
   </mat-drawer>
 
   <div class="example-sidenav-content">
-    <mat-toolbar>
+    <mat-toolbar class="header">
       <button
         mat-icon-button
         class="example-icon"

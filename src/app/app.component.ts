@@ -14,7 +14,7 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // event is an instance of NavigationEnd, get url!
-        const url = event.urlAfterRedirects.split('/')[1];
+        const url = event.urlAfterRedirects.split('/');
 
         this.listener.currentRoute.next(url);
       }

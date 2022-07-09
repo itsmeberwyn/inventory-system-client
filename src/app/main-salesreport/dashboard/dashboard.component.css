@@ -1,0 +1,29 @@
+.first__container {
+  min-height: 120px;
+  max-height: 150px;
+}
+
+.second__container {
+  min-height: 430px;
+  max-height: 440px;
+}
+
+.third__container {
+  min-height: 230px;
+  max-height: 240px;
+}
+
+.fourth__container {
+  min-height: 320px;
+  max-height: 330px;
+}
+
+@media (min-width: 576px) {
+  /* CUSTOM WIDTHS */
+  .w-sm-50 {
+    width: 50% !important;
+  }
+  .w-sm-75 {
+    width: 75% !important;
+  }
+}
