@@ -1,10 +1,13 @@
 <div style="width: 95%" class="m-auto">
   <div class="d-flex flex-column flex-sm-row justify-content-between mt-3">
     <div
-      *ngFor="let items of [1, 2, 3, 4]; let i = index"
+      *ngFor="let items of header; let i = index"
       class="d-flex justify-content-center"
     >
-      <div class="card mb-3" style="max-width: 340px">
+      <div
+        class="card mb-3 d-flex justify-content-center shadow-sm"
+        style="max-width: 340px"
+      >
         <div class="row g-0 d-flex justify-content-center align-items-center">
           <div class="col-md-4 p-3 pe-1 d-flex justify-content-center">
             <img
@@ -17,14 +20,16 @@
               class="card-body d-flex flex-column align-items-center align-items-sm-start"
             >
               <h1 class="card-title fw-bold mb-1">P 9,000</h1>
-              <p class="card-text" style="font-size: 15px">Today's Sales</p>
+              <p class="card-text w-100" style="font-size: 15px">
+                {{ items.text }}
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="p-1 bg-white rounded">
+  <div class="p-1 bg-white rounded shadow-sm">
     <canvas
       baseChart
       width="400"
@@ -36,7 +41,9 @@
   </div>
 
   <div class="d-flex flex-column flex-sm-row mt-3">
-    <div class="w-100 bg-white rounded mb-3 mb-sm-0 me-sm-1 bottom__container">
+    <div
+      class="w-100 bg-white rounded mb-3 mb-sm-0 me-sm-1 bottom__container shadow-sm"
+    >
       <div class="container">
         <h3 class="mt-2 fw-bold">Top selling products</h3>
         <div class="table__container overflow-auto">
@@ -50,7 +57,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
                 <th scope="row">Faber Castel</th>
                 <td>14</td>
                 <td>32</td>
@@ -61,7 +68,9 @@
         </div>
       </div>
     </div>
-    <div class="w-100 bg-white rounded mb-3 mb-sm-0 ms-sm-1 bottom__container">
+    <div
+      class="w-100 bg-white rounded mb-3 mb-sm-0 ms-sm-1 bottom__container shadow-sm"
+    >
       <div class="container">
         <h3 class="mt-2 fw-bold">Top selling by categories</h3>
         <div class="">

@@ -1,1 +1,94 @@
-<p>report works!</p>
+<div style="width: 95%" class="m-auto">
+  <div class="d-flex flex-column">
+    <div class="d-flex flex-column flex-sm-row mb-3 mt-3">
+      <div class="w-100 me-2 mb-2 mb-sm-0">
+        <div class="d-flex flex-column flex-sm-row mb-2">
+          <div
+            class="w-100 bg-white me-0 me-sm-2 mb-2 mb-sm-0 first__row__container rounded shadow-sm"
+          >
+            <div class="container">
+              <h3 class="pt-2 fw-bold">Total Sold Items</h3>
+              <h1 class="d-flex justify-content-center">5200</h1>
+            </div>
+          </div>
+          <div
+            class="w-100 bg-white ms-0 ms-sm-2 first__row__container rounded shadow-sm"
+          >
+            <div class="container">
+              <h3 class="pt-2 fw-bold">Total purchase Cost</h3>
+              <h1 class="d-flex justify-content-center">9800</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row">
+          <div
+            class="w-100 bg-white me-0 me-sm-2 mb-2 mb-sm-0 second__row__container rounded shadow-sm"
+          >
+            <div class="container">
+              <h3 class="pt-2 fw-bold">Total Customers</h3>
+              <h1 class="d-flex justify-content-center">406</h1>
+            </div>
+          </div>
+          <div
+            class="w-100 bg-white ms-0 ms-sm-2 second__row__container rounded shadow-sm"
+          >
+            <div class="container">
+              <h3 class="pt-2 fw-bold">Total item purchased</h3>
+              <h1 class="d-flex justify-content-center">9800</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="w-100 w-sm-50 bg-white ms-0 ms-sm-2 second__col__container rounded shadow-sm"
+      >
+        <div class="container d-flex flex-column align-items-center pt-3">
+          <h2 class="mb-1">REVENUE</h2>
+          <p>Annual</p>
+
+          <h1 class="my-3">20.04k</h1>
+
+          <div class="w-100 d-flex justify-content-between border-bottom mb-3">
+            <p class="m-0">Cost of Goods</p>
+            <span class="text-danger">-3,010</span>
+          </div>
+          <div class="w-100 d-flex justify-content-between border-bottom mb-3">
+            <p class="m-0">Gross Profit</p>
+            <span>2,000.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-100 bg-white third__row__container rounded shadow-sm">
+      <div class="mx-3">
+        <h3 class="pt-2 fw-bold">Top selling products (Today)</h3>
+
+        <div class="table__container overflow-auto">
+          <table class="table table-hover">
+            <thead class="stick__header">
+              <tr>
+                <th scope="col">Month</th>
+                <th scope="col">Sold Items</th>
+                <th scope="col">Customers</th>
+                <th scope="col">Expenses</th>
+                <th scope="col">Sales</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of monthsLabel">
+                <th scope="row">{{ item }}</th>
+                <td>14</td>
+                <td>32</td>
+                <td>12</td>
+                <td>12</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

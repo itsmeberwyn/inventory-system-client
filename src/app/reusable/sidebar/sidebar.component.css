@@ -1,3 +1,20 @@
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 48;
+  padding: 8px !important;
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+}
+
+.fill__icon {
+  background-color: #5464ef;
+}
+
+.hover__nav:hover {
+  background-color: #122039;
+}
+
 .example-container {
   position: absolute;
   top: 0;
@@ -16,8 +33,28 @@
 .example-sidenav {
   /* padding: 20px; */
   border-right: 1px solid black;
+  background-color: #121935;
+}
+
+.example-sidenav h4 {
+  color: white;
+}
+
+.example-sidenav mat-icon {
+  color: white;
 }
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.header {
+  background-color: #fff;
+}
+
+mat-toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }

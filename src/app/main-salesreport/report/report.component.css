@@ -1,0 +1,78 @@
+.first__row__container,
+.second__row__container {
+  min-height: 120px;
+  max-height: 150px;
+}
+
+.third__row__container {
+  min-height: 300px;
+  max-height: 310px;
+}
+
+.second__col__container {
+  min-height: 240px;
+  max-height: 250px;
+}
+
+.first__row__container h3,
+.second__row__container h3,
+.second__col__container h3 {
+  color: #5464ef;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.first__row__container h1,
+.second__row__container h1,
+.second__col__container h1 {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.second__col__container h1 {
+  color: #5463ce;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.second__col__container span {
+  color: #5463ce;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.second__col__container p {
+  color: #777777;
+}
+
+.table {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.table thead th {
+  border-bottom: 2px solid #f1f1f1;
+}
+
+.table th {
+  color: #1c1c1c;
+}
+
+.table td {
+  color: #777777;
+}
+
+.table__container {
+  height: 230px;
+}
+
+.stick__header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
+
+@media (min-width: 576px) {
+  /* CUSTOM WIDTHS */
+  .w-sm-50 {
+    width: 50% !important;
+  }
+}
