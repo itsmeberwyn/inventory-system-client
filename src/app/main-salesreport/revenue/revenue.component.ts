@@ -35,7 +35,7 @@ export class RevenueComponent implements OnInit {
     datasets: [
       {
         data: [],
-        label: 'Series A',
+        label: 'Category',
         backgroundColor: 'rgba(84,100,239,1)',
         hoverBackgroundColor: 'rgba(84,100,239,0.6)',
       },
@@ -46,7 +46,7 @@ export class RevenueComponent implements OnInit {
     datasets: [
       {
         data: [65, 59, 80, 81, 56, 55, 40, 34, 77, 23, 99, 64],
-        label: 'Series A',
+        label: '2021',
         backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',
         pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -56,19 +56,8 @@ export class RevenueComponent implements OnInit {
         fill: 'origin',
       },
       {
-        data: [28, 48, 40, 19, 86, 27, 90, 34, 767, 88, 33, 76],
-        label: 'Series B',
-        backgroundColor: 'rgba(77,83,96,0.2)',
-        borderColor: 'rgba(77,83,96,1)',
-        pointBackgroundColor: 'rgba(77,83,96,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(77,83,96,1)',
-        fill: 'origin',
-      },
-      {
         data: [180, 480, 770, 90, 1000, 270, 400, 234, 344, 664, 767, 675],
-        label: 'Series C',
+        label: '2022',
         yAxisID: 'y-axis-1',
         backgroundColor: 'rgba(206,146,223,0.6)',
         borderColor: 'violet',
