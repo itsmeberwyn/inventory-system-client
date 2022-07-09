@@ -11,11 +11,70 @@
 .third__container {
   min-height: 230px;
   max-height: 240px;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 .fourth__container {
   min-height: 320px;
   max-height: 330px;
+}
+
+.first__container h3,
+.second__container h3,
+.fourth__container h3 {
+  color: #5464ef;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.first__container h1 {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.third__container h1 {
+  color: #5463ce;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.third__container span {
+  color: #5463ce;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.third__container p {
+  color: #777777;
+}
+
+.table {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.table thead th {
+  border-bottom: 2px solid #f1f1f1;
+}
+
+.table th {
+  color: #1c1c1c;
+}
+
+.table td {
+  color: #777777;
+}
+
+.table__container {
+  height: 360px;
+}
+
+.prod__table__container {
+  height: 250px;
+}
+
+.stick__header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
 }
 
 @media (min-width: 576px) {
