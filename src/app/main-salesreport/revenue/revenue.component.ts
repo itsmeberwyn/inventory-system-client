@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
+import {
+  Chart,
+  ChartConfiguration,
+  ChartData,
+  ChartEvent,
+  ChartType,
+} from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
 import { default as Annotation } from 'chartjs-plugin-annotation';
@@ -9,26 +15,32 @@ import { default as Annotation } from 'chartjs-plugin-annotation';
   styleUrls: ['./revenue.component.css'],
 })
 export class RevenueComponent implements OnInit {
-  header = [
-    {
-      text: 'Today’s Sales',
-    },
-    {
-      text: 'Monthly Gross Sales',
-    },
-    {
-      text: 'Today’s Customers',
-    },
-    {
-      text: 'Monthly Purchases',
-    },
-  ];
+  sampleData: number[] = [];
 
-  constructor() {
-    Chart.register(Annotation);
-  }
+  public lineChartType: ChartType = 'line';
+  public barChartType: ChartType = 'bar';
 
-  ngOnInit(): void {}
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+
+  public barChartData: ChartData<'bar'> = {
+    labels: [
+      'Pens',
+      'Pencils',
+      'Notebooks',
+      'Papers',
+      'Adhesives',
+      'Orgranizers',
+      'Separators',
+    ],
+    datasets: [
+      {
+        data: [],
+        label: 'Series A',
+        backgroundColor: 'rgba(84,100,239,1)',
+        hoverBackgroundColor: 'rgba(84,100,239,0.6)',
+      },
+    ],
+  };
 
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
@@ -83,6 +95,33 @@ export class RevenueComponent implements OnInit {
     ],
   };
 
+  header = [
+    {
+      text: 'Today’s Sales',
+    },
+    {
+      text: 'Monthly Gross Sales',
+    },
+    {
+      text: 'Today’s Customers',
+    },
+    {
+      text: 'Monthly Purchases',
+    },
+  ];
+
+  constructor() {
+    Chart.register(Annotation);
+  }
+
+  ngOnInit(): void {
+    this.sampleData = [32, 23, 23, 12, 34, 23, 32];
+    // console.log(this.barChartData['datasets'][0]['data']);
+    this.barChartData['datasets'][0]['data'] = this.sampleData;
+  }
+
+  // line chart configuration
+
   public lineChartOptions: ChartConfiguration['options'] = {
     elements: {
       line: {
@@ -133,9 +172,33 @@ export class RevenueComponent implements OnInit {
     // },
   };
 
-  public lineChartType: ChartType = 'line';
+  // line chart end
 
-  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  // bar chart configuration
+
+  public barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      x: {},
+      y: {
+        min: 10,
+      },
+    },
+    // plugins: {
+    //   legend: {
+    //     display: true,
+    //   },
+    //   datalabels: {
+    //     anchor: 'end',
+    //     align: 'end',
+    //   },
+    // },
+  };
+
+  // bar chart end
+
+  // hover or clicked
 
   public chartHovered({
     event,

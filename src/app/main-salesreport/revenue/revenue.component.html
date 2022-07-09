@@ -1,6 +1,9 @@
 <div style="width: 95%" class="m-auto">
   <div class="d-flex flex-column flex-sm-row justify-content-between mt-3">
-    <div *ngFor="let items of [1, 2, 3, 4]; let i = index">
+    <div
+      *ngFor="let items of [1, 2, 3, 4]; let i = index"
+      class="d-flex justify-content-center"
+    >
       <div class="card mb-3" style="max-width: 340px">
         <div class="row g-0 d-flex justify-content-center align-items-center">
           <div class="col-md-4 p-3 pe-1 d-flex justify-content-center">
@@ -29,13 +32,50 @@
       [data]="lineChartData"
       [options]="lineChartOptions"
       [type]="lineChartType"
-      (chartHover)="chartHovered($event)"
-      (chartClick)="chartClicked($event)"
     ></canvas>
   </div>
 
-  <div class="d-flex">
-    <div class="w-100">1</div>
-    <div class="w-100">2</div>
+  <div class="d-flex flex-column flex-sm-row mt-3">
+    <div class="w-100 bg-white rounded mb-3 mb-sm-0 me-sm-1 bottom__container">
+      <div class="container">
+        <h3 class="mt-2 fw-bold">Top selling products</h3>
+        <div class="table__container overflow-auto">
+          <table class="table table-hover">
+            <thead class="stick__header">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Sold</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Faber Castel</th>
+                <td>14</td>
+                <td>32</td>
+                <td>12</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 bg-white rounded mb-3 mb-sm-0 ms-sm-1 bottom__container">
+      <div class="container">
+        <h3 class="mt-2 fw-bold">Top selling by categories</h3>
+        <div class="">
+          <canvas
+            *ngIf="sampleData.length"
+            baseChart
+            height="110"
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="barChartType"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
