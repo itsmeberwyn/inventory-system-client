@@ -20,7 +20,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.routeListner.currentRoute.subscribe((route: any) => {
       this.currentRoute = route;
-      console.log(this.currentRoute);
     });
   }
 
