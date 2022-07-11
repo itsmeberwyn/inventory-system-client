@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './../main-pointofsale/products/products.component';
+import { ProductsComponent } from './products/products.component';
 import { PurchasesComponent } from './purchases/purchases.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 
