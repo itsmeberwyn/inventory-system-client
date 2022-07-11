@@ -13,3 +13,4 @@ export class LoginInventoryComponent implements OnInit {
   }
 
 }
+
