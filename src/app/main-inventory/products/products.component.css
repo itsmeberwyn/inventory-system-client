@@ -1,0 +1,76 @@
+.body_container{
+    /* background-color: aquamarine; */
+    /* background-color: white; */
+    width: 100%;
+    height: calc(100vh - 64px);
+}
+
+.top_container{
+    /* background-color: bisque; */
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: space-between;
+}
+.top_container button{
+    background-color: #5464EF;
+    color: white;
+}
+.mat-form-field  {
+    border-radius: 5px;
+    display: flex;
+    margin-top: 1.2%;
+    padding: 0;
+}
+.bot_container{
+    /* background-color:burlywood; */
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    height: 80vh;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.table_container{
+    /* background-color: aqua; */
+    /* background-color: white; */
+    background-color: white;
+    border-radius: 5px;
+    padding: 1%;
+    height: 90%;
+}
+
+.table tbody th {
+    text-align: center;
+}
+.table tbody {
+    vertical-align: middle;
+}
+.table th{
+    font-weight: 500;
+    color: #383838;
+    border-color: #E9ECEF ;
+}
+
+.table thead th:nth-child(3){
+    width: 25%;
+}
+.table thead th:nth-child(7){
+    width: 10%;
+    text-align: center;
+}
+.table button{
+    background-color: #E9ECEF;
+    margin: 1.5%;
+    border: none;
+}
+.table button:hover{
+    background-color: #d2d2d2;
+}
+.table svg{
+    color: #777777;
+}
+.pagination{
+    margin: 0.5% 1% 0% 1%;
+}
