@@ -8,10 +8,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatSelectModule} from '@angular/material/select';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 const MatModules = [
   MatFormFieldModule,
   MatSidenavModule,
@@ -24,12 +24,13 @@ const MatModules = [
   MatInputModule,
   MatNativeDateModule,
   MatSelectModule,
+  MatDialogModule,
   
 ];
 
 @NgModule({
   declarations: [],
-  imports: [MatModules, MatDatepickerModule, MatInputModule, MatNativeDateModule,MatSelectModule ],
+  imports: [MatModules, MatDatepickerModule, MatInputModule, MatNativeDateModule,MatSelectModule,],
   exports: [MatModules],
 })
 export class MaterialModule {}

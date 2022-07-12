@@ -12,15 +12,47 @@
             </mat-select>
           </mat-form-field>
      
-          <button mat-raised-button color="primary">
+          <button mat-raised-button color="primary" (click)="openDialog(template)">
             <span class="material-symbols-outlined">add</span> Add Products
           </button>
-            
+          
+            <!-- DIALOG BOX -->
+          <ng-template #template class="dialog_box">
+            <h2 mat-dialog-title>Install Angular</h2>
+            <mat-dialog-content class="mat-typography">
+              <form class="form_container_addproducts">
+                <div class="form-group">
+                  <mat-form-field class="product_name_field" appearance="fill">
+                    <mat-label>Product Name</mat-label>
+                    <input matInput placeholder="Ex. Pandan Pen">
+                  </mat-form-field>
+                  <mat-form-field class="product_descrption_field" appearance="fill">
+                    <mat-label>Product Descption</mat-label>
+                    <input matInput placeholder="Ex. Black">
+                  </mat-form-field>
+                  <mat-form-field class="product_price_field" appearance="fill">
+                    <mat-label>Product Price</mat-label>
+                    <span matPrefix>₱&nbsp;</span>
+                    <input matInput placeholder="Ex. 17" type="number">
+                  </mat-form-field>
+                  <mat-form-field class="product_price_field" appearance="fill">
+                    <mat-label>Product Quantity</mat-label>
+                    <input matInput placeholder="Ex. 20" type="number">
+                  </mat-form-field>
+
+                </div>
+              </form>
+            </mat-dialog-content>
+            <mat-dialog-actions align="end">    
+              <button mat-button mat-dialog-close>Cancel</button>
+              <button mat-button mat-dialog-close  cdkFocusInitial>Add Products</button>
+            </mat-dialog-actions>
+          </ng-template>
             
       </div>
       <div class="bot_container">
           <div class="table_container">
-              <table class="table">
+              <table class="table table-hover">
                   <thead>
                     <tr>
                       <th scope="col">ID</th>

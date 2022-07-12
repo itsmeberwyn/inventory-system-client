@@ -4,7 +4,6 @@
     width: 100%;
     height: calc(100vh - 64px);
 }
-
 .top_container{
     /* background-color: bisque; */
     width: 100%;
@@ -17,6 +16,13 @@
 .top_container button{
     background-color: #5464EF;
     color: white;
+}
+::ng-deep.mat-dialog-container{
+    width: 54vw;
+}
+::ng-deep.mat-dialog-title{
+    color: #5464EF;
+    padding: 0px 
 }
 .mat-form-field  {
     border-radius: 5px;
@@ -40,7 +46,11 @@
     padding: 1%;
     height: 90%;
 }
-
+.table thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+}
 .table tbody th {
     text-align: center;
 }
