@@ -5,8 +5,15 @@
     display: flex;
 }
 .left_container{
-    background-color: #1B2347;
+    background-image: url("../../../src/assets/login-assets/LoginBackground.jpg");
+    background-size: 100% 100%;
     width: 50%;
+    height: 100%;
+}
+.filter_container{
+    background-color: #1B2347;
+    opacity: 0.7;
+    width: 100%;
     height: 100%;
 }
 .rigt_container{
@@ -15,12 +22,15 @@
     height: 100%;
 }
 .logo_container{
-    background-color: tomato;
+    /* background-color: tomato; */
     width: 100%;
     height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.logo_container img{
+    width:35%;
 }
 .m-auto{
     /* background-color: blueviolet; */
@@ -44,8 +54,26 @@ form{
     border: none;
     margin: 5% 0% 5% 0%;
 }
+.form_container_credentials button:hover{
+    background-color: #3f4aab;
+}
+.divider_container{
+    /* background-color: aqua; */
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    color: #777777;
+}
+.div_1{
+    background-color:#777777;
+    width: 45%;
+    height: 10%;
+}
+
 .form_container_subsystem label{
     display: flex;
+    color: #777777;
     flex-direction: column;
     align-items: center;
     margin-top: 5%;
