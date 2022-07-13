@@ -12,15 +12,88 @@
               <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
      
-          <button mat-raised-button color="primary">
+          <button mat-raised-button color="primary"(click)="openDialog(add_purchase_modal)">
             <span class="material-symbols-outlined">add</span> Add Purchase
           </button>
             
+           <!-- DIALOG BOX -------------------------------------------------------------------->
+           <ng-template #add_purchase_modal class="dialog_box">
+            <h2 mat-dialog-title>Add Purchase</h2>
+            <mat-dialog-content class="mat-typography">
+                <div class="modal_body_container">
+                  <div class="modal_left_container">
+                    <div class="modal_left_top_container">
+                      
+                      <mat-form-field class="example-form-field" appearance="fill">
+                        <mat-label>Search</mat-label>
+                        <input matInput type="search" placeholder="Enter keyword">
+                          <mat-icon matSuffix>search</mat-icon>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="modal_left_table_container">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr >
+                            <th scope="col">ID</th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">DESCRIPTION</th>
+                            <th scope="col">AVAILABLE</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]">
+                            <td>001</td>
+                            <td>Faber Castle</td>
+                            <td>B2</td>
+                            <td>32</td>
+                          </tr>
+                        </tbody>
+                  </table>
+                    </div>
+                  </div>
+                  <div class="modal_right_container">
+                    <div class="moadal_right_top_container"><h1>Purchase Items (35)</h1></div>
+                    <div class="modal_right_table_container">
+                     
+                      <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of [1,2,3,4]">
+                           <td>
+                            <mat-card>
+                              <button mat-mini-fab ><mat-icon>close</mat-icon></button>
+                              <p>Faber Castle</p>
+                              <button mat-mini-fab ><mat-icon>remove</mat-icon></button>
+                              <p>35</p>
+                              <button mat-mini-fab ><mat-icon>add</mat-icon></button>
+                            </mat-card>
+                           </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="modal_right_footer_container">
+                      <div class="modal_right_footer_text">
+                        <h1>TOTAL:</h1>
+                        <h1>P1300</h1>
+                      </div>
+                      <button mat-raised-button color="primary">Check Out</button>
+                      <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+            </mat-dialog-content>
+    
+          </ng-template>
             
       </div>
       <div class="bot_container">
           <div class="table_container">
-              <table class="table">
+            <table class="table table-hover">
                   <thead>
                     <tr>
                       <th scope="col">PURCHASE DATE</th>
@@ -33,7 +106,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+
+                    <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]">
                       <td>2022-07-04</td>
                       <td>001</td>
                       <td>Faber Castle</td>
@@ -56,8 +130,9 @@
                           </button>
                       </th>
                     </tr>
+                    
                   </tbody>
-                </table>
+            </table>
             
       </div>
       <nav aria-label="Page navigation example">

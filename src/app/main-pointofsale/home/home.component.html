@@ -1,1 +1,73 @@
-<p>home works!</p>
+<div class="body_container">
+<div class="m-auto">
+    <div class="left_container">
+        <div class="left_top_container">
+          
+            <mat-form-field appearance="fill">
+                <mat-label>Categories</mat-label>
+                <mat-select>
+                  <mat-option >
+                    Notebooks
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+
+    <div class="left_bot_container">
+          <div class="left_table_container">
+            <table class="table table-hover">
+              <thead>
+                <tr >
+                  <th scope="col">ID</th>
+                  <th scope="col">NAME</th>
+                  <th scope="col">DESCRIPTION</th>
+                  <th scope="col">AVAILABLE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,1,1,11,1]">
+                  <td>001</td>
+                  <td>Faber Castle</td>
+                  <td>B2</td>
+                  <td>32</td>
+                </tr>
+              </tbody>
+        </table>
+          </div>
+    </div>
+      </div>
+
+      <div class="right_container">
+        <div class="right_top_container"><h1>Cart Items (35)</h1></div>
+        <div class="right_table_container">
+         
+          <table class="table">
+            <thead>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of [1,2,3,4,6,7,8]">
+               <td>
+                <mat-card>
+                  <button mat-mini-fab ><mat-icon>close</mat-icon></button>
+                  <p>Faber Castle</p>
+                  <button mat-mini-fab ><mat-icon>remove</mat-icon></button>
+                  <p>35</p>
+                  <button mat-mini-fab ><mat-icon>add</mat-icon></button>
+                </mat-card>
+               </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <mat-divider></mat-divider>
+        <div class="right_footer_container">
+          <div class="right_footer_text">
+            <h1>TOTAL:</h1>
+            <h1>P1300</h1>
+          </div>
+          <button mat-raised-button color="primary">Check Out</button>
+        </div>
+      </div>
+</div>
+</div>

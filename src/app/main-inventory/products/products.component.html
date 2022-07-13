@@ -12,15 +12,50 @@
             </mat-select>
           </mat-form-field>
      
-          <button mat-raised-button color="primary">
-            <span class="material-symbols-outlined">add</span> Add Products
+          <button mat-raised-button color="primary" (click)="openAddProductDialog(add_products_modal)">
+            <span class="material-symbols-outlined">add</span> Add Product
           </button>
-            
+          
+            <!-- DIALOG BOX -->
+          <ng-template #add_products_modal class="dialog_box">
+            <div class="modal_body_container">
+              <h2 mat-dialog-title>Add Product</h2>
+              <mat-dialog-content class="mat-typography">
+                <form class="form_container_addproducts">
+                  <div class="form-group">
+                    <mat-form-field class="product_name_field" appearance="fill">
+                      <mat-label>Product Name</mat-label>
+                      <input matInput placeholder="Ex. Pandan Pen">
+                    </mat-form-field>
+                    <mat-form-field class="product_descrption_field" appearance="fill">
+                      <mat-label>Product Descption</mat-label>
+                      <input matInput placeholder="Ex. Black">
+                    </mat-form-field>
+                    <mat-form-field class="product_price_field" appearance="fill">
+                      <mat-label>Product Price</mat-label>
+                      <span matPrefix>₱&nbsp;</span>
+                      <input matInput placeholder="Ex. 17" type="number">
+                    </mat-form-field>
+                    <mat-form-field class="product_price_field" appearance="fill">
+                      <mat-label>Product Quantity</mat-label>
+                      <input matInput placeholder="Ex. 20" type="number">
+                    </mat-form-field>
+              
+                  </div>
+                </form>
+              </mat-dialog-content>
+            </div>
+              <mat-dialog-actions align="end">    
+                <button mat-button mat-dialog-close>Cancel</button>
+                <button mat-button mat-dialog-close  cdkFocusInitial>Add Product</button>
+              </mat-dialog-actions>
+         
+          </ng-template>
             
       </div>
       <div class="bot_container">
           <div class="table_container">
-              <table class="table">
+              <table class="table table-hover">
                   <thead>
                     <tr>
                       <th scope="col">ID</th>
@@ -33,7 +68,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]">
                       <td>001</td>
                       <td>Faber Castle</td>
                       <td>B2</td>

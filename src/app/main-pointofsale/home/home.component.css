@@ -1,0 +1,164 @@
+
+.body_container{
+    /* background-color: aqua; */
+    /* background-color: white; */
+    width: 100%;
+    height: calc(100vh - 64px);
+    /* margin: 0% 0% 0% 2%; */
+}
+.m-auto{
+    /* background-color: bisque; */
+    height: 100%;
+    display: flex;
+    width: 100%;
+}
+
+.left_container{
+    /* background-color: #777777; */
+    width: 70%;
+    height: 100%;
+    margin: 0% 1%;
+    
+}
+.left_top_container{
+    /* background-color: #5464EF; */
+    width: 100%;
+    height:min-content;
+}
+.left_top_container::ng-deep.mat-form-field{
+    margin-top: 1%;
+}
+.left_bot_container{
+    background-color: white;
+    border-radius: 5px;
+    padding: 1%;
+    width: 100%;
+    height: 75vh;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.left_table_container{
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+.left_table_container .table thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    padding: 1% 0%;
+}
+.left_table_container .table thead tr th{
+    background-color: white;
+    /* padding: 1% !important; */
+}
+/* .left_table_container .table tbody th {
+    text-align: center;
+} */
+.left_table_container .table tbody {
+    vertical-align: middle;
+}
+.left_table_container .table th{
+    font-weight: 500;
+    color: #383838;
+    border-color: #E9ECEF ;
+}
+.left_table_container .table td{
+    padding: 1rem 0.5rem;
+}
+
+.right_container{
+    /* background-color: #383838; */
+    background-color: white;
+    border-radius: 5px;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.right_top_container{
+    background-color: #5464EF;
+    width: 100%;
+    height: 10%;
+    color: white;
+    display: flex;
+    padding-top: 3% ;
+    justify-content: center;
+    align-items: center;
+}
+.right_top_container h1{
+    font-size: 1.4rem;
+}
+.right_table_container{
+    /* background-color: aqua; */
+    /* background-color: white; */
+    width: 100%;
+    height: 60%;
+    overflow: auto;
+   
+}
+.right_table_container .table td{
+    /* background-color: #4A84D0; */
+    border: none;
+    padding: 0%;
+}
+.mat-card{
+    /* background-color: #5464EF; */
+    margin: 3%;
+    padding: 3%;
+    display: flex;
+    align-items: center;
+    text-align: middle;
+    justify-content: space-between;
+    height: 9vh;
+}
+.mat-card p{
+    margin: 0;
+}
+.mat-card button{
+    background-color: #EBF2FD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    color: #4A84D0;
+    width: 10%;
+    height: 80%;
+}
+.mat-card button:nth-child(1){
+    color: red;
+    background-color: #38383800;
+    border: solid red ;
+}
+.right_footer_container{
+    /* background-color: violet; */
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.right_footer_text{
+    /* background-color: #777777; */
+    color: #777777;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: space-around;
+}
+.right_footer_text h1{
+    font-size: 1.3rem;
+    vertical-align: middle;
+}
+.right_footer_text h1:nth-child(2){
+    font-weight: 600;
+}
+.right_footer_container button:nth-child(2){
+    background-color: #5464EF;
+    width: 90%;
+    height: 25%;
+    font-size: 1.1rem ;
+}
