@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material.modules';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // global components
 import { LoginInventoryComponent } from './login-inventory/login-inventory.component';
@@ -18,6 +20,7 @@ import { LoginPointofsaleComponent } from './login-pointofsale/login-pointofsale
 import { LoginSalesreportComponent } from './login-salesreport/login-salesreport.component';
 
 import { SidebarComponent } from './reusable/sidebar/sidebar.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,8 +38,14 @@ import { SidebarComponent } from './reusable/sidebar/sidebar.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
