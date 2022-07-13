@@ -12,12 +12,12 @@
               <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
      
-          <button mat-raised-button color="primary"(click)="openDialog(template)">
+          <button mat-raised-button color="primary"(click)="openDialog(add_purchase_modal)">
             <span class="material-symbols-outlined">add</span> Add Purchase
           </button>
             
            <!-- DIALOG BOX -------------------------------------------------------------------->
-           <ng-template #template class="dialog_box">
+           <ng-template #add_purchase_modal class="dialog_box">
             <h2 mat-dialog-title>Add Purchase</h2>
             <mat-dialog-content class="mat-typography">
                 <div class="modal_body_container">
@@ -55,13 +55,25 @@
                   <div class="modal_right_container">
                     <div class="moadal_right_top_container"><h1>Purchase Items (35)</h1></div>
                     <div class="modal_right_table_container">
-                      <mat-card>
-                        <button mat-mini-fab ><mat-icon>close</mat-icon></button>
-                        <p>Faber Castle</p>
-                        <button mat-mini-fab ><mat-icon>remove</mat-icon></button>
-                        <p>35</p>
-                        <button mat-mini-fab ><mat-icon>add</mat-icon></button>
-                      </mat-card>
+                     
+                      <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of [1,2,3,4]">
+                           <td>
+                            <mat-card>
+                              <button mat-mini-fab ><mat-icon>close</mat-icon></button>
+                              <p>Faber Castle</p>
+                              <button mat-mini-fab ><mat-icon>remove</mat-icon></button>
+                              <p>35</p>
+                              <button mat-mini-fab ><mat-icon>add</mat-icon></button>
+                            </mat-card>
+                           </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
                     </div>
                     <mat-divider></mat-divider>
                     <div class="modal_right_footer_container">

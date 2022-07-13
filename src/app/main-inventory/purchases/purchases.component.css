@@ -52,6 +52,11 @@ thead{
     height: 89%;
     overflow: auto;
 }
+.modal_left_table_container .table thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+}
 .modal_left_table_container .table tbody th {
     text-align: center;
 }
@@ -90,6 +95,10 @@ thead{
     /* background-color: aqua; */
     width: 100%;
     height: 60%;
+    overflow: auto;
+}
+.modal_right_table_container .table{
+    /* background-color: #4A84D0; */
 }
 .mat-card{
     /* background-color: #5464EF; */
@@ -99,7 +108,7 @@ thead{
     align-items: center;
     text-align: middle;
     justify-content: space-between;
-    height: 20%;
+    height: 7.5vh;
 }
 .mat-card p{
     margin: 0;
@@ -156,6 +165,7 @@ thead{
     /* background-color:burlywood; */
     background-color: white;
     border-radius: 5px;
+    padding: 1%;
     width: 100%;
     height: 80vh;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -167,15 +177,14 @@ thead{
     height: 90%;
     overflow: auto;
 }
-.table thead {
+.table_container .table thead {
     position: sticky;
     top: 0;
     background-color: #fff;
 }
-
-.table thead tr th{
+.table_container .table thead tr th{
     background-color: white;
-    padding: 1% !important;
+    /* padding: 1% !important; */
 }
 
 .table_container .table tbody th {
@@ -211,5 +220,5 @@ thead{
     color: #777777;
 }
 .pagination{
-    margin: 0.5% 1% 0% 1%;
+    margin: 0.5% 0%;
 }
