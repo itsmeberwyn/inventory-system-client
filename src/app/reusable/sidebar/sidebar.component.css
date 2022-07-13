@@ -58,3 +58,31 @@ mat-toolbar {
   top: 0; /* Sets the sticky toolbar to be on top */
   z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
+
+.btn-group{
+  background-color: #5464ef;
+  height: 100%;
+  width: 15%;
+}
+.btn-group button{
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+  height: inherit;
+  border: none;
+  border-radius: 0%;
+}
+.btn_text_container{
+
+}
+.btn_text_container{
+  font-size: 1rem;
+}
+.btn:hover, .btn:focus:focus, .btn:active{
+  /* border-style: outset; */
+  outline: none;
+  outline: none;
+  box-shadow: none;
+}

@@ -155,22 +155,39 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <span>My App</span>
+      <!-- <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput type="search" placeholder="Enter keyword">
+          <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field> -->
       <span class="example-spacer"></span>
-      <button
+      <!-- <button
         mat-icon-button
         class="example-icon favorite-icon"
         aria-label="Example icon-button with heart icon"
       >
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with share icon"
-      >
-        <mat-icon>share</mat-icon>
-      </button>
+      <span class="material-symbols-outlined">
+        notifications
+        </span>
+      </button> -->
+      
+     <!-- Example single danger button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="material-symbols-outlined">
+              account_circle
+              </span>
+            <div class="btn_text_container">
+                <h6>Juan Dela Cruz</h6>
+                <p>Admin</p>
+            </div>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Log Out</a></li>
+          </ul>
+        </div>
+
+
     </mat-toolbar>
 
     <router-outlet></router-outlet>

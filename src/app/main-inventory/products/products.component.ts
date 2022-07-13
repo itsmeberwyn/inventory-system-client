@@ -13,7 +13,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
   }
  
-  openAddProductDialog(templateRef: TemplateRef<any>) {
+  openDialog(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
 }
 

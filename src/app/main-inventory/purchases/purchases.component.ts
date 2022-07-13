@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  MatDialog } from '@angular/material/dialog';
-import { TemplateRef } from '@angular/core'
+import { TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-purchases',
@@ -9,7 +9,7 @@ import { TemplateRef } from '@angular/core'
 })
 export class PurchasesComponent implements OnInit {
 
-  constructor( private dialog: MatDialog) { }
+  constructor( private dialog: MatDialog ) { }
 
   ngOnInit(): void {
   }
