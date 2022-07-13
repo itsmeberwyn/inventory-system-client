@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  MatDialog } from '@angular/material/dialog';
-import { TemplateRef } from '@angular/core'
+import { TemplateRef } from '@angular/core';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',

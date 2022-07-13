@@ -68,7 +68,6 @@ thead{
     color: #383838;
     border-color: #E9ECEF ;
 }
-
 .modal_right_container{
     /* background-color: #383838; */
     border-radius: 5px;
@@ -86,7 +85,6 @@ thead{
     display: flex;
     padding-top: 3% ;
     justify-content: center;
- 
 }
 .moadal_right_top_container h1{
     font-size: 1.1rem;

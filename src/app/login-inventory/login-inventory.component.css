@@ -16,7 +16,10 @@
     width: 100%;
     height: 100%;
 }
-.rigt_container{
+.banner_container{
+    z-index: 2;
+}
+.right_container{
     background-color: #F6F4FC;
     width: 50%;
     height: 100%;
