@@ -12,7 +12,7 @@ export class SuppliersComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  openAddSupplierDialog(templateRef: TemplateRef<any>) {
+  openDialog(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
 }
 }

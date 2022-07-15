@@ -26,6 +26,7 @@ thead{
     margin-top: 1.2%;
     padding: 0;
 }
+/*------------EDIT MODAL--------------------------------*/
 .modal_body_container{
     /* background-color: #5464EF; */
     width: 75vw;
@@ -159,6 +160,10 @@ thead{
     /* background-color: #5464EF; */
     width: 90%;
 }
+/*------------DELETE MODAL--------------------------------*/
+
+
+
 .bot_container{
     /* background-color:burlywood; */
     background-color: white;

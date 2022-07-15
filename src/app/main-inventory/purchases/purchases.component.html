@@ -1,8 +1,6 @@
 <div class="body_container">
-
     <div style="width: 95%" class="m-auto">
       <div class="top_container">
-      
           <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Choose a date</mat-label>
               <input matInput [matDatepicker]="picker" placeholder="MM/DD/YY">
@@ -11,26 +9,22 @@
               </mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-     
-          <button mat-raised-button color="primary"(click)="openDialog(add_purchase_modal)">
+          <button mat-raised-button color="primary" (click)="openDialog(add_purchase_modal)">
             <span class="material-symbols-outlined">add</span> Add Purchase
           </button>
-            
-           <!-- DIALOG BOX -------------------------------------------------------------------->
+              <!-- ADD PURCHASE DIALOG BOX -------------------------------------------------------------------->
            <ng-template #add_purchase_modal class="dialog_box">
             <h2 mat-dialog-title>Add Purchase</h2>
             <mat-dialog-content class="mat-typography">
                 <div class="modal_body_container">
                   <div class="modal_left_container">
                     <div class="modal_left_top_container">
-                      
                       <mat-form-field class="example-form-field" appearance="fill">
                         <mat-label>Search</mat-label>
                         <input matInput type="search" placeholder="Enter keyword">
                           <mat-icon matSuffix>search</mat-icon>
                       </mat-form-field>
                     </div>
-
                     <div class="modal_left_table_container">
                       <table class="table table-hover">
                         <thead>
@@ -42,7 +36,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]">
+                          <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]" (click)="openDialog(edit_purchase_modal)">
                             <td>001</td>
                             <td>Faber Castle</td>
                             <td>B2</td>
@@ -55,7 +49,6 @@
                   <div class="modal_right_container">
                     <div class="moadal_right_top_container"><h1>Purchase Items (35)</h1></div>
                     <div class="modal_right_table_container">
-                     
                       <table class="table">
                         <thead>
                         </thead>
@@ -73,7 +66,6 @@
                           </tr>
                         </tbody>
                       </table>
-
                     </div>
                     <mat-divider></mat-divider>
                     <div class="modal_right_footer_container">
@@ -81,16 +73,64 @@
                         <h1>TOTAL:</h1>
                         <h1>P1300</h1>
                       </div>
-                      <button mat-raised-button color="primary">Check Out</button>
+                      <button mat-raised-button color="primary">Save</button>
                       <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
                     </div>
                   </div>
                 </div>
             </mat-dialog-content>
-    
           </ng-template>
-            
-      </div>
+              <!-- EDIT PURCHASE DIALOG BOX -------------------------------------------------------------------->
+             <ng-template #edit_purchase_modal class="dialog_box">
+              <h2 mat-dialog-title>Add Purchase</h2>
+              <mat-dialog-content class="mat-typography">
+                  <div class="modal_body_container">
+                    <div class="modal_left_container">
+                      <div class="modal_left_top_container">
+                        <mat-form-field class="example-form-field" appearance="fill">
+                          <mat-label>Search</mat-label>
+                          <input matInput type="search" placeholder="Enter keyword">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                      </div>
+                      <div class="modal_left_table_container">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr >
+                              <th scope="col">ID</th>
+                              <th scope="col">NAME</th>
+                              <th scope="col">DESCRIPTION</th>
+                              <th scope="col">AVAILABLE</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]">
+                              <td>001</td>
+                              <td>Faber Castle</td>
+                              <td>B2</td>
+                              <td>32</td>
+                            </tr>
+                          </tbody>
+                    </table>
+                      </div>
+                    </div>
+                  </div>
+              </mat-dialog-content>
+            </ng-template>
+                  <!-- DELETE DIALOG BOX ------------------------------------------------------------------------>
+                 <ng-template #delete_modal class="dialog_box">
+                  <div class="delete_modal_body_container">
+                      <h2 mat-dialog-title>Delete Item</h2>
+                      <mat-dialog-content class="mat-typography">
+                          <h1>Are you Sure you like to Delete this item?</h1>
+                      </mat-dialog-content>
+                  </div>
+                      <mat-dialog-actions align="end">    
+                      <button mat-button mat-dialog-close>Cancel</button>
+                      <button mat-button mat-dialog-close  cdkFocusInitial>Delete</button>
+                      </mat-dialog-actions>
+                  </ng-template>
+    </div>
       <div class="bot_container">
           <div class="table_container">
             <table class="table table-hover">
@@ -106,7 +146,6 @@
                     </tr>
                   </thead>
                   <tbody>
-
                     <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]">
                       <td>2022-07-04</td>
                       <td>001</td>
@@ -115,14 +154,13 @@
                       <td>32</td>
                       <td>P17</td>
                       <th>
-                          <button type="button" class="btn btn-secondary btn-sm">
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="openDialog(add_purchase_modal)">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
                                   <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
                               </svg>
-                              
                           </button>
-                          <button type="button" class="btn btn-secondary btn-sm">
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="openDialog(delete_modal)">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                   <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -130,10 +168,8 @@
                           </button>
                       </th>
                     </tr>
-                    
                   </tbody>
             </table>
-            
       </div>
       <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-end">
