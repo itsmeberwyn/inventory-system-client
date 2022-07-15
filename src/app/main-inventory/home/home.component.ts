@@ -1,6 +1,7 @@
 import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,25 @@ import { RequestParams } from 'src/app/models/RequestParams';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private dataService: DataService) {}
+  $categories: any = [];
+  $products: any = [];
+  $currentPage = 0;
+
+  constructor(
+    private dataService: DataService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // this.getProducts();
+    this.route.params.subscribe((params) => {
+      if (params['currentPage'] != '') {
+        this.$currentPage = parseInt(params['currentPage']) - 1;
+      }
+    });
+
+    this.getProducts();
+    this.getCategories();
   }
 
   getProducts() {
@@ -19,9 +35,34 @@ export class HomeComponent implements OnInit {
     requestParams.EndPoint = `/get-products`;
 
     this.dataService
-      .httpRequest('GET_REQUIRES_AUTH', requestParams)
+      .httpRequest('GET', requestParams)
       .subscribe(async (data: any) => {
-        console.log(data);
+        this.$products = data.payload;
       });
+  }
+
+  getCategories() {
+    const requestParams = new RequestParams();
+    requestParams.EndPoint = `/get-categories`;
+
+    this.dataService
+      .httpRequest('GET', requestParams)
+      .subscribe(async (data: any) => {
+        this.$categories = data.payload;
+      });
+  }
+
+  paginate(page: any) {
+    this.router.navigate([`inventory/home/${page + 1}`]);
+  }
+
+  next() {
+    if (this.$currentPage < this.$products.length - 1)
+      this.router.navigate([`inventory/home/${(this.$currentPage += 2)}`]);
+  }
+
+  previous() {
+    if (this.$currentPage > 0)
+      this.router.navigate([`inventory/home/${this.$currentPage}`]);
   }
 }
