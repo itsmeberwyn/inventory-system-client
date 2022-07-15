@@ -60,9 +60,11 @@ mat-toolbar {
 }
 
 .btn-group{
-  background-color: #5464ef;
+  /* background-color: #5464ef; */
   height: 100%;
   width: 15%;
+  display: flex;
+  align-items: center;
 }
 .btn-group button{
   background-color: #fff;
@@ -73,12 +75,21 @@ mat-toolbar {
   height: inherit;
   border: none;
   border-radius: 0%;
-}
-.btn_text_container{
 
 }
 .btn_text_container{
-  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+}
+.btn_text_container h6{
+  font-size: 1.1rem;
+}
+.btn_text_container p{
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #777777;
+  margin: 0%;
 }
 .btn:hover, .btn:focus:focus, .btn:active{
   /* border-style: outset; */
