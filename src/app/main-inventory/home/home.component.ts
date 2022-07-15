@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
   }
 
   next() {
+    console.log(this.$currentPage < this.$products.length - 1);
     if (this.$currentPage < this.$products.length - 1)
       this.router.navigate([`inventory/home/${(this.$currentPage += 2)}`]);
   }

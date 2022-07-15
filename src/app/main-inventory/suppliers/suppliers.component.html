@@ -2,7 +2,11 @@
     
     <div style="width: 95%" class="m-auto">
         <div class="top_container">
-        
+          <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Search</mat-label>
+              <input matInput type="search" placeholder="Enter keyword" [(ngModel)]="search" (ngModelChange)="searchSupplier()">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
             <button mat-raised-button (click)="openDialog(add_supplier_modal)">
                 <span class="material-symbols-outlined">add</span> Add Supplier
             </button>      
@@ -68,12 +72,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]">
-                        <td>2022-07-04</td>
-                        <td>001</td>
-                        <td>Faber Castle</td>
-                        <td>0987-654-321</td>                   
-                        <td>Sa kanto</td>
+                      <tr *ngFor="let item of $suppliers[$currentPage]">
+                        <td>{{item.created_at.split(" ")[0]}}</td>
+                        <td>{{item.id}}</td>
+                        <td>{{item.supplierName}}</td>
+                        <td>{{item.contact}}</td>                   
+                        <td>{{item.location}}</td>
                         <th>
                             <button type="button" class="btn btn-secondary btn-sm" (click)="openDialog(add_supplier_modal)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -94,16 +98,16 @@
                   </table>
               
         </div>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example" *ngIf="$suppliers.length > 8">
             <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            <li class="page-item disabled" [ngClass]="(this.$currentPage) <= 0?'disabled':''" role="button">
+                <a class="page-link" (click)="previous()" aria-disabled="true">Previous</a>
             </li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+            <li class="page-item" role="button" [ngClass]="(this.$currentPage+1) >= this.$suppliers.length?'disabled':''">
+                <a class="page-link" (click)="next()">Next</a>
             </li>
             </ul>
         </nav>

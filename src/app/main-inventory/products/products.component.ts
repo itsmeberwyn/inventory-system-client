@@ -20,7 +20,9 @@ export class ProductsComponent implements OnInit {
   $products_copy: any = [];
   $currentPage = 0;
   $categories: any = [];
-  category = 'Categories';
+
+  category: String = 'Categories';
+  search: any = '';
 
   productForm: FormGroup = this.formBuilder.group({
     categoryId: ['', Validators.required],
@@ -112,7 +114,40 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  addProduct() {}
+  addProduct() {
+    console.log(this.productForm.value);
+  }
+
+  searchProduct() {
+    if (this.$products.length === 0 || this.search === '') {
+      this.$products = this.$products_copy;
+      return;
+    }
+
+    const result = this.$products.map((chunk: any) => {
+      try {
+        return chunk.filter((product: any) => {
+          return new RegExp(this.search.toLowerCase()).test(
+            product.productName.toLowerCase()
+          );
+        });
+      } catch (e) {}
+    });
+
+    this.$products = result
+      .flat()
+      .reduce((resultArray: any, item: any, index: any) => {
+        const chunkIndex = Math.floor(index / 8);
+
+        if (!resultArray[chunkIndex]) {
+          resultArray[chunkIndex] = [];
+        }
+
+        resultArray[chunkIndex].push(item);
+
+        return resultArray;
+      }, []);
+  }
 
   deleteProduct(index: number, page: number, productId: number) {
     const requestParams = new RequestParams();

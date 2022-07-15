@@ -13,8 +13,11 @@ const routes: Routes = [
 
   { path: 'product', redirectTo: 'product/' },
   { path: 'product/:currentPage', component: ProductsComponent },
+
   { path: 'purchase', component: PurchasesComponent },
-  { path: 'supplier', component: SuppliersComponent },
+
+  { path: 'supplier', redirectTo: 'supplier/' },
+  { path: 'supplier/:currentPage', component: SuppliersComponent },
 ];
 
 @NgModule({
