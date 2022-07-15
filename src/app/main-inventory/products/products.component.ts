@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit {
     this.getProducts();
   }
 
-  openAddProductDialog(templateRef: TemplateRef<any>) {
+  openDialog(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
   }
 
