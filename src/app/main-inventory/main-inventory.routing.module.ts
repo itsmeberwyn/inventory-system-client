@@ -7,7 +7,9 @@ import { PurchasesComponent } from './purchases/purchases.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: 'home', redirectTo: 'home/', pathMatch: 'full' },
+  { path: '', redirectTo: 'home/', pathMatch: 'full' },
+  { path: 'home/:currentPage', component: HomeComponent },
   { path: 'product', component: ProductsComponent },
   { path: 'purchase', component: PurchasesComponent },
   { path: 'supplier', component: SuppliersComponent },
