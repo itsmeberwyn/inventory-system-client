@@ -40,7 +40,7 @@
         <mat-icon
           mat-list-icon
           class="material-symbols-outlined"
-          [ngClass]="isNumber(currentRoute[3]) || currentRoute[3]==='' ? 'fill__icon' : ''"
+          [ngClass]="(isNumber(currentRoute[3]) || currentRoute[3]==='') &&  currentRoute[2]==='home'? 'fill__icon' : ''"
           >home</mat-icon
         >
         <h4 mat-line *ngIf="isExpanded">Home</h4>
@@ -172,7 +172,7 @@
       </button> -->
       
      <!-- Example single danger button -->
-        <div class="btn-group">
+        <!-- <div class="btn-group">
           <span class="material-symbols-outlined" style="font-size: 2.5rem;">
             account_circle
             </span>
@@ -186,7 +186,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Log Out</a></li>
           </ul>
-        </div>
+        </div> -->
 
 
     </mat-toolbar>
