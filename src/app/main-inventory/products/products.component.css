@@ -17,6 +17,12 @@
     background-color: #5464EF;
     color: white;
 }
+.search_container{
+    display: flex;
+    width: 35%;
+    align-items: center;
+    justify-content: space-between;
+}
 .modal_body_container{
     width: 25vw;
     display: flex;
@@ -44,7 +50,7 @@
     background-color: white;
     border-radius: 5px;
     width: 100%;
-    height: 80vh;
+    height: 75vh;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     padding: 1%;
 }

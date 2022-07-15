@@ -165,7 +165,7 @@ thead{
     border-radius: 5px;
     padding: 1%;
     width: 100%;
-    height: 80vh;
+    height: 75vh;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .table_container{
@@ -197,13 +197,13 @@ thead{
     border-color: #E9ECEF ;
 }
 .table_container .table thead th:nth-child(1){
-    width: 15%;
+    /* width: 15%; */
 }
 .table_container .table thead th:nth-child(4){
-    width: 25%;
+    /* width: 25%; */
 }
-.table_container .table thead th:nth-child(7){
-    width: 10%;
+.table_container .table thead th:nth-child(5){
+    /* width: 10%; */
     text-align: center;
 }
 .table_container .table button{
@@ -219,4 +219,48 @@ thead{
 }
 .pagination{
     margin: 0.5% 0%;
+}
+
+
+.edit_modal_body_container{
+    /* background-color: #5464EF; */
+    width: 75vw;
+    height: 65vh;
+    display: flex;
+    
+}
+.edit_modal_left_container{
+    /* background-color: #777777; */
+    width: 100%;
+    height: 100%;
+}
+.edit_modal_left_top_container{
+    /* background-color: #5464EF; */
+    width: 100%;
+    height: 11%;
+}
+.edit_modal_left_top_container::ng-deep.mat-form-field{
+    margin-top: 0%;
+}
+.edit_modal_left_table_container{
+    /* background-color: aliceblue; */
+    width: 100%;
+    height: 89%;
+    overflow: auto;
+}
+.edit_modal_left_table_container .table thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+}
+.edit_modal_left_table_container .table tbody th {
+    text-align: center;
+}
+.edit_modal_left_table_container .table tbody {
+    vertical-align: middle;
+}
+.edit_modal_left_table_container .table th{
+    font-weight: 500;
+    color: #383838;
+    border-color: #E9ECEF ;
 }

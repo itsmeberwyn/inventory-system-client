@@ -3,20 +3,30 @@
     <div style="width: 95%" class="m-auto">
       <div class="top_container">
       
-        <mat-form-field appearance="fill">
-            <mat-label>Categories</mat-label>
-            <mat-select>
-              <mat-option >
-                Notebooks
-              </mat-option>
-            </mat-select>
+        
+        <div class="search_container">
+          <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Search</mat-label>
+              <input matInput type="search" placeholder="Enter keyword">
+            <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
+          
+          <mat-form-field appearance="fill">
+              <mat-label>Categories</mat-label>
+              <mat-select>
+                <mat-option >
+                  Notebooks
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+  
      
           <button mat-raised-button color="primary" (click)="openDialog(add_products_modal)">
             <span class="material-symbols-outlined">add</span> Add Product
           </button>
           
-            <!-- DIALOG BOX -->
+            <!--ADD PRODUCTS DIALOG BOX -->
           <ng-template #add_products_modal class="dialog_box">
             <div class="modal_body_container">
               <h2 mat-dialog-title>Add Product</h2>
@@ -39,6 +49,14 @@
                     <mat-form-field class="product_price_field" appearance="fill">
                       <mat-label>Product Quantity</mat-label>
                       <input matInput placeholder="Ex. 20" type="number">
+                    </mat-form-field>
+                    <mat-form-field class="product_mincount_field" appearance="fill">
+                      <mat-label>Product Minimum Quantity</mat-label>
+                      <input matInput placeholder="Ex. 5" type="number">
+                    </mat-form-field>
+                    <mat-form-field class="product_maxcount_field" appearance="fill">
+                      <mat-label>Product Max Quantity</mat-label>
+                      <input matInput placeholder="Ex. 30" type="number">
                     </mat-form-field>
                   </div>
                 </form>

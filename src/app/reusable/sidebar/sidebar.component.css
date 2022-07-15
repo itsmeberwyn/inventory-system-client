@@ -62,7 +62,6 @@ mat-toolbar {
 .btn-group{
   /* background-color: #5464ef; */
   height: 100%;
-  width: 15%;
   display: flex;
   align-items: center;
 }
