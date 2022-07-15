@@ -27,4 +27,11 @@ export class SidebarComponent implements OnInit {
     this.drawer.toggle();
     this.cdr.detectChanges();
   }
+
+  isNumber(val: any): boolean {
+    if (parseInt(val) >= 0) {
+      return true;
+    }
+    return typeof val === 'number';
+  }
 }
