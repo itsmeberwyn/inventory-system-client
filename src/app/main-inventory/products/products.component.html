@@ -3,22 +3,20 @@
     <div style="width: 95%" class="m-auto">
       <div class="top_container">
       
-        
         <div class="search_container">
           <mat-form-field class="example-form-field" appearance="fill">
             <mat-label>Search</mat-label>
-              <input matInput type="search" placeholder="Enter keyword">
+              <input matInput type="search" placeholder="Enter keyword" [(ngModel)]="search" (ngModelChange)="searchProduct()">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
           
           <mat-form-field appearance="fill">
-              <mat-label>Categories</mat-label>
-              <mat-select>
-                <mat-option >
-                  Notebooks
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <mat-label>Categories</mat-label>
+            <mat-select [(ngModel)]="category" (ngModelChange)="filterByCategory($event)">
+              <mat-option>Clear</mat-option>
+              <mat-option *ngFor="let category of $categories" value="{{category.id}}" >{{category.categoryName | titlecase}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
   
      
@@ -31,32 +29,32 @@
             <div class="modal_body_container">
               <h2 mat-dialog-title>Add Product</h2>
               <mat-dialog-content class="mat-typography">
-                <form class="form_container_addproducts">
+                <form class="form_container_addproducts" [formGroup]="productForm">
                   <div class="form-group">
                     <mat-form-field class="product_name_field" appearance="fill">
                       <mat-label>Product Name</mat-label>
-                      <input matInput placeholder="Ex. Pandan Pen">
+                      <input matInput placeholder="Ex. Pandan Pen" formControlName="productName">
                     </mat-form-field>
                     <mat-form-field class="product_descrption_field" appearance="fill">
                       <mat-label>Product Descption</mat-label>
-                      <input matInput placeholder="Ex. Black">
+                      <input matInput placeholder="Ex. Black" formControlName="productDescription">
                     </mat-form-field>
                     <mat-form-field class="product_price_field" appearance="fill">
                       <mat-label>Product Price</mat-label>
                       <span matPrefix>₱&nbsp;</span>
-                      <input matInput placeholder="Ex. 17" type="number">
+                      <input matInput placeholder="Ex. 17" type="number" formControlName="price">
                     </mat-form-field>
                     <mat-form-field class="product_price_field" appearance="fill">
                       <mat-label>Product Quantity</mat-label>
-                      <input matInput placeholder="Ex. 20" type="number">
+                      <input matInput placeholder="Ex. 20" type="number" formControlName="quantity">
                     </mat-form-field>
                     <mat-form-field class="product_mincount_field" appearance="fill">
                       <mat-label>Product Minimum Quantity</mat-label>
-                      <input matInput placeholder="Ex. 5" type="number">
+                      <input matInput placeholder="Ex. 5" type="number" formControlName="minQuantity">
                     </mat-form-field>
                     <mat-form-field class="product_maxcount_field" appearance="fill">
                       <mat-label>Product Max Quantity</mat-label>
-                      <input matInput placeholder="Ex. 30" type="number">
+                      <input matInput placeholder="Ex. 30" type="number" formControlName="maxQuantity">
                     </mat-form-field>
                   </div>
                 </form>
@@ -64,22 +62,10 @@
             </div>
               <mat-dialog-actions align="end">    
                 <button mat-button mat-dialog-close>Cancel</button>
-                <button mat-button mat-dialog-close  cdkFocusInitial>Add Product</button>
+                <button mat-button mat-dialog-close  cdkFocusInitial (click)="addProduct()">Add Product</button>
               </mat-dialog-actions>
           </ng-template>
-           <!-- DIALOG BOX ------------------------------------------------------------------------>
-           <ng-template #delete_modal class="dialog_box">
-            <div class="delete_modal_body_container">
-                <h2 mat-dialog-title>Delete Item</h2>
-                <mat-dialog-content class="mat-typography">
-                    <h1>Are you Sure you like to Delete this item?</h1>
-                </mat-dialog-content>
-            </div>
-                <mat-dialog-actions align="end">    
-                <button mat-button mat-dialog-close>Cancel</button>
-                <button mat-button mat-dialog-close  cdkFocusInitial>Delete</button>
-                </mat-dialog-actions>
-            </ng-template>  
+ 
 
       </div>
       <div class="bot_container">
@@ -97,7 +83,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of $products[$currentPage]">
+                    <tr *ngFor="let item of $products[$currentPage]; let i=index">
                       <td>{{item.id}}</td>
                       <td>{{item.productName}}</td>
                       <td>{{item.productDescription}}</td>
@@ -118,21 +104,34 @@
                               </svg>
                           </button>
                       </th>
+                                      <!-- DIALOG BOX ------------------------------------------------------------------------>
+                    <ng-template #delete_modal class="dialog_box">
+                      <div class="delete_modal_body_container">
+                          <h2 mat-dialog-title>Delete Item</h2>
+                          <mat-dialog-content class="mat-typography">
+                              <h1>Are you Sure you like to Delete this item?</h1>
+                          </mat-dialog-content>
+                      </div>
+                          <mat-dialog-actions align="end">    
+                          <button mat-button mat-dialog-close>Cancel</button>
+                          <button mat-button mat-dialog-close  cdkFocusInitial (click)="deleteProduct(i, this.$currentPage, item.id)">Delete</button>
+                          </mat-dialog-actions>
+                      </ng-template> 
                     </tr>
+
                   </tbody>
                 </table>
             
       </div>
       <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-end">
-          <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          <li class="page-item" [ngClass]="(this.$currentPage) <= 0?'disabled':''" role="button">
+              <a class="page-link" (click)="previous()" aria-disabled="true">Previous</a>
           </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-              <a class="page-link" href="#">Next</a>
+          <li class="page-item" role="button" *ngFor="let page of [].constructor($products.length); let i=index"><a class="page-link" (click)="paginate(i)">{{i+1}}</a></li>
+      
+          <li class="page-item" role="button" [ngClass]="(this.$currentPage+1) >= this.$products.length?'disabled':''">
+              <a class="page-link" (click)="next()">Next</a>
           </li>
           </ul>
       </nav>
