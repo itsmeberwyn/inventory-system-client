@@ -2,7 +2,11 @@
     
     <div style="width: 95%" class="m-auto">
         <div class="top_container">
-        
+          <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Search</mat-label>
+              <input matInput type="search" placeholder="Enter keyword">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
             <button mat-raised-button (click)="openDialog(add_supplier_modal)">
                 <span class="material-symbols-outlined">add</span> Add Supplier
             </button>      

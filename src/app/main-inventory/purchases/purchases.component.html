@@ -36,7 +36,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]" (click)="openDialog(edit_purchase_modal)">
+                          <tr *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13]">
                             <td>001</td>
                             <td>Faber Castle</td>
                             <td>B2</td>
@@ -80,20 +80,20 @@
                 </div>
             </mat-dialog-content>
           </ng-template>
-              <!-- EDIT PURCHASE DIALOG BOX -------------------------------------------------------------------->
-             <ng-template #edit_purchase_modal class="dialog_box">
-              <h2 mat-dialog-title>Add Purchase</h2>
+              <!-- VIEW PURCHASE DIALOG BOX -------------------------------------------------------------------->
+             <ng-template #view_purchase_modal class="dialog_box">
+              <h2 mat-dialog-title>View Purchase</h2>
               <mat-dialog-content class="mat-typography">
-                  <div class="modal_body_container">
-                    <div class="modal_left_container">
-                      <div class="modal_left_top_container">
+                  <div class="edit_modal_body_container">
+                    <div class="edit_modal_left_container">
+                      <div class="edit_modal_left_top_container">
                         <mat-form-field class="example-form-field" appearance="fill">
                           <mat-label>Search</mat-label>
                           <input matInput type="search" placeholder="Enter keyword">
                             <mat-icon matSuffix>search</mat-icon>
                         </mat-form-field>
                       </div>
-                      <div class="modal_left_table_container">
+                      <div class="edit_modal_left_table_container">
                         <table class="table table-hover">
                           <thead>
                             <tr >
@@ -116,7 +116,11 @@
                     </div>
                   </div>
               </mat-dialog-content>
+              <mat-dialog-actions align="end">    
+                <button mat-button mat-dialog-close>Close</button>
+                </mat-dialog-actions>
             </ng-template>
+            
                   <!-- DELETE DIALOG BOX ------------------------------------------------------------------------>
                  <ng-template #delete_modal class="dialog_box">
                   <div class="delete_modal_body_container">
@@ -154,7 +158,7 @@
                       <td>32</td>
                       <td>P17</td>
                       <th>
-                          <button type="button" class="btn btn-secondary btn-sm" (click)="openDialog(add_purchase_modal)">
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="openDialog(view_purchase_modal)">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
                                   <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
