@@ -39,8 +39,8 @@ export class DataService {
         break;
 
       //put data
-      case 'PUT':
-        result = this.http.put(
+      case 'PATCH':
+        result = this.http.patch(
           `${this.baseURL}${requestParams.EndPoint}`,
           requestParams.Body,
           {
