@@ -1,3 +1,4 @@
+import { DataService } from './../../services/data.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   Chart,
@@ -9,13 +10,17 @@ import {
 import { BaseChartDirective } from 'ng2-charts';
 
 import { default as Annotation } from 'chartjs-plugin-annotation';
+import { RequestParams } from 'src/app/models/RequestParams';
 @Component({
   selector: 'app-revenue',
   templateUrl: './revenue.component.html',
   styleUrls: ['./revenue.component.css'],
 })
 export class RevenueComponent implements OnInit {
-  sampleData: number[] = [];
+  barData: number[] = [];
+  barLabel: string[] = [];
+  salesMonth: number[] = [];
+  salesMonthLabel: string[] = [];
 
   public lineChartType: ChartType = 'line';
   public barChartType: ChartType = 'bar';
@@ -23,15 +28,7 @@ export class RevenueComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   public barChartData: ChartData<'bar'> = {
-    labels: [
-      'Pens',
-      'Pencils',
-      'Notebooks',
-      'Papers',
-      'Adhesives',
-      'Orgranizers',
-      'Separators',
-    ],
+    labels: ['Pens', 'Pencils'],
     datasets: [
       {
         data: [],
@@ -45,17 +42,6 @@ export class RevenueComponent implements OnInit {
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
       {
-        data: [65, 59, 80, 81, 56, 55, 40, 34, 77, 23, 99, 64],
-        label: '2021',
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'rgba(148,159,177,1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-        fill: 'origin',
-      },
-      {
         data: [180, 480, 770, 90, 1000, 270, 400, 234, 344, 664, 767, 675],
         label: '2022',
         yAxisID: 'y-axis-1',
@@ -68,21 +54,21 @@ export class RevenueComponent implements OnInit {
         fill: 'origin',
       },
     ],
-    labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ],
+    labels: [],
   };
+
+  // 'January',
+  // 'February',
+  // 'March',
+  // 'April',
+  // 'May',
+  // 'June',
+  // 'July',
+  // 'August',
+  // 'September',
+  // 'October',
+  // 'November',
+  // 'December',
 
   header = [
     {
@@ -99,14 +85,72 @@ export class RevenueComponent implements OnInit {
     },
   ];
 
-  constructor() {
+  topSelling: any = [];
+  topSellingCat: any = [];
+
+  constructor(private dataService: DataService) {
     Chart.register(Annotation);
   }
 
   ngOnInit(): void {
-    this.sampleData = [32, 23, 23, 12, 34, 23, 32];
-    // console.log(this.barChartData['datasets'][0]['data']);
-    this.barChartData['datasets'][0]['data'] = this.sampleData;
+    this.getTopSelling();
+    this.getTopSellingCat();
+    this.getSalesMonth();
+
+    // this.sampleData = [32, 23, 23, 12, 34, 3, 32];
+    // // console.log(this.barChartData['datasets'][0]['data']);
+    // this.barChartData['datasets'][0]['data'] = this.sampleData;
+  }
+
+  getTopSelling() {
+    const requestParams = new RequestParams();
+    requestParams.EndPoint = `/get-topselling-month`;
+
+    this.dataService
+      .httpRequest('GET', requestParams)
+      .subscribe(async (data: any) => {
+        this.topSelling = data.payload;
+      });
+  }
+
+  getTopSellingCat() {
+    const requestParams = new RequestParams();
+    requestParams.EndPoint = `/get-topsellingcat-month`;
+
+    this.dataService
+      .httpRequest('GET', requestParams)
+      .subscribe(async (data: any) => {
+        this.topSellingCat = data.payload;
+
+        // this.barChartData['labels'] = this.barlabel;
+        // this.barChartData['datasets'][0]['data'] = this.barData;
+        this.barData = this.topSellingCat.map((data: any) => data.quantitySold);
+        this.barLabel = this.topSellingCat.map(
+          (data: any) => data.categoryName
+        );
+
+        this.barChartData['datasets'][0]['data'] = this.barData;
+        this.barChartData['labels'] = this.barLabel;
+        console.log(this.barData);
+      });
+  }
+
+  getSalesMonth() {
+    const requestParams = new RequestParams();
+    requestParams.EndPoint = `/get-sales-month`;
+
+    this.dataService
+      .httpRequest('GET', requestParams)
+      .subscribe(async (data: any) => {
+        this.salesMonth = data.payload[0];
+        this.salesMonthLabel = this.salesMonth.map((day, index) =>
+          (index + 1).toString()
+        );
+        // this.topSellingCat = data.payload;
+        console.log(data.payload);
+        this.lineChartData['datasets'][0]['data'] = this.salesMonth;
+        this.lineChartData['labels'] = this.salesMonthLabel;
+      });
   }
 
   // line chart configuration
