@@ -26,12 +26,17 @@ const MatModules = [
   MatNativeDateModule,
   MatSelectModule,
   MatDialogModule,
-  
 ];
 
 @NgModule({
   declarations: [],
-  imports: [MatModules, MatDatepickerModule, MatInputModule, MatNativeDateModule,MatSelectModule,],
+  imports: [
+    MatModules,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatSelectModule,
+  ],
   exports: [MatModules],
 })
 export class MaterialModule {}

@@ -21,6 +21,7 @@ import { LoginSalesreportComponent } from './login-salesreport/login-salesreport
 
 import { SidebarComponent } from './reusable/sidebar/sidebar.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AddSupplierComponent } from './modals/supplier/add-supplier/add-supplier.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     SidebarComponent,
     LoginPointofsaleComponent,
     LoginSalesreportComponent,
+    AddSupplierComponent,
   ],
   imports: [
     BrowserModule,

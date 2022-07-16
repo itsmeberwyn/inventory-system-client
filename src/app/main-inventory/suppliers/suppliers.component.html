@@ -7,55 +7,9 @@
               <input matInput type="search" placeholder="Enter keyword" [(ngModel)]="search" (ngModelChange)="searchSupplier()">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
-            <button mat-raised-button (click)="openDialog(add_supplier_modal)">
+            <button mat-raised-button (click)="openAddDialog()">
                 <span class="material-symbols-outlined">add</span> Add Supplier
             </button>      
-
-              <!-- DIALOG BOX -->
-          <ng-template #add_supplier_modal class="dialog_box">
-            <div class="modal_body_container">
-              <h2 mat-dialog-title>Add Supplier</h2>
-              <mat-dialog-content class="mat-typography">
-
-                <form class="form_container_addproducts">
-                  <div class="form-group">
-                    <mat-form-field class="product_name_field" appearance="fill">
-                      <mat-label>Supplier Name</mat-label>
-                      <input matInput placeholder="Ex. Pilot.Inc">
-                    </mat-form-field>                  
-                    <mat-form-field class="product_price_field" appearance="fill">
-                      <mat-label>Supplier Contact</mat-label>
-                      <span matPrefix>#&nbsp;</span>
-                      <input matInput placeholder="Ex. 1234-567-890" type="tel">
-                    </mat-form-field>
-                    <mat-form-field class="product_descrption_field" appearance="fill">
-                        <mat-label>Supplier Location</mat-label>
-                        <input matInput placeholder="">
-                      </mat-form-field>
-                  </div>
-                </form>
-              </mat-dialog-content>
-            </div>
-              <mat-dialog-actions align="end">    
-                <button mat-button mat-dialog-close>Cancel</button>
-                <button mat-button mat-dialog-close  cdkFocusInitial>Add Supplier</button>
-              </mat-dialog-actions>
-         
-          </ng-template>
-            <!-- DIALOG BOX ------------------------------------------------------------------------>
-            <ng-template #delete_modal class="dialog_box">
-              <div class="delete_modal_body_container">
-                  <h2 mat-dialog-title>Delete Item</h2>
-                  <mat-dialog-content class="mat-typography">
-                      <h1>Are you Sure you like to Delete this item?</h1>
-                  </mat-dialog-content>
-              </div>
-                  <mat-dialog-actions align="end">    
-                  <button mat-button mat-dialog-close>Cancel</button>
-                  <button mat-button mat-dialog-close  cdkFocusInitial>Delete</button>
-                  </mat-dialog-actions>
-              </ng-template>
-          
         </div>
         <div class="bot_container">
             <div class="table_container">
@@ -72,21 +26,21 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of $suppliers[$currentPage]">
+                      <tr *ngFor="let item of $suppliers[$currentPage]; let i=index">
                         <td>{{item.created_at.split(" ")[0]}}</td>
                         <td>{{item.id}}</td>
                         <td>{{item.supplierName}}</td>
                         <td>{{item.contact}}</td>                   
                         <td>{{item.location}}</td>
                         <th>
-                            <button type="button" class="btn btn-secondary btn-sm" (click)="openDialog(add_supplier_modal)">
+                            <button type="button" class="btn btn-secondary btn-sm" (click)="openEditDialog(item, i)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
                                 </svg>
                                 
                             </button>
-                            <button type="button" class="btn btn-secondary btn-sm" (click)="openDialog(delete_modal)">
+                            <button type="button" class="btn btn-secondary btn-sm" (click)="openDeleteDialog(i, $currentPage, item.id)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -98,14 +52,12 @@
                   </table>
               
         </div>
-        <nav aria-label="Page navigation example" *ngIf="$suppliers.length > 8">
+        <nav aria-label="Page navigation example" >
             <ul class="pagination justify-content-end">
-            <li class="page-item disabled" [ngClass]="(this.$currentPage) <= 0?'disabled':''" role="button">
+            <li class="page-item" [ngClass]="(this.$currentPage) <= 0?'disabled':''" role="button">
                 <a class="page-link" (click)="previous()" aria-disabled="true">Previous</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item" *ngFor="let page of $suppliers; let i=index"><a class="page-link" (click)="paginate(i)">{{i+1}}</a></li>
             <li class="page-item" role="button" [ngClass]="(this.$currentPage+1) >= this.$suppliers.length?'disabled':''">
                 <a class="page-link" (click)="next()">Next</a>
             </li>
