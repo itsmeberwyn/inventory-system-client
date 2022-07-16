@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent as InventoryProductsComponent } from './products/products.component';
 import { PurchasesComponent } from './purchases/purchases.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
+import { DeleteSupplierComponent } from '../modals/supplier/delete-supplier/delete-supplier.component';
+import { EditSupplierComponent } from '../modals/supplier/edit-supplier/edit-supplier.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { SuppliersComponent } from './suppliers/suppliers.component';
     InventoryProductsComponent,
     PurchasesComponent,
     SuppliersComponent,
+    EditSupplierComponent,
+    DeleteSupplierComponent,
   ],
   imports: [
     CommonModule,
