@@ -37,7 +37,23 @@ export class HomeComponent implements OnInit {
     this.dataService
       .httpRequest('GET', requestParams)
       .subscribe(async (data: any) => {
-        this.$products = data.payload;
+        // this.$products = data.payload;
+
+        const newData = data.payload.flat().sort(this.compare);
+        this.$products = newData.reduce(
+          (resultArray: any, item: any, index: any) => {
+            const chunkIndex = Math.floor(index / 8);
+
+            if (!resultArray[chunkIndex]) {
+              resultArray[chunkIndex] = [];
+            }
+
+            resultArray[chunkIndex].push(item);
+
+            return resultArray;
+          },
+          []
+        );
       });
   }
 
@@ -50,6 +66,23 @@ export class HomeComponent implements OnInit {
       .subscribe(async (data: any) => {
         this.$categories = data.payload;
       });
+  }
+
+  compare(a: any, b: any) {
+    // item.quantity/item.maxQuantity*100
+    if (
+      (a.quantity / a.maxQuantity) * 100 <
+      (b.quantity / b.maxQuantity) * 100
+    ) {
+      return -1;
+    }
+    if (
+      (a.quantity / a.maxQuantity) * 100 >
+      (b.quantity / b.maxQuantity) * 100
+    ) {
+      return 1;
+    }
+    return 0;
   }
 
   paginate(page: any) {

@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'product', redirectTo: 'product/' },
   { path: 'product/:currentPage', component: ProductsComponent },
 
-  { path: 'purchase', component: PurchasesComponent },
+  { path: 'purchase', redirectTo: 'purchase/' },
+  { path: 'purchase/:currentPage', component: PurchasesComponent },
 
   { path: 'supplier', redirectTo: 'supplier/' },
   { path: 'supplier/:currentPage', component: SuppliersComponent },

@@ -1,9 +1,14 @@
+import { AddSupplierComponent } from './../../modals/supplier/add-supplier/add-supplier.component';
+import { DeleteSupplierComponent } from './../../modals/supplier/delete-supplier/delete-supplier.component';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TemplateRef } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { RequestParams } from 'src/app/models/RequestParams';
+
+import { EditSupplierComponent } from 'src/app/modals/supplier/edit-supplier/edit-supplier.component';
 @Component({
   selector: 'app-suppliers',
   templateUrl: './suppliers.component.html',
@@ -11,8 +16,14 @@ import { RequestParams } from 'src/app/models/RequestParams';
 })
 export class SuppliersComponent implements OnInit {
   $suppliers: any = [];
-  $suppliers_copy = [];
+  $suppliers_copy: any = [];
   $currentPage = 0;
+
+  supplierForm: FormGroup = this.formBuilder.group({
+    supplierName: ['', Validators.required],
+    contact: ['', Validators.required],
+    location: ['', Validators.required],
+  });
 
   search: any = '';
 
@@ -20,7 +31,8 @@ export class SuppliersComponent implements OnInit {
     private dialog: MatDialog,
     private dataService: DataService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -33,8 +45,37 @@ export class SuppliersComponent implements OnInit {
     this.getSupplier();
   }
 
-  openDialog(templateRef: TemplateRef<any>) {
-    this.dialog.open(templateRef);
+  openAddDialog() {
+    this.dialog.open(AddSupplierComponent, {
+      data: this.$suppliers,
+    });
+  }
+
+  openEditDialog(item: any, index: number) {
+    this.dialog.open(EditSupplierComponent, {
+      data: {
+        item: item,
+        index: index,
+        $suppliers: this.$suppliers,
+      },
+    });
+  }
+
+  openDeleteDialog(index: number, page: number, supplierId: number) {
+    const openDialog = this.dialog.open(DeleteSupplierComponent, {
+      data: {
+        index: index,
+        page: page,
+        supplierId: supplierId,
+        $suppliers: this.$suppliers,
+        $suppliers_copy: this.$suppliers_copy,
+      },
+    });
+
+    openDialog.afterClosed().subscribe((result: any) => {
+      this.$suppliers = result.$suppliers;
+      this.$suppliers_copy = result.$suppliers;
+    });
   }
 
   getSupplier() {
@@ -46,7 +87,6 @@ export class SuppliersComponent implements OnInit {
       .subscribe(async (data: any) => {
         this.$suppliers = data.payload;
         this.$suppliers_copy = data.payload;
-        console.log(data);
       });
   }
 

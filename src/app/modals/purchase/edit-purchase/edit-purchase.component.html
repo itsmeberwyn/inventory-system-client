@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>Add Purchase</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="modal_body_container">
+      <div class="modal_left_container">
+        <div class="modal_left_top_container">
+          <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Search</mat-label>
+            <input matInput type="search" placeholder="Enter keyword" [(ngModel)]="search" (ngModelChange)="searchProduct()">
+              <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="modal_left_table_container">
+          <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">DESCRIPTION</th>
+                <th scope="col">AVAILABLE</th>
+            </tr>
+        </thead>
+        <tbody>
+              <tr role="button" *ngFor="let product of $products[0]" (click)="addOrder(product)" >
+                <td>{{product.id}}</td>
+                <td>{{product.productName}}</td>
+                <td>{{product.productDescription}}</td>
+                <td>{{product.quantity}}</td>
+              </tr>
+            </tbody>
+      </table>
+        </div>
+      </div>
+      <form class="modal_right_container" [formGroup]="transactionForm">
+        <div class="moadal_right_top_container"><h1>Purchase Items</h1></div>
+        <div class="modal_right_table_container">
+          <table class="table">
+            <thead>
+            </thead>
+            <tbody formArrayName="list">
+              <tr *ngFor="let order of formArrOrder.controls; let i=index; trackBy:trackByFn">
+               <td *ngIf="this.transactionForm.controls.list.value[i].is_deleted !== 1" [formGroupName]="i">
+                <mat-card>
+                  <button mat-mini-fab (click)="removeOrder(i)"><mat-icon>close</mat-icon></button>
+                  <p class="d-flex flex-column">{{order.get('productName')?.value}} <span>({{this.transactionForm.controls.list.value[i].quantityBought}} X {{this.transactionForm.controls.list.value[i].price}} = {{this.transactionForm.controls.list.value[i].price * this.transactionForm.controls.list.value[i].quantityBought}})</span></p>
+                  <button mat-mini-fab (click)="removeQuantity(i)"><mat-icon>remove</mat-icon></button>
+                  <p>{{this.transactionForm.controls.list.value[i].quantityBought}}</p>
+                  <button mat-mini-fab (click)="addQuantity(i)"><mat-icon>add</mat-icon></button>
+                </mat-card>
+               </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="modal_right_footer_container">
+          <div class="modal_right_footer_text">
+            <h1>TOTAL:</h1>
+            <h1>P{{totalCost}}</h1>
+          </div>
+          <button mat-raised-button mat-dialog-close color="primary" (click)="submitOrder()">Save</button>
+          <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+        </div>
+      </form>
+    </div>
+</mat-dialog-content>
