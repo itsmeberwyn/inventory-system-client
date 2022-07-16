@@ -12,49 +12,6 @@
           <button mat-raised-button color="primary" (click)="openAddDialog()">
             <span class="material-symbols-outlined">add</span> Add Purchase
           </button>
-
-              <!-- VIEW PURCHASE DIALOG BOX -------------------------------------------------------------------->
-             <ng-template #view_purchase_modal class="dialog_box">
-              <h2 mat-dialog-title>View Purchase</h2>
-              <mat-dialog-content class="mat-typography">
-                  <div class="edit_modal_body_container">
-                    <div class="edit_modal_left_container">
-                      <div class="edit_modal_left_top_container">
-                        <mat-form-field class="example-form-field" appearance="fill">
-                          <mat-label>Search</mat-label>
-                          <input matInput type="search" placeholder="Enter keyword">
-                            <mat-icon matSuffix>search</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="edit_modal_left_table_container">
-                        <table class="table table-hover">
-                          <thead>
-                            <tr >
-                              <th scope="col">ID</th>
-                              <th scope="col">NAME</th>
-                              <th scope="col">DESCRIPTION</th>
-                              <th scope="col">PRICE</th>
-                              <th scope="col">AVAILABLE</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>001</td>
-                              <td>Faber Castle</td>
-                              <td>B2</td>
-                              <td>P32</td>
-                              <td>32</td>
-                            </tr>
-                          </tbody>
-                    </table>
-                      </div>
-                    </div>
-                  </div>
-              </mat-dialog-content>
-              <mat-dialog-actions align="end">    
-                <button mat-button mat-dialog-close>Close</button>
-                </mat-dialog-actions>
-            </ng-template>
             
     </div>
       <div class="bot_container">
@@ -71,7 +28,7 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let purchase of keys()">
-                      <td>{{$purchases[$currentPage][purchase][0].created_at}}</td>
+                      <td role="button" (click)="openViewDialog($currentPage, purchase)">{{$purchases[$currentPage][purchase][0].created_at}}</td>
                       <td>{{$purchases[$currentPage][purchase][0].purchaseSerialId}}</td>
                       <td>{{quantity(purchase)}}</td>
                       <td>{{cost(purchase)}}</td>

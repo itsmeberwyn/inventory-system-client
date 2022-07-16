@@ -1,3 +1,4 @@
+import { ViewPurchaseComponent } from './../../modals/purchase/view-purchase/view-purchase.component';
 import { EditPurchaseComponent } from './../../modals/purchase/edit-purchase/edit-purchase.component';
 import { DeletePurchaseComponent } from './../../modals/purchase/delete-purchase/delete-purchase.component';
 import { AddPurchaseComponent } from './../../modals/purchase/add-purchase/add-purchase.component';
@@ -40,6 +41,12 @@ export class PurchasesComponent implements OnInit {
   // openDialog(templateRef: TemplateRef<any>) {
   //   this.dialog.open(templateRef);
   // }
+
+  openViewDialog(page: any, index: any) {
+    const openDialog = this.dialog.open(ViewPurchaseComponent, {
+      data: this.$purchases[page][index],
+    });
+  }
 
   openAddDialog() {
     const openDialog = this.dialog.open(AddPurchaseComponent, {

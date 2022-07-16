@@ -1,0 +1,39 @@
+    <h2 mat-dialog-title>View Purchase</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="edit_modal_body_container">
+          <div class="edit_modal_left_container">
+            <!-- <div class="edit_modal_left_top_container">
+              <mat-form-field class="example-form-field" appearance="fill">
+                <mat-label>Search</mat-label>
+                <input matInput type="search" placeholder="Enter keyword">
+                  <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div> -->
+            <div class="edit_modal_left_table_container">
+              <table class="table table-hover">
+                <thead>
+                  <tr >
+                    <th scope="col">SERIAL ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">QUANTITY BOUGHT</th>
+                    <th scope="col">DATE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of this.$purchases">
+                    <td>{{item.purchaseSerialId}}</td>
+                    <td>{{item.productName | titlecase}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.quantityBought}}</td>
+                    <td>{{item.created_at}}</td>
+                  </tr>
+                </tbody>
+          </table>
+            </div>
+          </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">    
+      <button mat-button mat-dialog-close>Close</button>
+      </mat-dialog-actions>
