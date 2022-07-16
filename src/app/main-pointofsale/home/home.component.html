@@ -25,7 +25,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of $products.flat(); let i=index">
+                <tr role="button" *ngFor="let item of $products.flat(); let i=index" (click)="addOrder(item)">
                   <td>{{item.id}}</td>
                   <td>{{item.productName}}</td>
                   <td>{{item.productDescription}}</td>
@@ -38,22 +38,22 @@
     </div>
       </div>
 
-      <div class="right_container">
-        <div class="right_top_container"><h1>Cart Items (35)</h1></div>
+      <form class="right_container" [formGroup]="orderForm">
+        <div class="right_top_container"><h1>Cart Items</h1></div>
         <div class="right_table_container">
          
           <table class="table">
             <thead>
             </thead>
-            <tbody>
-              <tr>
-               <td>
+            <tbody formArrayName="list">
+              <tr *ngFor="let order of formArrOrder.controls; let i=index;">
+               <td [formGroupName]="i">
                 <mat-card>
-                  <button mat-mini-fab ><mat-icon>close</mat-icon></button>
-                  <p>Faber Castle</p>
-                  <button mat-mini-fab ><mat-icon>remove</mat-icon></button>
-                  <p>35</p>
-                  <button mat-mini-fab ><mat-icon>add</mat-icon></button>
+                  <button mat-mini-fab (click)="removeOrder(i)"><mat-icon>close</mat-icon></button>
+                  <p class="d-flex flex-column">{{order.get('productName')?.value}} <span>({{this.orderForm.controls.list.value[i].quantity}} X {{this.orderForm.controls.list.value[i].price}} = {{this.orderForm.controls.list.value[i].price * this.orderForm.controls.list.value[i].quantity}})</span></p>
+                  <button mat-mini-fab (click)="removeQuantity(i)"><mat-icon>remove</mat-icon></button>
+                  <p>{{this.orderForm.controls.list.value[i].quantity}}</p>
+                  <button mat-mini-fab (click)="addQuantity(i)"><mat-icon>add</mat-icon></button>
                 </mat-card>
                </td>
               </tr>
@@ -64,11 +64,18 @@
         <mat-divider></mat-divider>
         <div class="right_footer_container">
           <div class="right_footer_text">
-            <h1>TOTAL:</h1>
-            <h1>P1300</h1>
+            <div class="d-flex justify-content-between w-100 px-3">
+              <h1>TOTAL:</h1>
+              <h1>P{{totalCost}}</h1>
+            </div>
+            <mat-form-field class="product_price_field px-3" appearance="fill">
+              <mat-label>Amount Receive</mat-label>
+              <span matPrefix>₱&nbsp;</span>
+              <input matInput placeholder="Ex. 17" type="number" formControlName="amountReceive">
+            </mat-form-field>
           </div>
-          <button mat-raised-button color="primary">Check Out</button>
+          <button mat-raised-button color="primary" (click)="submitOrder()">Check Out</button>
         </div>
-      </div>
+      </form>
 </div>
 </div>

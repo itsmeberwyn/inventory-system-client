@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'product', redirectTo: 'product/' },
   { path: 'product/:currentPage', component: ProductsComponent },
 
-  { path: 'order', component: OrdersComponent },
+  { path: 'order', redirectTo: 'order/' },
+  { path: 'order/:currentPage', component: OrdersComponent },
 ];
 
 @NgModule({

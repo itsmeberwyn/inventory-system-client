@@ -20,31 +20,27 @@
                     <tr>
                       <th scope="col">PURCHASE DATE</th>
                       <th scope="col">ID</th>
-                      <th scope="col">NAME</th>
-                      <th scope="col">DESCRIPTION</th>
                       <th scope="col">QUANTITY</th>
-                      <th scope="col">PRICE</th>
+                      <th scope="col">TOTAL</th>
                       <th scope="col">ACTION</th>
                     </tr>
                   </thead>
                   <tbody>
 
-                    <tr>
-                      <td>2022-07-04</td>
-                      <td>001</td>
-                      <td>Faber Castle</td>
-                      <td>B2</td>
-                      <td>32</td>
-                      <td>P17</td>
+                    <tr *ngFor="let transaction of keys()">
+                      <td>{{$transactions[$currentPage][transaction][0].created_at}}</td>
+                      <td>{{$transactions[$currentPage][transaction][0].id}}</td>
+                      <td>{{quantity(transaction)}}</td>
+                      <td>{{cost(transaction)}}</td>
                       <th>
-                          <button type="button" class="btn btn-secondary btn-sm" (click)="openDialog(edit_order_modal)">
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="openEditDialog($currentPage, transaction)">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
                                   <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
                               </svg>
                               
                           </button>
-                          <button type="button" class="btn btn-secondary btn-sm" (click)="openDialog(delete_order_modal)">
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="openDeleteDialog($transactions[$currentPage][transaction][0].id)">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                   <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -55,105 +51,17 @@
                     
                   </tbody>
             </table>
-
-             <!-- DIALOG BOX -------------------------------------------------------------------->
-           <ng-template #edit_order_modal class="dialog_box">
-            <h2 mat-dialog-title>Edit Order</h2>
-            <mat-dialog-content class="mat-typography">
-                <div class="modal_body_container">
-                  <div class="modal_left_container">
-                    <div class="modal_left_top_container">
-                      
-                      <mat-form-field class="example-form-field" appearance="fill">
-                        <mat-label>Search</mat-label>
-                        <input matInput type="search" placeholder="Enter keyword">
-                          <mat-icon matSuffix>search</mat-icon>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="modal_left_table_container">
-                      <table class="table table-hover">
-                        <thead>
-                          <tr >
-                            <th scope="col">ID</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">DESCRIPTION</th>
-                            <th scope="col">AVAILABLE</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>001</td>
-                            <td>Faber Castle</td>
-                            <td>B2</td>
-                            <td>32</td>
-                          </tr>
-                        </tbody>
-                  </table>
-                    </div>
-                  </div>
-                  <div class="modal_right_container">
-                    <div class="moadal_right_top_container"><h1>Order Items (35)</h1></div>
-                    <div class="modal_right_table_container">
-                      <table class="table">
-                        <thead>
-                        </thead>
-                        <tbody>
-                          <tr>
-                           <td>
-                            <mat-card>
-                              <button mat-mini-fab ><mat-icon>close</mat-icon></button>
-                              <p>Faber Castle</p>
-                              <button mat-mini-fab ><mat-icon>remove</mat-icon></button>
-                              <p>35</p>
-                              <button mat-mini-fab ><mat-icon>add</mat-icon></button>
-                            </mat-card>
-                           </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <mat-divider></mat-divider>
-                    <div class="modal_right_footer_container">
-                      <div class="modal_right_footer_text">
-                        <h1>TOTAL:</h1>
-                        <h1>P1300</h1>
-                      </div>
-                      <button mat-raised-button color="primary">Save</button>
-                      <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
-                    </div>
-                  </div>
-                </div>
-            </mat-dialog-content>
-          </ng-template>
-
-            <!-- DIALOG BOX ------------------------------------------------------------------------>
-            <ng-template #delete_order_modal class="dialog_box">
-            <div class="delete_modal_body_container">
-                <h2 mat-dialog-title>Delete Item</h2>
-                <mat-dialog-content class="mat-typography">
-                    <h1>Are you Sure you like to Delete this item?</h1>
-                </mat-dialog-content>
-            </div>
-                <mat-dialog-actions align="end">    
-                <button mat-button mat-dialog-close>Cancel</button>
-                <button mat-button mat-dialog-close  cdkFocusInitial>Delete</button>
-                </mat-dialog-actions>
-            </ng-template>
-
       </div>
       <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-end">
-          <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-          </li>
-          </ul>
-      </nav>
+        <ul class="pagination justify-content-end">
+        <li class="page-item" role="button" [ngClass]="(this.$currentPage) <= 0?'disabled':''">
+            <a class="page-link" (click)="previous()" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item" role="button" *ngFor="let page of this.$transactions; let i=index"><a class="page-link" (click)="paginate(i)">{{i+1}}</a></li>
+        <li class="page-item" role="button" [ngClass]="(this.$currentPage+1) >= this.$transactions.length?'disabled':''">
+            <a class="page-link"  (click)="next()">Next</a>
+        </li>
+        </ul>
+    </nav>
     </div>
  </div>

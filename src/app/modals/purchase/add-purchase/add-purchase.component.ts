@@ -105,6 +105,7 @@ export class AddPurchaseComponent implements OnInit {
   }
 
   removeOrder(index: any) {
+    this.totalCost -= this.transactionForm.controls.list.value[index].subTotal;
     this.formArrOrder.removeAt(index);
   }
 

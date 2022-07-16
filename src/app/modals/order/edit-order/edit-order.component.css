@@ -141,6 +141,7 @@ thead{
     color: #777777;
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     vertical-align: middle;
     justify-content: space-around;

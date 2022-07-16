@@ -145,6 +145,7 @@
     color: #777777;
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     vertical-align: middle;
     justify-content: space-around;
@@ -161,4 +162,10 @@
     width: 90%;
     height: 25%;
     font-size: 1.1rem ;
+    margin-bottom: 2vh;
+}
+
+.product_price_field{
+    width:100%;
+    padding-bottom: 0;
 }

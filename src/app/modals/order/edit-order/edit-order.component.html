@@ -1,0 +1,76 @@
+    <h2 mat-dialog-title>Edit Order</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="modal_body_container">
+          <div class="modal_left_container">
+            <div class="modal_left_top_container">
+              
+              <mat-form-field class="example-form-field" appearance="fill">
+                <mat-label>Search</mat-label>
+                <input matInput type="search" placeholder="Enter keyword">
+                  <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <div class="modal_left_table_container">
+              <table class="table table-hover">
+                <thead>
+                  <tr >
+                    <th scope="col">ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">DESCRIPTION</th>
+                    <th scope="col">AVAILABLE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr role="button" *ngFor="let product of $products[0]" (click)="addOrder(product)" >
+                    <td>{{product.id}}</td>
+                    <td>{{product.productName}}</td>
+                    <td>{{product.productDescription}}</td>
+                    <td>{{product.quantity}}</td>
+                  </tr>
+                </tbody>
+          </table>
+            </div>
+          </div>
+          <form class="modal_right_container" [formGroup]="orderForm">
+            <div class="moadal_right_top_container"><h1>Order Items (35)</h1></div>
+            <div class="modal_right_table_container">
+              <table class="table">
+                <thead>
+                </thead>
+                <tbody formArrayName="list">
+                  <tr *ngFor="let order of formArrOrder.controls; let i=index;">
+                   <td  *ngIf="this.orderForm.controls.list.value[i].is_deleted !== 1" [formGroupName]="i">
+                    <mat-card>
+                        <button mat-mini-fab (click)="removeOrder(i)"><mat-icon>close</mat-icon></button>
+                        <p class="d-flex flex-column">{{order.get('productName')?.value}} <span>({{this.orderForm.controls.list.value[i].quantity}} X {{this.orderForm.controls.list.value[i].price}} = {{this.orderForm.controls.list.value[i].price * this.orderForm.controls.list.value[i].quantity}})</span></p>
+                        <button mat-mini-fab (click)="removeQuantity(i)"><mat-icon>remove</mat-icon></button>
+                        <p>{{this.orderForm.controls.list.value[i].quantity}}</p>
+                        <button mat-mini-fab (click)="addQuantity(i)"><mat-icon>add</mat-icon></button>
+                      </mat-card>
+                   </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="modal_right_footer_container">
+              <div class="modal_right_footer_text">
+                <div class="d-flex justify-content-between w-100 px-3">
+                    <h1>TOTAL:</h1>
+                    <h1>P{{totalCost}}</h1>
+                  </div>
+                  <div stlye="font-size: 10px">
+                    <mat-form-field class="product_price_field px-3" appearance="fill">
+                        <mat-label>Amount Receive</mat-label>
+                        <span matPrefix>₱&nbsp;</span>
+                        <input matInput placeholder="Ex. 17" type="number" formControlName="amountReceive">
+                      </mat-form-field>
+                    </div>
+              </div>
+              <button mat-raised-button mat-dialog-close color="primary" (click)="submitOrder()">Save</button>
+              <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+            </div>
+          </form>
+        </div>
+    </mat-dialog-content>
