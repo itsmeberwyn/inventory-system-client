@@ -2,15 +2,14 @@
 <div class="m-auto">
     <div class="left_container">
         <div class="left_top_container">
-          
-            <mat-form-field appearance="fill">
-                <mat-label>Categories</mat-label>
-                <mat-select>
-                  <mat-option >
-                    Notebooks
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Categories</mat-label>
+            <mat-select [(ngModel)]="category" (ngModelChange)="filterByCategory($event)">
+              <mat-option>Clear</mat-option>
+              <mat-option *ngFor="let category of $categories" value="{{category.id}}" >{{category.categoryName | titlecase}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
     <div class="left_bot_container">
@@ -22,14 +21,16 @@
                   <th scope="col">NAME</th>
                   <th scope="col">DESCRIPTION</th>
                   <th scope="col">AVAILABLE</th>
+                  <th scope="col">PRICE</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>001</td>
-                  <td>Faber Castle</td>
-                  <td>B2</td>
-                  <td>32</td>
+                <tr *ngFor="let item of $products.flat(); let i=index">
+                  <td>{{item.id}}</td>
+                  <td>{{item.productName}}</td>
+                  <td>{{item.productDescription}}</td>
+                  <td>{{item.quantity}}</td>
+                  <td>{{item.price}}</td>
                 </tr>
               </tbody>
         </table>

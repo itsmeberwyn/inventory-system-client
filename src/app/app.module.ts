@@ -26,6 +26,9 @@ import { AddPurchaseComponent } from './modals/purchase/add-purchase/add-purchas
 import { DeletePurchaseComponent } from './modals/purchase/delete-purchase/delete-purchase.component';
 import { EditPurchaseComponent } from './modals/purchase/edit-purchase/edit-purchase.component';
 import { ViewPurchaseComponent } from './modals/purchase/view-purchase/view-purchase.component';
+import { DeleteProductComponent } from './modals/product/delete-product/delete-product.component';
+import { EditProductComponent } from './modals/product/edit-product/edit-product.component';
+import { AddProductComponent } from './modals/product/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { ViewPurchaseComponent } from './modals/purchase/view-purchase/view-purc
     DeletePurchaseComponent,
     EditPurchaseComponent,
     ViewPurchaseComponent,
+    DeleteProductComponent,
+    EditProductComponent,
+    AddProductComponent,
   ],
   imports: [
     BrowserModule,
