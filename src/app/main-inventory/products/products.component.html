@@ -39,6 +39,13 @@
                       <mat-label>Product Descption</mat-label>
                       <input matInput placeholder="Ex. Black" formControlName="productDescription">
                     </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Categories</mat-label>
+                      <mat-select [(ngModel)]="category" (ngModelChange)="filterByCategory($event)">
+                        <mat-option>Clear</mat-option>
+                        <mat-option *ngFor="let category of $categories" value="{{category.id}}" >{{category.categoryName | titlecase}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
                     <mat-form-field class="product_price_field" appearance="fill">
                       <mat-label>Product Price</mat-label>
                       <span matPrefix>₱&nbsp;</span>
