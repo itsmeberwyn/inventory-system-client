@@ -73,8 +73,10 @@ export class SuppliersComponent implements OnInit {
     });
 
     openDialog.afterClosed().subscribe((result: any) => {
-      this.$suppliers = result.$suppliers;
-      this.$suppliers_copy = result.$suppliers;
+      this.getSupplier();
+
+      // this.$suppliers = result.$suppliers;
+      // this.$suppliers_copy = result.$suppliers;
     });
   }
 
