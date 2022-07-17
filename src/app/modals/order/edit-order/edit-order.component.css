@@ -34,6 +34,9 @@ thead{
     display: flex;
     
 }
+::ng-deep .mat-dialog-container{
+    height: 80vh;
+}
 .modal_left_container{
     /* background-color: #777777; */
     width: 70%;
@@ -72,8 +75,8 @@ thead{
 .modal_right_container{
     /* background-color: #383838; */
     border-radius: 5px;
-    width: 30%;
-    height: 100%;
+    width: 40%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
@@ -119,13 +122,15 @@ thead{
     justify-content: center;
     box-shadow: none;
     color: #4A84D0;
-   width: 10%;
-   height: 80%;
+    width: 10%;
+    height: 80%;
 }
 .mat-card button:nth-child(1){
     color: red;
     background-color: #38383800;
     border: solid red ;
+    width: 30px;
+    height: 30px;
 }
 .modal_right_footer_container{
     /* background-color: violet; */
@@ -156,6 +161,7 @@ thead{
 .modal_right_footer_container button:nth-child(2){
     background-color: #5464EF;
     width: 90%;
+    margin: 2%;
 }
 .modal_right_footer_container button:nth-child(3){
     /* background-color: #5464EF; */
