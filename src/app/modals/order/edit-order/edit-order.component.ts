@@ -1,35 +1,48 @@
-import { FormBuilder, FormArray, Validators } from '@angular/forms';
-import { DataService } from './../../services/data.service';
-import { Component, OnInit } from '@angular/core';
+import { DataService } from './../../../services/data.service';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-edit-order',
+  templateUrl: './edit-order.component.html',
+  styleUrls: ['./edit-order.component.css'],
 })
-export class HomeComponent implements OnInit {
-  $categories: any = [];
+export class EditOrderComponent implements OnInit {
   $products: any = [];
   $products_copy: any = [];
+  $orders: any = [];
 
-  category: any = '';
-  totalCost: number = 0;
+  totalCost: any = 0;
 
   orderForm: any = this.formBuilder.group({
     list: this.formBuilder.array([]),
     amountReceive: ['', Validators.required],
     totalAmount: ['', Validators.required],
+    transactionId: ['', Validators.required],
   });
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public $order: any,
     private dataService: DataService,
     private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.getProducts();
-    this.getCategories();
+    this.init();
+  }
+
+  init() {
+    for (let item of this.$order) {
+      this.addOrder(item, 1);
+    }
+
+    this.orderForm.controls.amountReceive.patchValue(
+      this.$order[0].amountReceive
+    );
+    this.orderForm.controls.transactionId.patchValue(this.$order[0].id);
   }
 
   getProducts() {
@@ -44,75 +57,50 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  getCategories() {
-    const requestParams = new RequestParams();
-    requestParams.EndPoint = `/get-categories`;
-
-    this.dataService
-      .httpRequest('GET', requestParams)
-      .subscribe(async (data: any) => {
-        this.$categories = data.payload;
-      });
-  }
-
-  filterByCategory(event: any) {
-    if (event === undefined) {
-      this.getProducts();
-
-      return;
-    }
-
-    this.$products = this.$products_copy;
-
-    let result = [];
-    for (let i = 0; i < this.$products.length; i++) {
-      for (let j = 0; j < this.$products[i].length; j++) {
-        console.log(this.$products[i][j].categoryId, event);
-        if (this.$products[i][j].categoryId === parseInt(event)) {
-          result.push(this.$products[i][j]);
-        }
-      }
-    }
-
-    this.$products = result.reduce((resultArray, item, index) => {
-      const chunkIndex = Math.floor(index / 8);
-
-      if (!resultArray[chunkIndex]) {
-        resultArray[chunkIndex] = [];
-      }
-
-      resultArray[chunkIndex].push(item);
-
-      return resultArray;
-    }, []);
-
-    console.log(this.$products);
-  }
-
   get formArrOrder() {
     return this.orderForm.get('list') as FormArray;
   }
 
-  newOrder(data: any) {
-    this.totalCost += data.price * 1;
-
+  oldOrder(data: any) {
     console.log(data);
+    this.totalCost += data.subTotal;
+
     return this.formBuilder.group({
-      productId: data.id,
+      transactionId: data.id,
+      productId: data.productId,
       productName: data.productName,
-      quantity: 1,
+      quantity: data.quantity,
+      origQuantity: data.quantity,
       price: data.price,
-      subTotal: data.price * 1,
+      subTotal: data.subTotal,
+      is_deleted: null,
+      orderId: data.orderId,
     });
   }
 
-  addOrder(data: any) {
-    this.formArrOrder.push(this.newOrder(data));
+  newOrder(data: any) {
+    this.totalCost += data.price * 1;
+    console.log(data, this.$order[0].id);
+
+    return this.formBuilder.group({
+      transactionId: this.$order[0].id,
+      productId: data.id,
+      productName: data.productName,
+      quantity: 1,
+      origQuantity: 1,
+      price: data.price,
+      subTotal: data.price * 1,
+      is_deleted: null,
+      orderId: 0,
+    });
   }
 
-  removeOrder(index: any) {
-    this.totalCost -= this.orderForm.controls.list.value[index].subTotal;
-    this.formArrOrder.removeAt(index);
+  addOrder(data: any, checker: any = 0) {
+    if (checker === 0) {
+      this.formArrOrder.push(this.newOrder(data));
+    } else {
+      this.formArrOrder.push(this.oldOrder(data));
+    }
   }
 
   addQuantity(index: any) {
@@ -144,24 +132,25 @@ export class HomeComponent implements OnInit {
     // console.log(this.orderForm.get('list')?.value[0].quantity);
   }
 
+  removeOrder(index: any) {
+    this.totalCost -= this.orderForm.controls.list.value[index].subTotal;
+    this.orderForm.controls.list.value[index].is_deleted = 1;
+    // this.formArrOrder.removeAt(index);
+  }
+
   submitOrder() {
     this.orderForm.controls.totalAmount.patchValue(this.totalCost);
     console.log(this.orderForm.value);
 
     if (this.orderForm.valid) {
       const requestParams = new RequestParams();
-      requestParams.EndPoint = `/add-transaction`;
+      requestParams.EndPoint = `/update-orders`;
       requestParams.Body = JSON.stringify(this.orderForm.value);
 
       this.dataService
-        .httpRequest('POST', requestParams)
+        .httpRequest('PATCH', requestParams)
         .subscribe(async (data: any) => {
           if (data.status['remarks'] === 'success') {
-            this.orderForm = this.formBuilder.group({
-              list: this.formBuilder.array([]),
-              amountReceive: ['', Validators.required],
-              totalAmount: ['', Validators.required],
-            });
           }
         });
     }

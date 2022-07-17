@@ -1,0 +1,10 @@
+    <div class="delete_modal_body_container">
+        <h2 mat-dialog-title>Delete Item</h2>
+        <mat-dialog-content class="mat-typography">
+            <h1>Are you Sure you like to Delete this item?</h1>
+        </mat-dialog-content>
+    </div>
+        <mat-dialog-actions align="end">    
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button mat-dialog-close  cdkFocusInitial (click)="deleteProduct()">Delete</button>
+        </mat-dialog-actions>

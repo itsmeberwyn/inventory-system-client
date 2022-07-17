@@ -7,8 +7,15 @@ import { MaterialModule } from '../modules/material.modules';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent as PosProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [HomeComponent, PosProductsComponent, OrdersComponent],
-  imports: [CommonModule, MaterialModule, MainPointofSaleRoutingComponent],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    MainPointofSaleRoutingComponent,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class MainPointofSaleModule {}

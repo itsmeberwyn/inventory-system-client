@@ -202,12 +202,12 @@ thead{
     border-color: #E9ECEF ;
 }
 .table_container .table thead th:nth-child(1){
+    width: 15%;
+}
+.table_container .table thead th:nth-child(4){
     width: 25%;
 }
-.table_container .table thead th:nth-child(2){
-    width: 25%;
-}
-.table_container .table thead th:nth-child(5){
+.table_container .table thead th:nth-child(7){
     width: 10%;
     text-align: center;
 }

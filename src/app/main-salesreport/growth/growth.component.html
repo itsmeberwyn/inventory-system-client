@@ -11,7 +11,7 @@
         baseChart
         width="400"
         height="60"
-        [data]="lineChartData"
+        [data]="lineChartDataGrowth"
         [options]="lineChartOptions"
         [type]="lineChartType"
       ></canvas>
@@ -21,19 +21,20 @@
     <div
       class="bottom__container w-100 bg-white rounded mb-3 me-sm-1 shadow-sm"
     >
-      <div class="container">
-        <h3 class="pt-2 fw-bold">Expenses</h3>
+    <div class="container">
+      <h3 class="pt-2 fw-bold">Expenses</h3>
       </div>
       <div class="p-3">
         <canvas
+          *ngIf="this.barChartDataGrowth['datasets'][0]['data'].length"
           baseChart
-          height="100"
-          [data]="barChartData"
+          height="110"
+          [data]="barChartDataGrowth"
           [options]="barChartOptions"
           [type]="barChartType"
         >
         </canvas>
-      </div>
+    </div>
     </div>
     <div
       class="bottom__container w-100 bg-white rounded mb-3 ms-sm-1 shadow-sm"
@@ -50,10 +51,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of this.lineChartData['labels']">
-                <th scope="row">{{ item }}</th>
-                <td>14</td>
-                <td>12</td>
+              <tr *ngFor="let item of customersData['2021']; let i=index">
+                <th scope="row">{{ months[i] }}</th>
+                <td>{{customersData['2021'][i]}}</td>
+                <td>{{customersData['2022'][i]}}</td>
               </tr>
             </tbody>
           </table>

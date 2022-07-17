@@ -83,11 +83,6 @@ export class EditPurchaseComponent implements OnInit {
       }, []);
   }
 
-  productClick(data: any) {
-    console.log(data);
-    // this.$orders.push(data);
-  }
-
   get formArrOrder() {
     return this.transactionForm.get('list') as FormArray;
   }

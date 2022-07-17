@@ -1,15 +1,13 @@
+import { EditProductComponent } from './../../modals/product/edit-product/edit-product.component';
+import { AddProductComponent } from './../../modals/product/add-product/add-product.component';
+import { DeleteProductComponent } from './../../modals/product/delete-product/delete-product.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TemplateRef } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
-import {
-  Validators,
-  FormGroup,
-  FormBuilder,
-  FormControl,
-} from '@angular/forms';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -24,20 +22,9 @@ export class ProductsComponent implements OnInit {
   category: String = 'Categories';
   search: any = '';
 
-  productForm: FormGroup = this.formBuilder.group({
-    categoryId: ['', Validators.required],
-    productName: ['', Validators.required],
-    productDescription: ['', Validators.required],
-    price: ['', Validators.required],
-    quantity: ['', Validators.required],
-    minQuantity: ['', Validators.required],
-    maxQuantity: ['', Validators.required],
-  });
-
   constructor(
     private dialog: MatDialog,
     private dataService: DataService,
-    private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -53,8 +40,37 @@ export class ProductsComponent implements OnInit {
     this.getProducts();
   }
 
-  openDialog(templateRef: TemplateRef<any>) {
-    this.dialog.open(templateRef);
+  openAddDialog() {
+    const openDialog = this.dialog.open(AddProductComponent, {});
+
+    openDialog.afterClosed().subscribe((result: any) => {
+      this.getProducts();
+    });
+  }
+
+  openEditDialog(data: any) {
+    const openDialog = this.dialog.open(EditProductComponent, {
+      data: data,
+    });
+
+    openDialog.afterClosed().subscribe((result: any) => {
+      this.getProducts();
+    });
+  }
+
+  openDeleteDialog(index: number, currentPage: number, productId: number) {
+    const openDialog = this.dialog.open(DeleteProductComponent, {
+      data: {
+        index: index,
+        currentPage: currentPage,
+        productId: productId,
+        $products: this.$products,
+      },
+    });
+
+    openDialog.afterClosed().subscribe((result: any) => {
+      this.getProducts();
+    });
   }
 
   filterByCategory(event: any) {
@@ -114,10 +130,6 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  addProduct() {
-    console.log(this.productForm.value);
-  }
-
   searchProduct() {
     if (this.$products.length === 0 || this.search === '') {
       this.$products = this.$products_copy;
@@ -147,23 +159,6 @@ export class ProductsComponent implements OnInit {
 
         return resultArray;
       }, []);
-  }
-
-  deleteProduct(index: number, page: number, productId: number) {
-    const requestParams = new RequestParams();
-    requestParams.EndPoint = `/delete-product`;
-    requestParams.Body = { productId: productId };
-
-    this.dataService
-      .httpRequest('PATCH', requestParams)
-      .subscribe(async (data: any) => {
-        if (data.status['remarks'] === 'success') {
-          if (index > -1) {
-            this.$products[page].splice(index, 1);
-            this.$products_copy[page].splice(index, 1);
-          }
-        }
-      });
   }
 
   paginate(page: any) {

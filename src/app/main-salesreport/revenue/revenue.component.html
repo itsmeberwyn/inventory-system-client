@@ -19,7 +19,8 @@
             <div
               class="card-body d-flex flex-column align-items-center align-items-sm-start"
             >
-              <h1 class="card-title fw-bold mb-1">P 9,000</h1>
+              <h1 class="card-title fw-bold mb-1" *ngIf="i==1">{{items.value | currency: "PHP" }}</h1>
+              <h1 class="card-title fw-bold mb-1" *ngIf="i!=1">{{items.value  }}</h1>
               <p class="card-text w-100" style="font-size: 15px">
                 {{ items.text }}
               </p>
@@ -30,11 +31,12 @@
     </div>
   </div>
   <div class="p-1 bg-white rounded shadow-sm">
+    <h3 class="mt-2 ms-2 fw-bold">Sales Daily</h3>
     <canvas
       baseChart
       width="400"
       height="50"
-      [data]="lineChartData"
+      [data]="lineChartDataRevenue"
       [options]="lineChartOptions"
       [type]="lineChartType"
     ></canvas>
@@ -57,11 +59,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
-                <th scope="row">Faber Castel</th>
-                <td>14</td>
-                <td>32</td>
-                <td>12</td>
+              <tr *ngFor="let item of topSelling">
+                <th scope="row">{{item.productName}}</th>
+                <td>{{item.price}}</td>
+                <td>{{item.quantitySold}}</td>
+                <td>{{item.sold  | currency: "PHP"}}</td>
               </tr>
             </tbody>
           </table>
@@ -75,9 +77,9 @@
         <h3 class="mt-2 fw-bold">Top selling by categories</h3>
         <div class="">
           <canvas
-            *ngIf="sampleData.length"
+            *ngIf="barData.length"
             baseChart
-            height="110"
+            height="80"
             [data]="barChartData"
             [options]="barChartOptions"
             [type]="barChartType"
