@@ -41,10 +41,12 @@ thead{
 .modal_left_top_container{
     /* background-color: #5464EF; */
     width: 100%;
-    height: 11%;
+    height: 15%;
+    display: flex;
 }
 .modal_left_top_container::ng-deep.mat-form-field{
     margin-top: 0%;
+    margin-right: 2%;
 }
 .modal_left_table_container{
     /* background-color: aliceblue; */

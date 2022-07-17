@@ -3,11 +3,19 @@
         <div class="modal_body_container">
           <div class="modal_left_container">
             <div class="modal_left_top_container">
+
               <mat-form-field class="example-form-field" appearance="fill">
-                <mat-label>Search</mat-label>
+                <mat-label>Search by product name</mat-label>
                 <input matInput type="search" placeholder="Enter keyword" [(ngModel)]="search" (ngModelChange)="searchProduct()">
                   <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
+
+              <!-- <mat-form-field class="example-form-field" appearance="fill">
+                <mat-label>Supplier Input</mat-label>
+                <input matInput type="search" placeholder="Supplier" [(ngModel)]="search" (ngModelChange)="searchProduct()">
+                  <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field> -->
+
             </div>
             <div class="modal_left_table_container">
               <table class="table table-hover">
@@ -31,7 +39,7 @@
             </div>
           </div>
           <form class="modal_right_container" [formGroup]="transactionForm">
-            <div class="moadal_right_top_container"><h1>Purchase Items (Supplier Input)</h1></div>
+            <div class="moadal_right_top_container"><h1>Purchase Items</h1></div>
             <div class="modal_right_table_container">
               <table class="table">
                 <thead>

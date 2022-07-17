@@ -36,13 +36,14 @@ export class DeleteProductComponent implements OnInit {
       .httpRequest('PATCH', requestParams)
       .subscribe(async (data: any) => {
         if (data.status['remarks'] === 'success') {
-          if (this.data.index > -1) {
-            this.data.$products[this.data.page].splice(this.data.index, 1);
-          }
           setTimeout(() => {
             Swal.fire('Awesome!', data.status['message'], 'success');
             this.progress.finish();
           }, 200);
+          if (this.data.index > -1) {
+            this.data.$products[this.data.page].splice(this.data.index, 1);
+          }
+         
         }
       });
   }
