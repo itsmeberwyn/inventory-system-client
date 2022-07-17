@@ -21,6 +21,7 @@ import { LoginSalesreportComponent } from './login-salesreport/login-salesreport
 
 import { SidebarComponent } from './reusable/sidebar/sidebar.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+
 import { AddSupplierComponent } from './modals/supplier/add-supplier/add-supplier.component';
 import { AddPurchaseComponent } from './modals/purchase/add-purchase/add-purchase.component';
 import { DeletePurchaseComponent } from './modals/purchase/delete-purchase/delete-purchase.component';
