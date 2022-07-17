@@ -22,13 +22,15 @@ export class RevenueComponent implements OnInit {
   salesMonth: number[] = [];
   salesMonthLabel: string[] = [];
 
+  grossSales: number = 0;
+
   public lineChartType: ChartType = 'line';
   public barChartType: ChartType = 'bar';
 
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   public barChartData: ChartData<'bar'> = {
-    labels: ['Pens', 'Pencils'],
+    labels: [],
     datasets: [
       {
         data: [],
@@ -39,7 +41,7 @@ export class RevenueComponent implements OnInit {
     ],
   };
 
-  public lineChartData: ChartConfiguration['data'] = {
+  public lineChartDataRevenue: ChartConfiguration['data'] = {
     datasets: [
       {
         data: [180, 480, 770, 90, 1000, 270, 400, 234, 344, 664, 767, 675],
@@ -73,15 +75,19 @@ export class RevenueComponent implements OnInit {
   header = [
     {
       text: 'Today’s Sales',
+      value: '0',
     },
     {
       text: 'Monthly Gross Sales',
+      value: '0',
     },
     {
       text: 'Today’s Customers',
+      value: '0',
     },
     {
       text: 'Monthly Purchases',
+      value: '0',
     },
   ];
 
@@ -96,10 +102,7 @@ export class RevenueComponent implements OnInit {
     this.getTopSelling();
     this.getTopSellingCat();
     this.getSalesMonth();
-
-    // this.sampleData = [32, 23, 23, 12, 34, 3, 32];
-    // // console.log(this.barChartData['datasets'][0]['data']);
-    // this.barChartData['datasets'][0]['data'] = this.sampleData;
+    this.getSummaryMonth();
   }
 
   getTopSelling() {
@@ -129,9 +132,10 @@ export class RevenueComponent implements OnInit {
           (data: any) => data.categoryName
         );
 
-        this.barChartData['datasets'][0]['data'] = this.barData;
         this.barChartData['labels'] = this.barLabel;
-        console.log(this.barData);
+        this.barChartData['datasets'][0]['data'] = this.barData;
+
+        this.chart?.update();
       });
   }
 
@@ -146,10 +150,38 @@ export class RevenueComponent implements OnInit {
         this.salesMonthLabel = this.salesMonth.map((day, index) =>
           (index + 1).toString()
         );
-        // this.topSellingCat = data.payload;
-        console.log(data.payload);
-        this.lineChartData['datasets'][0]['data'] = this.salesMonth;
-        this.lineChartData['labels'] = this.salesMonthLabel;
+        this.lineChartDataRevenue['datasets'][0]['data'] = this.salesMonth;
+        this.lineChartDataRevenue['labels'] = this.salesMonthLabel;
+
+        this.chart?.update();
+      });
+  }
+
+  getSummaryMonth() {
+    const requestParams = new RequestParams();
+    requestParams.EndPoint = `/get-summary`;
+
+    this.dataService
+      .httpRequest('GET', requestParams)
+      .subscribe(async (data: any) => {
+        this.header = [
+          {
+            text: 'Sold Items',
+            value: data.payload[new Date().getMonth()][0],
+          },
+          {
+            text: 'Gross Sales',
+            value: data.payload[new Date().getMonth()][3],
+          },
+          {
+            text: 'Customers',
+            value: data.payload[new Date().getMonth()][1],
+          },
+          {
+            text: 'Purchases',
+            value: data.payload[new Date().getMonth()][2],
+          },
+        ];
       });
   }
 

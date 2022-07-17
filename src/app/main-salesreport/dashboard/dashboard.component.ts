@@ -13,6 +13,8 @@ export class DashboardComponent implements OnInit {
   topSelling: any = [];
   topSellingCat: any = [];
 
+  revenue: number = 0;
+
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
@@ -51,6 +53,9 @@ export class DashboardComponent implements OnInit {
     this.dataService
       .httpRequest('GET', requestParams)
       .subscribe(async (data: any) => {
+        for (let item of data.payload) {
+          this.revenue += item.sold;
+        }
         this.topSelling = data.payload;
       });
   }

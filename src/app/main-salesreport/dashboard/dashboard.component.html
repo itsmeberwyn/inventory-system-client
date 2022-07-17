@@ -7,7 +7,7 @@
         >
           <div class="container">
             <h3 class="mt-2 fw-bold">Total Sold Items (Today)</h3>
-            <h1 class="d-flex justify-content-center">{{totalSold[0].soldItemsToday}}</h1>
+            <h1 class="d-flex justify-content-center">{{totalSold[0]?.soldItemsToday}}</h1>
           </div>
         </div>
         <div
@@ -15,7 +15,7 @@
         >
           <div class="container">
             <h3 class="mt-2 fw-bold">Total Customers (Today)</h3>
-            <h1 class="d-flex justify-content-center">{{totalCustomer[0].customersToday}}</h1>
+            <h1 class="d-flex justify-content-center">{{totalCustomer[0]?.customersToday}}</h1>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
                   <th scope="row">{{item.productName}}</th>
                   <td>{{item.price}}</td>
                   <td>{{item.quantitySold}}</td>
-                  <td>{{item.sold}}</td>
+                  <td>{{item.sold  | currency: "PHP"}}</td>
                 </tr>
               </tbody>
             </table>
@@ -54,19 +54,10 @@
         class="third__container flex__container bg-white rounded mb-3 ms-sm-2 shadow-sm"
       >
         <div class="container d-flex flex-column align-items-center pt-3">
-          <h2 class="mb-1">REVENUE</h2>
+          <h2 class="mb-1 mt-3">REVENUE</h2>
           <p>Today</p>
 
-          <h1 class="my-3">20.04k</h1>
-
-          <div class="w-100 d-flex justify-content-between border-bottom mb-3">
-            <p class="m-0">Total Sales</p>
-            <span>23,050.00</span>
-          </div>
-          <div class="w-100 d-flex justify-content-between border-bottom mb-3">
-            <p class="m-0">Gross Profit</p>
-            <span>2,000.00</span>
-          </div>
+          <h1 class="my-4">{{revenue | currency: "PHP"}}</h1>
         </div>
       </div>
 
@@ -89,7 +80,7 @@
                 <tr *ngFor="let item of topSellingCat">
                   <th scope="row">{{item.categoryName}}</th>
                   <td>{{item.quantitySold}}</td>
-                  <td>{{item.sold}}</td>
+                  <td>{{item.sold  | currency: "PHP"}}</td>
                 </tr>
               </tbody>
             </table>

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import Annotation from 'chartjs-plugin-annotation';
 import { BaseChartDirective } from 'ng2-charts';
+import { RequestParams } from 'src/app/models/RequestParams';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-growth',
@@ -9,12 +11,29 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./growth.component.css'],
 })
 export class GrowthComponent implements OnInit {
+  customersData: any = [];
+
+  months: any = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
   public lineChartType: ChartType = 'line';
   public barChartType: ChartType = 'bar';
 
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
-  public lineChartData: ChartConfiguration['data'] = {
+  public lineChartDataGrowth: ChartConfiguration['data'] = {
     datasets: [
       {
         data: [28, 48, 40, 19, 86, 27, 90, 34, 767, 88, 33, 76],
@@ -30,7 +49,7 @@ export class GrowthComponent implements OnInit {
       {
         data: [180, 480, 770, 90, 1000, 270, 400, 234, 344, 664, 767, 675],
         label: '2022',
-        yAxisID: 'y-axis-1',
+        // yAxisID: 'y-axis-1',
         backgroundColor: 'rgba(206,146,223,0.6)',
         borderColor: 'violet',
         pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -106,25 +125,30 @@ export class GrowthComponent implements OnInit {
     // },
   };
 
-  public barChartData: ChartData<'bar'> = {
+  public barChartDataGrowth: ChartData<'bar'> = {
     labels: [
-      'Pens',
-      'Pencils',
-      'Notebooks',
-      'Papers',
-      'Adhesives',
-      'Orgranizers',
-      'Separators',
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ],
     datasets: [
       {
-        data: [23, 53, 83, 51, 35, 83, 42],
+        data: [],
         label: '2021',
         backgroundColor: 'rgba(84,100,239,1)',
         hoverBackgroundColor: 'rgba(84,100,239,0.6)',
       },
       {
-        data: [23, 43, 23, 51, 65, 23, 22],
+        data: [],
         label: '2022',
         backgroundColor: 'rgba(206,146,223,1)',
         hoverBackgroundColor: 'rgba(206,146,223,0.6)',
@@ -132,15 +156,58 @@ export class GrowthComponent implements OnInit {
     ],
   };
 
-  constructor() {
+  constructor(private dataService: DataService) {
     Chart.register(Annotation);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSalesYear();
+    this.getExpensesYear();
+    this.getCustomersYear();
+  }
+
+  getSalesYear() {
+    const requestParams = new RequestParams();
+    requestParams.EndPoint = `/get-sales-year`;
+
+    this.dataService
+      .httpRequest('GET', requestParams)
+      .subscribe(async (data: any) => {
+        this.lineChartDataGrowth['datasets'][0]['data'] = data.payload['2021'];
+        this.lineChartDataGrowth['datasets'][1]['data'] = data.payload['2022'];
+
+        this.chart?.update();
+      });
+  }
+
+  getExpensesYear() {
+    const requestParams = new RequestParams();
+    requestParams.EndPoint = `/get-expenses-year`;
+
+    this.dataService
+      .httpRequest('GET', requestParams)
+      .subscribe(async (data: any) => {
+        this.barChartDataGrowth['datasets'][0]['data'] = data.payload['2021'];
+        this.barChartDataGrowth['datasets'][1]['data'] = data.payload['2022'];
+
+        this.chart?.update();
+      });
+  }
+
+  getCustomersYear() {
+    const requestParams = new RequestParams();
+    requestParams.EndPoint = `/get-customers-year`;
+
+    this.dataService
+      .httpRequest('GET', requestParams)
+      .subscribe(async (data: any) => {
+        this.customersData = data.payload;
+      });
+  }
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    indexAxis: 'y',
+    // indexAxis: 'y',
     scales: {
       x: {},
       y: {
