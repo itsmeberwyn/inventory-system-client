@@ -8,8 +8,18 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent as PosProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { DeleteOrderComponent } from './../modals/order/delete-order/delete-order.component';
+import { EditOrderComponent } from './../modals/order/edit-order/edit-order.component';
+
 @NgModule({
-  declarations: [HomeComponent, PosProductsComponent, OrdersComponent],
+  declarations: [
+    HomeComponent,
+    PosProductsComponent,
+    OrdersComponent,
+    DeleteOrderComponent,
+    EditOrderComponent,
+  ],
   imports: [
     CommonModule,
     MaterialModule,

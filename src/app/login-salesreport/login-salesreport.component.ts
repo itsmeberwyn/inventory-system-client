@@ -48,8 +48,16 @@ export class LoginSalesreportComponent implements OnInit {
         (data: any) => {
           setTimeout(() => {
             this.progress.finish();
+            localStorage.setItem(
+              'user',
+              JSON.stringify({
+                id: data.payload['id'],
+                name: data.payload['username'],
+                role: data.payload['role'],
+              })
+            );
             this.userService.setAccessToken(data.payload['access_token']);
-            this.router.navigate(['/pointofsale']);
+            this.router.navigate(['/salesreport']);
           }, 100);
         },
         (error: any) => {

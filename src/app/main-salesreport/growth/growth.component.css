@@ -4,8 +4,8 @@
 }
 
 .bottom__container {
-  min-height: 260px;
-  max-height: 280px;
+  min-height: 38.980509745127435vh;
+  max-height: 41.97901049475262vh;
   /* width: 50%; */
 }
 
@@ -31,7 +31,7 @@
 }
 
 .table__container {
-  height: 220px;
+  height: 32.98350824587706vh;
 }
 
 .stick__header {
