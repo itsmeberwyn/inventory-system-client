@@ -9,7 +9,5 @@ import { Component, Inject, OnInit } from '@angular/core';
 export class ViewPurchaseComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public $purchases: any) {}
 
-  ngOnInit(): void {
-    console.log(this.$purchases);
-  }
+  ngOnInit(): void {}
 }

@@ -3,12 +3,22 @@ import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
 
+import Swal from 'sweetalert2';
+import ProgressBar from '@badrap/bar-of-progress';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  progress = new ProgressBar({
+    size: 4,
+    color: '#5464EF',
+    className: 'z-50',
+    delay: 100,
+  });
+
   $categories: any = [];
   $products: any = [];
   $products_copy: any = [];
@@ -145,6 +155,8 @@ export class HomeComponent implements OnInit {
   }
 
   submitOrder() {
+    this.progress.start();
+
     this.orderForm.controls.totalAmount.patchValue(this.totalCost);
     console.log(this.orderForm.value);
 
@@ -157,13 +169,31 @@ export class HomeComponent implements OnInit {
         .httpRequest('POST', requestParams)
         .subscribe(async (data: any) => {
           if (data.status['remarks'] === 'success') {
-            this.orderForm = this.formBuilder.group({
-              list: this.formBuilder.array([]),
-              amountReceive: ['', Validators.required],
-              totalAmount: ['', Validators.required],
-            });
+            setTimeout(() => {
+              this.progress.finish();
+              Swal.fire(
+                'Awesome!',
+                'Successfully added to the database',
+                'success'
+              );
+
+              this.orderForm = this.formBuilder.group({
+                list: this.formBuilder.array([]),
+                amountReceive: ['', Validators.required],
+                totalAmount: ['', Validators.required],
+              });
+              this.getProducts();
+            }, 200);
+          } else {
+            setTimeout(() => {
+              this.progress.finish();
+            }, 200);
           }
         });
+    } else {
+      setTimeout(() => {
+        this.progress.finish();
+      }, 200);
     }
   }
 }

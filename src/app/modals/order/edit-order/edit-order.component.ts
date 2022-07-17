@@ -4,12 +4,22 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
 
+import ProgressBar from '@badrap/bar-of-progress';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-edit-order',
   templateUrl: './edit-order.component.html',
   styleUrls: ['./edit-order.component.css'],
 })
 export class EditOrderComponent implements OnInit {
+  progress = new ProgressBar({
+    size: 4,
+    color: '#5464EF',
+    className: 'z-50',
+    delay: 100,
+  });
+
   $products: any = [];
   $products_copy: any = [];
   $orders: any = [];
@@ -139,6 +149,8 @@ export class EditOrderComponent implements OnInit {
   }
 
   submitOrder() {
+    this.progress.start();
+
     this.orderForm.controls.totalAmount.patchValue(this.totalCost);
     console.log(this.orderForm.value);
 
@@ -151,8 +163,16 @@ export class EditOrderComponent implements OnInit {
         .httpRequest('PATCH', requestParams)
         .subscribe(async (data: any) => {
           if (data.status['remarks'] === 'success') {
+            setTimeout(() => {
+              Swal.fire('Awesome!', data.status['message'], 'success');
+              this.progress.finish();
+            }, 200);
           }
         });
+    } else {
+      setTimeout(() => {
+        this.progress.finish();
+      }, 200);
     }
   }
 }

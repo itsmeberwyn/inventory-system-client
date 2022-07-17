@@ -76,20 +76,20 @@ mat-toolbar {
   border-radius: 0%;
 
 }
-.btn_text_container{
-  display: flex;
-  flex-direction: column;
-  padding: 1%;
-}
 .btn_text_container h6{
-  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  height:30px;
 }
 .btn_text_container p{
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #777777;
-  margin: 0%;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  height: 20px;
+  margin: 0;
 }
+
 .btn:hover, .btn:focus:focus, .btn:active{
   /* border-style: outset; */
   outline: none;

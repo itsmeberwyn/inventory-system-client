@@ -2,6 +2,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from './../../../services/data.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
+import ProgressBar from '@badrap/bar-of-progress';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-delete-purchase',
@@ -9,6 +11,13 @@ import { RequestParams } from 'src/app/models/RequestParams';
   styleUrls: ['./delete-purchase.component.css'],
 })
 export class DeletePurchaseComponent implements OnInit {
+  progress = new ProgressBar({
+    size: 4,
+    color: '#5464EF',
+    className: 'z-50',
+    delay: 100,
+  });
+
   constructor(
     private dataService: DataService,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -19,6 +28,8 @@ export class DeletePurchaseComponent implements OnInit {
   ngOnInit(): void {}
 
   deletePurchase() {
+    this.progress.start();
+
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/delete-purchase`;
     requestParams.Body = { purchaseId: this.data.serialId };
@@ -27,6 +38,10 @@ export class DeletePurchaseComponent implements OnInit {
       .httpRequest('PATCH', requestParams)
       .subscribe(async (data: any) => {
         if (data.status['remarks'] === 'success') {
+          setTimeout(() => {
+            Swal.fire('Awesome!', data.status['message'], 'success');
+            this.progress.finish();
+          }, 200);
         }
       });
   }

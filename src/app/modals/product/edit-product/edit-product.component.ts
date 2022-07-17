@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import ProgressBar from '@badrap/bar-of-progress';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-product',
@@ -10,6 +12,13 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./edit-product.component.css'],
 })
 export class EditProductComponent implements OnInit {
+  progress = new ProgressBar({
+    size: 4,
+    color: '#5464EF',
+    className: 'z-50',
+    delay: 100,
+  });
+
   $categories: any = [];
   category: any = '';
 
@@ -61,16 +70,28 @@ export class EditProductComponent implements OnInit {
   updateProduct() {
     console.log(this.productForm.value);
 
-    const requestParams = new RequestParams();
-    requestParams.EndPoint = `/update-product`;
-    requestParams.Body = JSON.stringify(this.productForm.value);
+    if (this.productForm.valid) {
+      this.progress.start();
 
-    this.dataService
-      .httpRequest('PATCH', requestParams)
-      .subscribe(async (data: any) => {
-        if (data.status['remarks'] === 'success') {
-          this.productForm.reset();
-        }
-      });
+      const requestParams = new RequestParams();
+      requestParams.EndPoint = `/update-product`;
+      requestParams.Body = JSON.stringify(this.productForm.value);
+
+      this.dataService
+        .httpRequest('PATCH', requestParams)
+        .subscribe(async (data: any) => {
+          if (data.status['remarks'] === 'success') {
+            setTimeout(() => {
+              this.productForm.reset();
+              Swal.fire('Awesome!', data.status['message'], 'success');
+              this.progress.finish();
+            }, 200);
+          }
+        });
+    } else {
+      setTimeout(() => {
+        this.progress.finish();
+      }, 200);
+    }
   }
 }
