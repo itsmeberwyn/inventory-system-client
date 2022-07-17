@@ -1,17 +1,17 @@
 .first__row__container,
 .second__row__container {
-  min-height: 120px;
-  max-height: 150px;
+  min-height: 17.991004497751124vh;
+  max-height: 22.488755622188904vh;
 }
 
 .third__row__container {
-  min-height: 300px;
-  max-height: 310px;
+  min-height: 44.97751124437781vh;
+  max-height: 46.476761619190405vh;
 }
 
 .second__col__container {
-  min-height: 240px;
-  max-height: 250px;
+  min-height: 35.98200899550225vh;
+  max-height: 37.481259370314845vh;
 }
 
 .first__row__container h3,
@@ -61,7 +61,7 @@
 }
 
 .table__container {
-  height: 230px;
+  height: 34.48275862068966vh;
 }
 
 .stick__header {

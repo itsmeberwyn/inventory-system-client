@@ -22,17 +22,6 @@ import { LoginSalesreportComponent } from './login-salesreport/login-salesreport
 import { SidebarComponent } from './reusable/sidebar/sidebar.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
-import { AddSupplierComponent } from './modals/supplier/add-supplier/add-supplier.component';
-import { AddPurchaseComponent } from './modals/purchase/add-purchase/add-purchase.component';
-import { DeletePurchaseComponent } from './modals/purchase/delete-purchase/delete-purchase.component';
-import { EditPurchaseComponent } from './modals/purchase/edit-purchase/edit-purchase.component';
-import { ViewPurchaseComponent } from './modals/purchase/view-purchase/view-purchase.component';
-import { DeleteProductComponent } from './modals/product/delete-product/delete-product.component';
-import { EditProductComponent } from './modals/product/edit-product/edit-product.component';
-import { AddProductComponent } from './modals/product/add-product/add-product.component';
-import { EditOrderComponent } from './modals/order/edit-order/edit-order.component';
-import { DeleteOrderComponent } from './modals/order/delete-order/delete-order.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,16 +32,6 @@ import { DeleteOrderComponent } from './modals/order/delete-order/delete-order.c
     SidebarComponent,
     LoginPointofsaleComponent,
     LoginSalesreportComponent,
-    AddSupplierComponent,
-    AddPurchaseComponent,
-    DeletePurchaseComponent,
-    EditPurchaseComponent,
-    ViewPurchaseComponent,
-    DeleteProductComponent,
-    EditProductComponent,
-    AddProductComponent,
-    EditOrderComponent,
-    DeleteOrderComponent,
   ],
   imports: [
     BrowserModule,
