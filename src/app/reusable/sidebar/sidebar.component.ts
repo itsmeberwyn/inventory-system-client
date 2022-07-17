@@ -9,6 +9,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 export class SidebarComponent implements OnInit {
   @ViewChild('drawer') drawer: any;
   currentRoute = '';
+  activeUser: any = JSON.parse(localStorage.getItem('user') || 'Unknown user');
 
   isExpanded = false;
 

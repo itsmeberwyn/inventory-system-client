@@ -3,6 +3,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { RequestParams } from 'src/app/models/RequestParams';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import ProgressBar from '@badrap/bar-of-progress';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-supplier',
@@ -10,6 +12,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./add-supplier.component.css'],
 })
 export class AddSupplierComponent implements OnInit {
+  progress = new ProgressBar({
+    size: 4,
+    color: '#5464EF',
+    className: 'z-50',
+    delay: 100,
+  });
+
   supplierForm: FormGroup = this.formBuilder.group({
     supplierName: ['', Validators.required],
     contact: ['', Validators.required],
@@ -25,31 +34,43 @@ export class AddSupplierComponent implements OnInit {
   ngOnInit(): void {}
 
   addSupplier() {
-    const requestParams = new RequestParams();
-    requestParams.EndPoint = `/add-supplier`;
-    requestParams.Body = JSON.stringify(this.supplierForm.value);
+    this.progress.start();
 
-    this.dataService
-      .httpRequest('POST', requestParams)
-      .subscribe(async (data: any) => {
-        if (data.status['remarks'] === 'success') {
-          this.supplierForm.reset();
-          this.$suppliers[0].unshift(data.payload);
+    if (this.supplierForm.valid) {
+      const requestParams = new RequestParams();
+      requestParams.EndPoint = `/add-supplier`;
+      requestParams.Body = JSON.stringify(this.supplierForm.value);
 
-          this.$suppliers = this.$suppliers
-            .flat()
-            .reduce((resultArray: any, item: any, index: any) => {
-              const chunkIndex = Math.floor(index / 8);
+      this.dataService
+        .httpRequest('POST', requestParams)
+        .subscribe(async (data: any) => {
+          if (data.status['remarks'] === 'success') {
+            setTimeout(() => {
+              this.supplierForm.reset();
+              Swal.fire('Awesome!', data.status['message'], 'success');
+              this.progress.finish();
+              this.$suppliers[0].unshift(data.payload);
 
-              if (!resultArray[chunkIndex]) {
-                resultArray[chunkIndex] = [];
-              }
+              this.$suppliers = this.$suppliers
+                .flat()
+                .reduce((resultArray: any, item: any, index: any) => {
+                  const chunkIndex = Math.floor(index / 8);
 
-              resultArray[chunkIndex].push(item);
+                  if (!resultArray[chunkIndex]) {
+                    resultArray[chunkIndex] = [];
+                  }
 
-              return resultArray;
-            }, []);
-        }
-      });
+                  resultArray[chunkIndex].push(item);
+
+                  return resultArray;
+                }, []);
+            }, 200);
+          }
+        });
+    } else {
+      setTimeout(() => {
+        this.progress.finish();
+      }, 200);
+    }
   }
 }

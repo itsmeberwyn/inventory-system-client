@@ -4,12 +4,22 @@ import { RequestParams } from 'src/app/models/RequestParams';
 import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+import Swal from 'sweetalert2';
+import ProgressBar from '@badrap/bar-of-progress';
+
 @Component({
   selector: 'app-add-purchase',
   templateUrl: './add-purchase.component.html',
   styleUrls: ['./add-purchase.component.css'],
 })
 export class AddPurchaseComponent implements OnInit {
+  progress = new ProgressBar({
+    size: 4,
+    color: '#5464EF',
+    className: 'z-50',
+    delay: 100,
+  });
+
   $products: any = [];
   $products_copy: any = [];
   $orders: any = [];
@@ -139,6 +149,8 @@ export class AddPurchaseComponent implements OnInit {
   }
 
   submitOrder() {
+    this.progress.start();
+
     console.log(this.transactionForm.controls.list.value);
     this.transactionId = new Date().valueOf();
 
@@ -152,8 +164,11 @@ export class AddPurchaseComponent implements OnInit {
       .httpRequest('POST', requestParams)
       .subscribe(async (data: any) => {
         if (data.status['remarks'] === 'success') {
-          this.transactionForm.reset();
-          // this.$purchases.unshift(data.payload)
+          setTimeout(() => {
+            this.transactionForm.reset();
+            Swal.fire('Awesome!', data.status['message'], 'success');
+            this.progress.finish();
+          }, 200);
         }
       });
   }

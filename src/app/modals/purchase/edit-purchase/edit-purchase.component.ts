@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import ProgressBar from '@badrap/bar-of-progress';
 import { RequestParams } from 'src/app/models/RequestParams';
 import { DataService } from 'src/app/services/data.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-purchase',
@@ -10,6 +12,13 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./edit-purchase.component.css'],
 })
 export class EditPurchaseComponent implements OnInit {
+  progress = new ProgressBar({
+    size: 4,
+    color: '#5464EF',
+    className: 'z-50',
+    delay: 100,
+  });
+
   $products: any = [];
   $products_copy: any = [];
   $orders: any = [];
@@ -164,7 +173,7 @@ export class EditPurchaseComponent implements OnInit {
   }
 
   submitOrder() {
-    console.log(this.transactionForm.controls.list.value);
+    this.progress.start();
 
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/update-purchase`;
@@ -176,8 +185,11 @@ export class EditPurchaseComponent implements OnInit {
       .httpRequest('PATCH', requestParams)
       .subscribe(async (data: any) => {
         if (data.status['remarks'] === 'success') {
-          this.transactionForm.reset();
-          // this.$purchases.unshift(data.payload)
+          setTimeout(() => {
+            this.transactionForm.reset();
+            Swal.fire('Awesome!', data.status['message'], 'success');
+            this.progress.finish();
+          }, 200);
         }
       });
   }

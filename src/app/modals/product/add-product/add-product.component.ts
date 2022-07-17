@@ -2,6 +2,8 @@ import { DataService } from './../../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import ProgressBar from '@badrap/bar-of-progress';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-product',
@@ -9,6 +11,13 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent implements OnInit {
+  progress = new ProgressBar({
+    size: 4,
+    color: '#5464EF',
+    className: 'z-50',
+    delay: 100,
+  });
+
   $categories: any = [];
   category: any = '';
 
@@ -44,17 +53,28 @@ export class AddProductComponent implements OnInit {
 
   addProduct() {
     console.log(this.productForm.value);
+    this.progress.start();
 
-    const requestParams = new RequestParams();
-    requestParams.EndPoint = `/add-product`;
-    requestParams.Body = JSON.stringify(this.productForm.value);
+    if (this.productForm.valid) {
+      const requestParams = new RequestParams();
+      requestParams.EndPoint = `/add-product`;
+      requestParams.Body = JSON.stringify(this.productForm.value);
 
-    this.dataService
-      .httpRequest('POST', requestParams)
-      .subscribe(async (data: any) => {
-        if (data.status['remarks'] === 'success') {
-          this.productForm.reset();
-        }
-      });
+      this.dataService
+        .httpRequest('POST', requestParams)
+        .subscribe(async (data: any) => {
+          if (data.status['remarks'] === 'success') {
+            setTimeout(() => {
+              this.productForm.reset();
+              Swal.fire('Awesome!', data.status['message'], 'success');
+              this.progress.finish();
+            }, 200);
+          }
+        });
+    } else {
+      setTimeout(() => {
+        this.progress.finish();
+      }, 200);
+    }
   }
 }

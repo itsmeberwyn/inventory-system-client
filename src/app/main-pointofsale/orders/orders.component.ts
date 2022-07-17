@@ -49,7 +49,7 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(transactionId: number) {
+  openDeleteDialog(transactionId: any) {
     const openDialog = this.dialog.open(DeleteOrderComponent, {
       data: transactionId,
     });

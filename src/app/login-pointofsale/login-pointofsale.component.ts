@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { RequestParams } from '../models/RequestParams';
 import Swal from 'sweetalert2';
+import ProgressBar from '@badrap/bar-of-progress';
 
 @Component({
   selector: 'app-login-pointofsale',
@@ -12,6 +13,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login-pointofsale.component.css'],
 })
 export class LoginPointofsaleComponent implements OnInit {
+  progress = new ProgressBar({
+    size: 4,
+    color: '#5464EF',
+    className: 'z-50',
+    delay: 100,
+  });
+
   loginForm: FormGroup = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
@@ -28,6 +36,8 @@ export class LoginPointofsaleComponent implements OnInit {
   ngOnInit(): void {}
 
   loginSubmit() {
+    this.progress.start();
+
     if (this.loginForm.valid) {
       const requestParams = new RequestParams();
       requestParams.EndPoint = `/admin-login`;
@@ -35,13 +45,24 @@ export class LoginPointofsaleComponent implements OnInit {
 
       this.dataService.httpRequest('POST', requestParams).subscribe(
         (data: any) => {
-          this.userService.setAccessToken(data.payload['access_token']);
-          this.router.navigate(['/pointofsale']);
+          setTimeout(() => {
+            this.progress.finish();
+            this.userService.setAccessToken(data.payload['access_token']);
+            this.router.navigate(['/pointofsale']);
+          }, 100);
         },
         (error: any) => {
-          Swal.fire('Failed!', error['error']['status'].message, 'error');
+          setTimeout(() => {
+            this.progress.finish();
+            Swal.fire('Failed!', error['error']['status'].message, 'error');
+          }, 100);
         }
       );
+    } else {
+      setTimeout(() => {
+        this.progress.finish();
+        Swal.fire('Failed!', 'Please fill the input field', 'error');
+      }, 200);
     }
   }
 }
