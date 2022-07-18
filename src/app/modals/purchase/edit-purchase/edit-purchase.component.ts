@@ -34,7 +34,9 @@ export class EditPurchaseComponent implements OnInit {
     private dataService: DataService,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public $purchases: any
-  ) {}
+  ) {
+    console.log($purchases);
+  }
 
   ngOnInit(): void {
     this.getProducts();
@@ -45,8 +47,6 @@ export class EditPurchaseComponent implements OnInit {
     for (let item of this.$purchases) {
       this.addOrder(item, 1);
     }
-
-    console.log(this.$purchases);
   }
 
   getProducts() {
@@ -102,7 +102,7 @@ export class EditPurchaseComponent implements OnInit {
     return this.formBuilder.group({
       id: data.id,
       purchaseSerialId: data.purchaseSerialId,
-      productId: data.id,
+      productId: data.productId,
       supplierId: 3,
       productName: data.productName,
       price: data.price,
@@ -174,6 +174,7 @@ export class EditPurchaseComponent implements OnInit {
 
   submitOrder() {
     this.progress.start();
+    console.log(this.transactionForm.value);
 
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/update-purchase`;
