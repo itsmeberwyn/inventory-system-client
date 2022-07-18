@@ -56,6 +56,24 @@ export class DataService {
         });
         break;
 
+      case 'POST_REQUIRES_AUTH':
+        result = this.http.post(
+          `${this.baseURL}${requestParams.EndPoint}`,
+          requestParams.Body,
+          { context: new HttpContext().set(AUTH_REQUIRED, true) }
+        );
+        break;
+
+      case 'PATCH_REQUIRES_AUTH':
+        result = this.http.patch(
+          `${this.baseURL}${requestParams.EndPoint}`,
+          requestParams.Body,
+          {
+            context: new HttpContext().set(AUTH_REQUIRED, true),
+          }
+        );
+        break;
+
       default:
         break;
     }

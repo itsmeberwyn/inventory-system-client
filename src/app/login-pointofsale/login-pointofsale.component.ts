@@ -56,6 +56,7 @@ export class LoginPointofsaleComponent implements OnInit {
               })
             );
             this.userService.setAccessToken(data.payload['access_token']);
+            this.userService.setLoginState();
             this.router.navigate(['/pointofsale']);
           }, 100);
         },

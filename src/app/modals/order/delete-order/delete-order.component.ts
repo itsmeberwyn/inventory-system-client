@@ -37,7 +37,7 @@ export class DeleteOrderComponent implements OnInit {
     console.log(this.data);
 
     this.dataService
-      .httpRequest('PATCH', requestParams)
+      .httpRequest('PATCH_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         if (data.status['remarks'] === 'success') {
           setTimeout(() => {

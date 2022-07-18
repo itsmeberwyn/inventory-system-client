@@ -33,7 +33,7 @@ export class DeleteProductComponent implements OnInit {
     requestParams.Body = { productId: this.data.productId };
 
     this.dataService
-      .httpRequest('PATCH', requestParams)
+      .httpRequest('PATCH_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         if (data.status['remarks'] === 'success') {
           setTimeout(() => {

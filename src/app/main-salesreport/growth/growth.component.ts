@@ -171,7 +171,7 @@ export class GrowthComponent implements OnInit {
     requestParams.EndPoint = `/get-sales-year`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.lineChartDataGrowth['datasets'][0]['data'] = data.payload['2021'];
         this.lineChartDataGrowth['datasets'][1]['data'] = data.payload['2022'];
@@ -185,7 +185,7 @@ export class GrowthComponent implements OnInit {
     requestParams.EndPoint = `/get-expenses-year`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.barChartDataGrowth['datasets'][0]['data'] = data.payload['2021'];
         this.barChartDataGrowth['datasets'][1]['data'] = data.payload['2022'];
@@ -199,7 +199,7 @@ export class GrowthComponent implements OnInit {
     requestParams.EndPoint = `/get-customers-year`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.customersData = data.payload;
       });

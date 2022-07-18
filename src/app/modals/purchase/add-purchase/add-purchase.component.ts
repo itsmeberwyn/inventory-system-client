@@ -51,7 +51,7 @@ export class AddPurchaseComponent implements OnInit {
     requestParams.EndPoint = `/get-products-large`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.$products = data.payload;
         this.$products_copy = data.payload;
@@ -63,7 +63,7 @@ export class AddPurchaseComponent implements OnInit {
     requestParams.EndPoint = `/get-suppliers`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.$suppliers = data.payload.flat();
         console.log(this.$suppliers);
@@ -176,7 +176,7 @@ export class AddPurchaseComponent implements OnInit {
     });
 
     this.dataService
-      .httpRequest('POST', requestParams)
+      .httpRequest('POST_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         if (data.status['remarks'] === 'success') {
           setTimeout(() => {

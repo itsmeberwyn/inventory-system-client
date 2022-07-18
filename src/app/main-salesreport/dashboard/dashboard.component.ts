@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
     requestParams.EndPoint = `/get-orders-today`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.totalSold = data.payload;
       });
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
     requestParams.EndPoint = `/get-customers-today`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.totalCustomer = data.payload;
       });
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
     requestParams.EndPoint = `/get-topselling-today`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         for (let item of data.payload) {
           this.revenue += item.sold;
@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
     requestParams.EndPoint = `/get-topsellingcat-today`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.topSellingCat = data.payload;
       });

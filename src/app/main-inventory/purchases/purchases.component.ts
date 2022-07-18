@@ -78,7 +78,7 @@ export class PurchasesComponent implements OnInit {
     requestParams.EndPoint = `/get-purchases`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.$purchases = data.payload;
         this.$purchases_copy = data.payload;

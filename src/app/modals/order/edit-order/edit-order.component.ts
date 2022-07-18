@@ -60,7 +60,7 @@ export class EditOrderComponent implements OnInit {
     requestParams.EndPoint = `/get-products-large`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.$products = data.payload;
         this.$products_copy = data.payload;
@@ -160,7 +160,7 @@ export class EditOrderComponent implements OnInit {
       requestParams.Body = JSON.stringify(this.orderForm.value);
 
       this.dataService
-        .httpRequest('PATCH', requestParams)
+        .httpRequest('PATCH_REQUIRES_AUTH', requestParams)
         .subscribe(async (data: any) => {
           if (data.status['remarks'] === 'success') {
             setTimeout(() => {

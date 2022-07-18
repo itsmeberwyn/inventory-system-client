@@ -57,6 +57,7 @@ export class LoginSalesreportComponent implements OnInit {
               })
             );
             this.userService.setAccessToken(data.payload['access_token']);
+            this.userService.setLoginState();
             this.router.navigate(['/salesreport']);
           }, 100);
         },

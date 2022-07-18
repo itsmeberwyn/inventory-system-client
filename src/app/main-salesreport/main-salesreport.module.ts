@@ -1,3 +1,4 @@
+import { SalesreportGuard } from './../guards/salesreport.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -22,5 +23,6 @@ import { ReportComponent } from './report/report.component';
     MainSalesReportRoutingComponent,
     NgChartsModule,
   ],
+  providers: [SalesreportGuard],
 })
 export class MainSalesReportModule {}

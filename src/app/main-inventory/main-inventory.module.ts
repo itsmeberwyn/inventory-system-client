@@ -1,3 +1,4 @@
+import { InventoryGuard } from './../guards/inventory.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -46,5 +47,6 @@ import { EditProductComponent } from './../modals/product/edit-product/edit-prod
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers: [InventoryGuard],
 })
 export class MainInventoryModule {}

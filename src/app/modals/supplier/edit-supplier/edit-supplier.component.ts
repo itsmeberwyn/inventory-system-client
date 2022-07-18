@@ -53,7 +53,7 @@ export class EditSupplierComponent implements OnInit {
     requestParams.Body = JSON.stringify(this.supplierForm.value);
 
     this.dataService
-      .httpRequest('PATCH', requestParams)
+      .httpRequest('PATCH_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         if (data.status['remarks'] === 'success') {
           setTimeout(() => {
