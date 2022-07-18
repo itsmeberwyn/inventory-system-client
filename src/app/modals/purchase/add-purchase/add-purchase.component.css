@@ -51,7 +51,7 @@ thead{
 .modal_left_table_container{
     /* background-color: aliceblue; */
     width: 100%;
-    height: 89%;
+    height: 85%;
     overflow: auto;
 }
 .modal_left_table_container .table thead {
@@ -82,7 +82,7 @@ thead{
 .moadal_right_top_container{
     background-color: #5464EF;
     width: 100%;
-    height: 15%;
+    height: 11%;
     color: white;
     display: flex;
     padding: 0% 2%;
@@ -97,6 +97,23 @@ thead{
     color: white;
     border-color: white;
 }
+/* /////////////////////////////////////////////////////////////////// */
+/* input color class */
+.moadal_right_top_container::ng-deep input.mat-input-element {
+    color: white !important;
+  }
+.moadal_right_top_container::ng-deep .mat-form-field-empty.mat-form-field-label {
+    color: white;
+}
+  /* Change label color on focused */
+.moadal_right_top_container::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: white !important;
+  }
+  /* underline border color on focused */
+.moadal_right_top_container::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+    background-color: white !important;
+  }
+/* ///////////////////////////////////////////////////////////////// */
 .modal_right_table_container{
     /* background-color: aqua; */
     width: 100%;
@@ -119,6 +136,22 @@ thead{
 .mat-card p{
     margin: 0;
 }
+.mat-card span{
+    display: flex;
+}
+.mat-card .form-group input{
+    width: 105px;
+    height: 25px;
+    margin-right: 5px;
+}
+.add_remove_container{
+    /* background-color: #5464EF; */
+    color: #4A84D0;
+    display: flex;
+    width: 100px;
+    justify-content: space-around;
+    align-items: center;
+}
 .mat-card button{
     background-color: #EBF2FD;
     display: flex;
@@ -126,13 +159,19 @@ thead{
     justify-content: center;
     box-shadow: none;
     color: #4A84D0;
-   width: 30px;
-   height: 30px;
+    width: 30px;
+    height: 30px;
 }
-.mat-card button:nth-child(1){
+
+.mat-card button{
     color: red;
     background-color: #38383800;
     border: solid red ;
+}
+.add_remove_container button{
+    color:#4A84D0;
+    background-color: #EBF2FD;
+    border: solid #4a84d000 ;
 }
 .modal_right_footer_container{
     /* background-color: violet; */
