@@ -101,18 +101,18 @@ thead{
 /* input color class */
 .moadal_right_top_container::ng-deep input.mat-input-element {
     color: white !important;
-  }
+}
 .moadal_right_top_container::ng-deep .mat-form-field-empty.mat-form-field-label {
     color: white;
 }
   /* Change label color on focused */
 .moadal_right_top_container::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
     color: white !important;
-  }
+}
   /* underline border color on focused */
 .moadal_right_top_container::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
     background-color: white !important;
-  }
+}
 /* ///////////////////////////////////////////////////////////////// */
 .modal_right_table_container{
     /* background-color: aqua; */

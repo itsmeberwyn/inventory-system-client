@@ -111,6 +111,14 @@ thead{
 .mat-card p{
     margin: 0;
 }
+.mat-card span{
+    display: flex;
+}
+.mat-card .form-group input{
+    width: 105px;
+    height: 25px;
+    margin-right: 5px;
+}
 .add_remove_container{
     /* background-color: #5464EF; */
     color: #4A84D0;
