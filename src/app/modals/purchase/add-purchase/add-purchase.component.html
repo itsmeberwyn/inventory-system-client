@@ -43,11 +43,9 @@
               <h1>Purchase Items</h1>
               <mat-form-field appearance="fill">
                 <mat-label>Supplier Input</mat-label>
-                <mat-select >
+                <mat-select formControlName="supplierId">
                   <mat-option>Clear</mat-option>
-                  <mat-option >
-                
-                </mat-option>
+                  <mat-option *ngFor="let supplier of $suppliers" value="{{supplier.id}}" >{{supplier.supplierName | titlecase}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -63,7 +61,7 @@
                       <p class="d-flex flex-column">{{order.get('productName')?.value}} 
                         <span>
                           <div class="form-group">
-                            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Price">
+                            <input type="number" class="form-control" formControlName="price" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Price">
                           </div>
                           ({{this.transactionForm.controls.list.value[i].quantityBought}} X {{this.transactionForm.controls.list.value[i].price}} = {{this.transactionForm.controls.list.value[i].price * this.transactionForm.controls.list.value[i].quantityBought}})
                         </span>

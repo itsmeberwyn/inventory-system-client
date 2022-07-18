@@ -1,3 +1,4 @@
+import { ViewOrderComponent } from './../../modals/order/view-order/view-order.component';
 import { EditOrderComponent } from './../../modals/order/edit-order/edit-order.component';
 import { DeleteOrderComponent } from './../../modals/order/delete-order/delete-order.component';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -38,6 +39,12 @@ export class OrdersComponent implements OnInit {
 
   openDialog(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
+  }
+
+  openViewDialog(page: any, index: any) {
+    const openDialog = this.dialog.open(ViewOrderComponent, {
+      data: this.$transactions[page][index],
+    });
   }
 
   openEditDialog(page: any, index: any) {

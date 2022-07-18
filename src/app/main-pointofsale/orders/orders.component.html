@@ -28,7 +28,7 @@
                   <tbody>
 
                     <tr *ngFor="let transaction of keys()">
-                      <td>{{$transactions[$currentPage][transaction][0].created_at}}</td>
+                      <td role="button" (click)="openViewDialog($currentPage, transaction)">{{$transactions[$currentPage][transaction][0].created_at}}</td>
                       <td>{{$transactions[$currentPage][transaction][0].id}}</td>
                       <td>{{quantity(transaction)}}</td>
                       <td>{{cost(transaction)}}</td>
