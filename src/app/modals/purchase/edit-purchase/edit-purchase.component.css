@@ -111,6 +111,14 @@ thead{
 .mat-card p{
     margin: 0;
 }
+.add_remove_container{
+    /* background-color: #5464EF; */
+    color: #4A84D0;
+    display: flex;
+    width: 100px;
+    justify-content: space-around;
+    align-items: center;
+}
 .mat-card button{
     background-color: #EBF2FD;
     display: flex;
@@ -121,10 +129,15 @@ thead{
    width: 30px;
    height: 30px;
 }
-.mat-card button:nth-child(1){
+.mat-card button{
     color: red;
     background-color: #38383800;
     border: solid red ;
+}
+.add_remove_container button{
+    color:#4A84D0;
+    background-color: #EBF2FD;
+    border: solid #4a84d000 ;
 }
 .modal_right_footer_container{
     /* background-color: violet; */

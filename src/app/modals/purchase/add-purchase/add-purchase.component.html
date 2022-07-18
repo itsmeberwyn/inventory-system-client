@@ -3,11 +3,19 @@
         <div class="modal_body_container">
           <div class="modal_left_container">
             <div class="modal_left_top_container">
+
               <mat-form-field class="example-form-field" appearance="fill">
-                <mat-label>Search</mat-label>
+                <mat-label>Search by product name</mat-label>
                 <input matInput type="search" placeholder="Enter keyword" [(ngModel)]="search" (ngModelChange)="searchProduct()">
                   <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
+
+              <!-- <mat-form-field class="example-form-field" appearance="fill">
+                <mat-label>Supplier Input</mat-label>
+                <input matInput type="search" placeholder="Supplier" [(ngModel)]="search" (ngModelChange)="searchProduct()">
+                  <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field> -->
+
             </div>
             <div class="modal_left_table_container">
               <table class="table table-hover">
@@ -31,7 +39,18 @@
             </div>
           </div>
           <form class="modal_right_container" [formGroup]="transactionForm">
-            <div class="moadal_right_top_container"><h1>Purchase Items (Supplier Input)</h1></div>
+            <div class="moadal_right_top_container">
+              <h1>Purchase Items</h1>
+              <mat-form-field appearance="fill">
+                <mat-label>Supplier Input</mat-label>
+                <mat-select >
+                  <mat-option>Clear</mat-option>
+                  <mat-option >
+                
+                </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div class="modal_right_table_container">
               <table class="table">
                 <thead>
@@ -41,10 +60,21 @@
                    <td [formGroupName]="i">
                     <mat-card>
                       <button mat-mini-fab (click)="removeOrder(i)"><mat-icon>close</mat-icon></button>
-                      <p class="d-flex flex-column">{{order.get('productName')?.value}} <span>({{this.transactionForm.controls.list.value[i].quantityBought}} X {{this.transactionForm.controls.list.value[i].price}} = {{this.transactionForm.controls.list.value[i].price * this.transactionForm.controls.list.value[i].quantityBought}})</span></p>
-                      <button mat-mini-fab (click)="removeQuantity(i)"><mat-icon>remove</mat-icon></button>
-                      <p>{{this.transactionForm.controls.list.value[i].quantityBought}}</p>
-                      <button mat-mini-fab (click)="addQuantity(i)"><mat-icon>add</mat-icon></button>
+                      <p class="d-flex flex-column">{{order.get('productName')?.value}} 
+                        <span>
+                          <div class="form-group">
+                            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Price">
+                          </div>
+                          ({{this.transactionForm.controls.list.value[i].quantityBought}} X {{this.transactionForm.controls.list.value[i].price}} = {{this.transactionForm.controls.list.value[i].price * this.transactionForm.controls.list.value[i].quantityBought}})
+                        </span>
+                      </p>
+                      
+                      <div class="add_remove_container">
+                        <button mat-mini-fab (click)="removeQuantity(i)"><mat-icon>remove</mat-icon></button>
+                        <p>{{this.transactionForm.controls.list.value[i].quantityBought}}</p>
+                        <button mat-mini-fab (click)="addQuantity(i)"><mat-icon>add</mat-icon></button>
+                      </div>
+
                     </mat-card>
                    </td>
                   </tr>
