@@ -43,7 +43,6 @@ export class DeleteProductComponent implements OnInit {
           if (this.data.index > -1) {
             this.data.$products[this.data.page].splice(this.data.index, 1);
           }
-         
         }
       });
   }

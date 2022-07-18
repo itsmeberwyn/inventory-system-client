@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TemplateRef } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
 
 @Component({
@@ -38,10 +37,6 @@ export class PurchasesComponent implements OnInit {
     this.getPurchases();
   }
 
-  // openDialog(templateRef: TemplateRef<any>) {
-  //   this.dialog.open(templateRef);
-  // }
-
   openViewDialog(page: any, index: any) {
     const openDialog = this.dialog.open(ViewPurchaseComponent, {
       data: this.$purchases[page][index],
@@ -59,7 +54,6 @@ export class PurchasesComponent implements OnInit {
   }
 
   editAddDialog(page: any, index: any) {
-    console.log(this.$purchases[page][index]);
     const openDialog = this.dialog.open(EditPurchaseComponent, {
       data: this.$purchases[page][index],
     });
@@ -68,10 +62,10 @@ export class PurchasesComponent implements OnInit {
     });
   }
 
-  removeAddDialog(serialId: any) {
+  removeAddDialog(data: any) {
     const openDialog = this.dialog.open(DeletePurchaseComponent, {
       data: {
-        serialId: serialId,
+        serial: data,
       },
     });
     openDialog.afterClosed().subscribe((result: any) => {
@@ -92,7 +86,6 @@ export class PurchasesComponent implements OnInit {
   }
 
   searchPurchases() {
-    // console.log(this.search.toISOString('en-US').split('T'));
     if (this.$purchases.length === 0 || this.search === '') {
       this.$purchases = this.$purchases_copy;
       return;
@@ -121,7 +114,6 @@ export class PurchasesComponent implements OnInit {
 
         return resultArray;
       }, []);
-    console.log(this.$purchases);
   }
 
   keys(): any {
