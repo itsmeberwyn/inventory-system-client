@@ -23,11 +23,13 @@ export class AddPurchaseComponent implements OnInit {
   $products: any = [];
   $products_copy: any = [];
   $orders: any = [];
+  $suppliers: any = [];
 
   transactionId = new Date().valueOf();
 
   transactionForm: any = this.formBuilder.group({
     list: this.formBuilder.array([]),
+    supplierId: ['', Validators.required],
   });
 
   search: string = '';
@@ -41,6 +43,7 @@ export class AddPurchaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
+    this.getSuppliers();
   }
 
   getProducts() {
@@ -52,6 +55,18 @@ export class AddPurchaseComponent implements OnInit {
       .subscribe(async (data: any) => {
         this.$products = data.payload;
         this.$products_copy = data.payload;
+      });
+  }
+
+  getSuppliers() {
+    const requestParams = new RequestParams();
+    requestParams.EndPoint = `/get-suppliers`;
+
+    this.dataService
+      .httpRequest('GET', requestParams)
+      .subscribe(async (data: any) => {
+        this.$suppliers = data.payload.flat();
+        console.log(this.$suppliers);
       });
   }
 
@@ -101,9 +116,9 @@ export class AddPurchaseComponent implements OnInit {
     return this.formBuilder.group({
       purchaseSerialId: this.transactionId,
       productId: data.id,
-      supplierId: 3,
+      supplierId: this.transactionForm.controls.supplierId.value,
       productName: data.productName,
-      price: data.price,
+      price: 0,
       quantityBought: 1,
       actualQuantity: data.quantity,
       subTotal: data.price * 1,
@@ -151,14 +166,14 @@ export class AddPurchaseComponent implements OnInit {
   submitOrder() {
     this.progress.start();
 
-    console.log(this.transactionForm.controls.list.value);
     this.transactionId = new Date().valueOf();
 
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/add-purchases`;
-    requestParams.Body = JSON.stringify(
-      this.transactionForm.controls.list.value
-    );
+    requestParams.Body = JSON.stringify({
+      data: this.transactionForm.controls.list.value,
+      supplierId: this.transactionForm.controls.supplierId.value,
+    });
 
     this.dataService
       .httpRequest('POST', requestParams)
