@@ -39,7 +39,18 @@
             </div>
           </div>
           <form class="modal_right_container" [formGroup]="transactionForm">
-            <div class="moadal_right_top_container"><h1>Purchase Items</h1></div>
+            <div class="moadal_right_top_container">
+              <h1>Purchase Items</h1>
+              <mat-form-field appearance="fill">
+                <mat-label>Supplier Input</mat-label>
+                <mat-select >
+                  <mat-option>Clear</mat-option>
+                  <mat-option >
+                
+                </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div class="modal_right_table_container">
               <table class="table">
                 <thead>
