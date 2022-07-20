@@ -75,8 +75,8 @@ thead{
 .modal_right_container{
     /* background-color: #383838; */
     border-radius: 5px;
-    width: 40%;
-    height: 90%;
+    width: 45%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
@@ -115,27 +115,37 @@ thead{
 .mat-card p{
     margin: 0;
 }
+.mat-card span{
+    display: flex;
+}
+.add_remove_container{
+    /* background-color: #5464EF; */
+    color: #4A84D0;
+    display: flex;
+    width: 100px;
+    justify-content: space-around;
+    align-items: center;
+}
 .mat-card button{
-    background-color: #EBF2FD;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: none;
-    color: #4A84D0;
-    width: 10%;
-    height: 80%;
-}
-.mat-card button:nth-child(1){
     color: red;
     background-color: #38383800;
     border: solid red ;
     width: 30px;
     height: 30px;
 }
+.add_remove_container button{
+    color:#4A84D0;
+    background-color: #EBF2FD;
+    border: solid #4a84d000 ;
+}
 .modal_right_footer_container{
-    /* background-color: violet; */
+    /* background-color: blue; */
     width: 100%;
-    height: 30%;
+    height: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
