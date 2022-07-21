@@ -73,7 +73,7 @@ thead{
 .modal_right_container{
     /* background-color: #383838; */
     border-radius: 5px;
-    width: 40%;
+    width: 45%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -101,18 +101,18 @@ thead{
 /* input color class */
 .moadal_right_top_container::ng-deep input.mat-input-element {
     color: white !important;
-  }
+}
 .moadal_right_top_container::ng-deep .mat-form-field-empty.mat-form-field-label {
     color: white;
 }
   /* Change label color on focused */
 .moadal_right_top_container::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
     color: white !important;
-  }
+}
   /* underline border color on focused */
 .moadal_right_top_container::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
     background-color: white !important;
-  }
+}
 /* ///////////////////////////////////////////////////////////////// */
 .modal_right_table_container{
     /* background-color: aqua; */
@@ -153,20 +153,15 @@ thead{
     align-items: center;
 }
 .mat-card button{
-    background-color: #EBF2FD;
+    color: red;
+    background-color: #38383800;
+    border: solid red ;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: none;
-    color: #4A84D0;
     width: 30px;
     height: 30px;
-}
-
-.mat-card button{
-    color: red;
-    background-color: #38383800;
-    border: solid red ;
 }
 .add_remove_container button{
     color:#4A84D0;
