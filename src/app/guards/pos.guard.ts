@@ -23,7 +23,10 @@ export class PosGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this._userService.getLoginState()) {
+    if (
+      this._userService.getLoginState() &&
+      JSON.parse(localStorage.getItem('user') || '')?.role === 'pointofsale'
+    ) {
       return true;
     } else {
       this.router.navigate(['/pos-login']);

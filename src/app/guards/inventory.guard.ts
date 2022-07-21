@@ -1,3 +1,4 @@
+import { RouteListenerService } from './../services/route-listener.service';
 import { UserService } from './../services/user.service';
 import { Injectable } from '@angular/core';
 import {
@@ -13,7 +14,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class InventoryGuard implements CanActivate {
-  constructor(private router: Router, private _userService: UserService) {}
+  constructor(
+    private router: Router,
+    private _userService: UserService,
+    private routeListenerService: RouteListenerService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,7 +28,10 @@ export class InventoryGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this._userService.getLoginState()) {
+    if (
+      this._userService.getLoginState() &&
+      JSON.parse(localStorage.getItem('user') || '')?.role === 'inventory'
+    ) {
       return true;
     } else {
       this.router.navigate(['/']);

@@ -33,7 +33,25 @@ export class LoginPointofsaleComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.userService.getLoginState()) {
+      if (
+        JSON.parse(localStorage.getItem('user') || '')?.role === 'inventory'
+      ) {
+        this.router.navigate(['/inventory']);
+      } else if (
+        JSON.parse(localStorage.getItem('user') || '')?.role === 'pointofsale'
+      ) {
+        this.router.navigate(['/pointofsale']);
+      } else if (
+        JSON.parse(localStorage.getItem('user') || '')?.role === 'salesreport'
+      ) {
+        this.router.navigate(['/salesreport']);
+      }
+    } else {
+      this.router.navigate(['/pos-login']);
+    }
+  }
 
   loginSubmit() {
     this.progress.start();
