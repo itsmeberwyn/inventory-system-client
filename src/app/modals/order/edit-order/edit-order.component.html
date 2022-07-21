@@ -44,9 +44,13 @@
                     <mat-card>
                         <button mat-mini-fab (click)="removeOrder(i)"><mat-icon>close</mat-icon></button>
                         <p class="d-flex flex-column">{{order.get('productName')?.value}} <span>({{this.orderForm.controls.list.value[i].quantity}} X {{this.orderForm.controls.list.value[i].price}} = {{this.orderForm.controls.list.value[i].price * this.orderForm.controls.list.value[i].quantity}})</span></p>
-                        <button mat-mini-fab (click)="removeQuantity(i)"><mat-icon>remove</mat-icon></button>
-                        <p>{{this.orderForm.controls.list.value[i].quantity}}</p>
-                        <button mat-mini-fab (click)="addQuantity(i)"><mat-icon>add</mat-icon></button>
+                        
+                       <div class="add_remove_container">
+                         <button mat-mini-fab (click)="removeQuantity(i)"><mat-icon>remove</mat-icon></button>
+                         <p>{{this.orderForm.controls.list.value[i].quantity}}</p>
+                         <button mat-mini-fab (click)="addQuantity(i)"><mat-icon>add</mat-icon></button>
+                       </div>
+                      
                       </mat-card>
                    </td>
                   </tr>
@@ -68,8 +72,12 @@
                       </mat-form-field>
                     </div>
               </div>
-              <button mat-raised-button mat-dialog-close color="primary" (click)="submitOrder()">Save</button>
-              <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+
+           
+               <button mat-raised-button mat-dialog-close color="primary" (click)="submitOrder()">Save</button>
+               <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+            
+            
             </div>
           </form>
         </div>

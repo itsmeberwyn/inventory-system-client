@@ -41,7 +41,14 @@
                <td *ngIf="this.transactionForm.controls.list.value[i].is_deleted !== 1" [formGroupName]="i">
                 <mat-card>
                   <button mat-mini-fab (click)="removeOrder(i)"><mat-icon>close</mat-icon></button>
-                  <p class="d-flex flex-column">{{order.get('productName')?.value}} <span>({{this.transactionForm.controls.list.value[i].quantityBought}} X {{this.transactionForm.controls.list.value[i].price}} = {{this.transactionForm.controls.list.value[i].price * this.transactionForm.controls.list.value[i].quantityBought}})</span></p>
+                  <p class="d-flex flex-column">{{order.get('productName')?.value}} 
+                    <span>
+                      <div class="form-group">
+                        <input type="number" class="form-control" formControlName="price" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Price">
+                      </div>
+                      ({{this.transactionForm.controls.list.value[i].quantityBought}} X {{this.transactionForm.controls.list.value[i].price}} = {{this.transactionForm.controls.list.value[i].price * this.transactionForm.controls.list.value[i].quantityBought}})
+                    </span>
+                  </p>
                  
                  <div class="add_remove_container">
                    <button mat-mini-fab (click)="removeQuantity(i)"><mat-icon>remove</mat-icon></button>
