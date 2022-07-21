@@ -25,7 +25,7 @@ export class PosGuard implements CanActivate {
     | UrlTree {
     if (
       this._userService.getLoginState() &&
-      JSON.parse(localStorage.getItem('user') || '')?.role === 'pointofsale'
+      JSON.parse(localStorage.getItem('user') || '{}')?.role === 'pointofsale'
     ) {
       return true;
     } else {

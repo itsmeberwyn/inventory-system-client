@@ -25,7 +25,7 @@ export class SalesreportGuard implements CanActivate {
     | UrlTree {
     if (
       this._userService.getLoginState() &&
-      JSON.parse(localStorage.getItem('user') || '')?.role === 'salesreport'
+      JSON.parse(localStorage.getItem('user') || '{}')?.role === 'salesreport'
     ) {
       return true;
     } else {

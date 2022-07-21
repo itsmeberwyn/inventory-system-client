@@ -30,7 +30,7 @@ export class InventoryGuard implements CanActivate {
     | UrlTree {
     if (
       this._userService.getLoginState() &&
-      JSON.parse(localStorage.getItem('user') || '')?.role === 'inventory'
+      JSON.parse(localStorage.getItem('user') || '{}')?.role === 'inventory'
     ) {
       return true;
     } else {

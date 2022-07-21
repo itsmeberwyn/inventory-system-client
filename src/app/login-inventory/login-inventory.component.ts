@@ -34,22 +34,34 @@ export class LoginInventoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.userService.getLoginState()) {
+    if (
+      this.userService.getLoginState() &&
+      JSON.parse(localStorage.getItem('user') || '{}')?.role !== undefined
+    ) {
       if (
-        JSON.parse(localStorage.getItem('user') || '')?.role === 'inventory'
+        JSON.parse(localStorage.getItem('user') || '{}')?.role === 'inventory'
       ) {
         this.router.navigate(['/inventory']);
       } else if (
-        JSON.parse(localStorage.getItem('user') || '')?.role === 'pointofsale'
+        JSON.parse(localStorage.getItem('user') || '{}')?.role === 'pointofsale'
       ) {
         this.router.navigate(['/pointofsale']);
       } else if (
-        JSON.parse(localStorage.getItem('user') || '')?.role === 'salesreport'
+        JSON.parse(localStorage.getItem('user') || '{}')?.role === 'salesreport'
       ) {
         this.router.navigate(['/salesreport']);
       }
     } else {
-      this.router.navigate(['/']);
+      const requestParams = new RequestParams();
+      requestParams.EndPoint = `/logout`;
+      requestParams.Body = '';
+
+      this.dataService
+        .httpRequest('POST', requestParams)
+        .subscribe((data: any) => {
+          this.userService.logOut();
+          this.router.navigate(['/']);
+        });
     }
   }
 
