@@ -61,6 +61,7 @@ export class LoginSalesreportComponent implements OnInit {
         .httpRequest('POST', requestParams)
         .subscribe((data: any) => {
           this.userService.logOut();
+          localStorage.removeItem('user');
           this.router.navigate(['/sr-login']);
         });
     }
