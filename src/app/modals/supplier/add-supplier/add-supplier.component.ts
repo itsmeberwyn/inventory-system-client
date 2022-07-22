@@ -42,7 +42,7 @@ export class AddSupplierComponent implements OnInit {
       requestParams.Body = JSON.stringify(this.supplierForm.value);
 
       this.dataService
-        .httpRequest('POST', requestParams)
+        .httpRequest('POST_REQUIRES_AUTH', requestParams)
         .subscribe(async (data: any) => {
           if (data.status['remarks'] === 'success') {
             setTimeout(() => {

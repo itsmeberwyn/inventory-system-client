@@ -85,7 +85,7 @@ export class SuppliersComponent implements OnInit {
     requestParams.EndPoint = `/get-suppliers`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.$suppliers = data.payload;
         this.$suppliers_copy = data.payload;

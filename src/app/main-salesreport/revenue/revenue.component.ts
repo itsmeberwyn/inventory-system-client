@@ -110,7 +110,7 @@ export class RevenueComponent implements OnInit {
     requestParams.EndPoint = `/get-topselling-month`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.topSelling = data.payload;
       });
@@ -121,7 +121,7 @@ export class RevenueComponent implements OnInit {
     requestParams.EndPoint = `/get-topsellingcat-month`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.topSellingCat = data.payload;
 
@@ -144,7 +144,7 @@ export class RevenueComponent implements OnInit {
     requestParams.EndPoint = `/get-sales-month`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.salesMonth = data.payload[0];
         this.salesMonthLabel = this.salesMonth.map((day, index) =>
@@ -162,7 +162,7 @@ export class RevenueComponent implements OnInit {
     requestParams.EndPoint = `/get-summary`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.header = [
           {

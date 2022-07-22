@@ -33,7 +33,38 @@ export class LoginPointofsaleComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (
+      this.userService.getLoginState() &&
+      JSON.parse(localStorage.getItem('user') || '{}')?.role !== undefined
+    ) {
+      if (
+        JSON.parse(localStorage.getItem('user') || '{}')?.role === 'inventory'
+      ) {
+        this.router.navigate(['/inventory']);
+      } else if (
+        JSON.parse(localStorage.getItem('user') || '{}')?.role === 'pointofsale'
+      ) {
+        this.router.navigate(['/pointofsale']);
+      } else if (
+        JSON.parse(localStorage.getItem('user') || '{}')?.role === 'salesreport'
+      ) {
+        this.router.navigate(['/salesreport']);
+      }
+    } else {
+      const requestParams = new RequestParams();
+      requestParams.EndPoint = `/logout`;
+      requestParams.Body = '';
+
+      this.dataService
+        .httpRequest('POST', requestParams)
+        .subscribe((data: any) => {
+          this.userService.logOut();
+          localStorage.removeItem('user');
+          this.router.navigate(['/pos-login']);
+        });
+    }
+  }
 
   loginSubmit() {
     this.progress.start();
@@ -56,6 +87,7 @@ export class LoginPointofsaleComponent implements OnInit {
               })
             );
             this.userService.setAccessToken(data.payload['access_token']);
+            this.userService.setLoginState();
             this.router.navigate(['/pointofsale']);
           }, 100);
         },

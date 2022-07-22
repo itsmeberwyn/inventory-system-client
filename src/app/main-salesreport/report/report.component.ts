@@ -49,7 +49,7 @@ export class ReportComponent implements OnInit {
     requestParams.EndPoint = `/get-orders-curyear`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.soldItems = data.payload[0]['quantitySold'];
         this.revenue = data.payload[0]['revenue'];
@@ -61,7 +61,7 @@ export class ReportComponent implements OnInit {
     requestParams.EndPoint = `/get-purchases-curyear`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.purhaseCost = data.payload['cost'];
         this.purchaseQuantity = data.payload['quantity'];
@@ -73,7 +73,7 @@ export class ReportComponent implements OnInit {
     requestParams.EndPoint = `/get-transactions-curyear`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.customers = data.payload[0]['totalCustomers'];
       });
@@ -84,7 +84,7 @@ export class ReportComponent implements OnInit {
     requestParams.EndPoint = `/get-details-curyear`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.details = data.payload['2022'];
       });
@@ -95,7 +95,7 @@ export class ReportComponent implements OnInit {
     requestParams.EndPoint = `/get-customer-curyear`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.customersPerMonth = data.payload['2022'];
       });
@@ -106,7 +106,7 @@ export class ReportComponent implements OnInit {
     requestParams.EndPoint = `/get-expenses-curyear`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.expensesPerMonth = data.payload['2022'];
       });

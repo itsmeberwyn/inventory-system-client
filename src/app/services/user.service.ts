@@ -13,7 +13,18 @@ export class UserService {
   }
 
   public getLoginState() {
-    return sessionStorage.getItem('login-state') == 'true';
+    if (
+      sessionStorage.getItem('login-state') == 'true' &&
+      localStorage.getItem('user') &&
+      JSON.parse(localStorage.getItem('user') || '') !== ''
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  public isValidRoute(role: string) {
+    return JSON.parse(localStorage.getItem('user') || '').role === role;
   }
 
   public logOut() {
@@ -31,7 +42,7 @@ export class UserService {
 
   //Get access token from web storage
   public getAccessToken() {
-    const token: any = sessionStorage.getItem('auth-header');
+    const token: any = sessionStorage.getItem('auth-token');
     return token;
   }
 

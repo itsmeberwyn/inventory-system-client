@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit {
     requestParams.EndPoint = `/get-categories`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.$categories = data.payload;
       });
@@ -49,7 +49,7 @@ export class ProductsComponent implements OnInit {
     requestParams.EndPoint = `/get-products-large`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.$products = data.payload;
         this.$products_copy = data.payload;

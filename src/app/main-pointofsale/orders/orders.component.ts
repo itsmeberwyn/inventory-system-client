@@ -70,7 +70,7 @@ export class OrdersComponent implements OnInit {
     requestParams.EndPoint = `/get-transactions`;
 
     this.dataService
-      .httpRequest('GET', requestParams)
+      .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.$transactions = data.payload;
         this.$transactions_copy = data.payload;

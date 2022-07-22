@@ -34,7 +34,7 @@ export class DeleteSupplierComponent implements OnInit {
     requestParams.Body = { supplierId: this.data.supplierId };
 
     this.dataService
-      .httpRequest('PATCH', requestParams)
+      .httpRequest('PATCH_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         if (data.status['remarks'] === 'success') {
           setTimeout(() => {

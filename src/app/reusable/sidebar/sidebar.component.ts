@@ -22,7 +22,9 @@ export class SidebarComponent implements OnInit {
 
   @ViewChild('drawer') drawer: any;
   currentRoute = '';
-  activeUser: any = JSON.parse(localStorage.getItem('user') || 'Unknown user');
+  activeUser: any =
+    localStorage.getItem('user') &&
+    JSON.parse(localStorage.getItem('user') || 'Unknown user');
 
   isExpanded = false;
 

@@ -1,3 +1,4 @@
+import { PosGuard } from './../guards/pos.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -27,5 +28,6 @@ import { EditOrderComponent } from './../modals/order/edit-order/edit-order.comp
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers: [PosGuard],
 })
 export class MainPointofSaleModule {}
