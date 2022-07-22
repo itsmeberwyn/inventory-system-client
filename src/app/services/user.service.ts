@@ -14,9 +14,9 @@ export class UserService {
 
   public getLoginState() {
     if (
-      sessionStorage.getItem('login-state') == 'true' ||
-      (localStorage.getItem('user') &&
-        JSON.parse(localStorage.getItem('user') || '') !== '')
+      sessionStorage.getItem('login-state') == 'true' &&
+      localStorage.getItem('user') &&
+      JSON.parse(localStorage.getItem('user') || '') !== ''
     ) {
       return true;
     }
