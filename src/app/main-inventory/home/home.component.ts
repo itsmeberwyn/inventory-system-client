@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
         this.$products = data.payload;
-        console.log(data)
+        console.log(data);
 
         // const newData = data.payload.flat().sort(this.compare);
         // this.$products = newData.reduce(
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
   }
 
   paginate(page: any) {
-    this.router.navigate([`inventory/home/${page + 1}`]);
+    this.router.navigate([`inventory/home/${parseInt(page) + 1}`]);
   }
 
   next() {

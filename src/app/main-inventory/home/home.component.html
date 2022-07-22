@@ -44,7 +44,7 @@
                               <select class="custom-select" id="inputGroupSelect01"
                               #mySelect
                               (change)='paginate(mySelect.value)'>
-                                <option *ngFor="let page of [].constructor($products.length); let i=index" value="{{i+1}}">{{i+1}}</option>
+                                <option *ngFor="let page of [].constructor($products.length); let i=index" [selected]="$currentPage == i" value="{{i}}">{{i+1}}</option>
                               </select>
                             </div>
                             
@@ -58,7 +58,7 @@
                         <td colspan="2">
                           <div class="progress">
                               <div class="progress-bar" 
-                              [ngClass]="item.quantity > item.minQuantity?'bg-primary':item.quantity <= item.minQuantity && item.quantity >= 5?'bg-warning':'bg-danger'" 
+                              [ngClass]="(item.quantity/item.maxQuantity*100) > 50 ?'bg-primary':(item.quantity/item.maxQuantity*100) <= 50 && (item.quantity/item.maxQuantity*100)>= 10 ?'bg-warning':'bg-danger'" 
                               role="progressbar" 
                               [ngStyle]="{'width.%': item.quantity/item.maxQuantity*100}" 
                               aria-valuenow="100" 
