@@ -121,7 +121,20 @@
     width: 105px;
     justify-content: space-around;
     align-items: center;
+ 
 }
+.card_p{
+    background-color: #5464EF;
+    width: 260px;
+    display:inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card_p:hover {
+    overflow: visible;
+    word-wrap: normal;
+  }
 .mat-card p{
     margin: 0;
 }

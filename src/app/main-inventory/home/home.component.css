@@ -121,9 +121,22 @@
     vertical-align:middle;
 
 }
+
 .input-group{
-    background-color: #00E676;
-    
+    /* background-color: #00E676; */
+    display: flex;
+    justify-content: center;
+    margin: 5% 0% 0% 0% ;
+}
+.input-group select{
+    width: 5vw;
+    /* border-radius: 5px; */
+}
+.input-group label{
+    background-color: rgba(0, 0, 128, 0);
+    border: none;
+    color: #5464EF;
+    font-weight: 500;
 }
 .table td{
     width:min-content;
