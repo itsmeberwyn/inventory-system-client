@@ -37,23 +37,24 @@ export class HomeComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        // this.$products = data.payload;
+        this.$products = data.payload;
+        console.log(data)
 
-        const newData = data.payload.flat().sort(this.compare);
-        this.$products = newData.reduce(
-          (resultArray: any, item: any, index: any) => {
-            const chunkIndex = Math.floor(index / 8);
+        // const newData = data.payload.flat().sort(this.compare);
+        // this.$products = newData.reduce(
+        //   (resultArray: any, item: any, index: any) => {
+        //     const chunkIndex = Math.floor(index / 8);
 
-            if (!resultArray[chunkIndex]) {
-              resultArray[chunkIndex] = [];
-            }
+        //     if (!resultArray[chunkIndex]) {
+        //       resultArray[chunkIndex] = [];
+        //     }
 
-            resultArray[chunkIndex].push(item);
+        //     resultArray[chunkIndex].push(item);
 
-            return resultArray;
-          },
-          []
-        );
+        //     return resultArray;
+        //   },
+        //   []
+        // );
       });
   }
 
