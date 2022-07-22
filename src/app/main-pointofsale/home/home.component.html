@@ -50,18 +50,20 @@
                <td [formGroupName]="i">
                 <mat-card>
                   <button mat-mini-fab (click)="removeOrder(i)"><mat-icon>close</mat-icon></button>
+                  
                   <div class="card_p">
-                    <p class="d-flex flex-column">{{order.get('productName')?.value}} 
-                      <span>({{this.orderForm.controls.list.value[i].quantity}} X {{this.orderForm.controls.list.value[i].price}} = {{this.orderForm.controls.list.value[i].price * this.orderForm.controls.list.value[i].quantity}})</span>
+                    <p class="d-flex flex-column" data-bs-toggle="tooltip" data-bs-placement="top" title=" {{order.get('productName')?.value}} ">
+                      {{order.get('productName')?.value}} 
                     </p>
+                    <span>({{this.orderForm.controls.list.value[i].quantity}} X {{this.orderForm.controls.list.value[i].price}} = {{this.orderForm.controls.list.value[i].price * this.orderForm.controls.list.value[i].quantity}})</span>
                   </div>
 
-                 <div class="add_remove_container">
+                
+                  <div class="add_remove_container">
                    <button mat-mini-fab (click)="removeQuantity(i)"><mat-icon>remove</mat-icon></button>
                    <p>{{this.orderForm.controls.list.value[i].quantity}}</p>
                    <button mat-mini-fab (click)="addQuantity(i)"><mat-icon>add</mat-icon></button>
                  </div>
-
                 </mat-card>
                </td>
               </tr>
