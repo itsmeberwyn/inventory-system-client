@@ -35,6 +35,7 @@ export class AddPurchaseComponent implements OnInit {
 
   search: string = '';
   totalCost: number = 0;
+  currentPage = 0;
 
   constructor(
     private dataService: DataService,
@@ -196,5 +197,9 @@ export class AddPurchaseComponent implements OnInit {
 
   trackByFn(index: any, item: any) {
     return index;
+  }
+
+  paginate(page: any) {
+    this.currentPage = page;
   }
 }
