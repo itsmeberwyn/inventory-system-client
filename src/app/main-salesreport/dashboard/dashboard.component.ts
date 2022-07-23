@@ -1,6 +1,7 @@
 import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,9 @@ export class DashboardComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.totalSold = data.payload;
+        this.totalSold = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 
@@ -42,7 +45,9 @@ export class DashboardComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.totalCustomer = data.payload;
+        this.totalCustomer = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 
@@ -56,7 +61,9 @@ export class DashboardComponent implements OnInit {
         for (let item of data.payload) {
           this.revenue += item.sold;
         }
-        this.topSelling = data.payload;
+        this.topSelling = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 
@@ -67,7 +74,9 @@ export class DashboardComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.topSellingCat = data.payload;
+        this.topSellingCat = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 }

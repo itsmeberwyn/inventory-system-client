@@ -4,6 +4,7 @@ import { RequestParams } from 'src/app/models/RequestParams';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import ProgressBar from '@badrap/bar-of-progress';
 import Swal from 'sweetalert2';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-add-product',
@@ -47,7 +48,9 @@ export class AddProductComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$categories = data.payload;
+        this.$categories = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 

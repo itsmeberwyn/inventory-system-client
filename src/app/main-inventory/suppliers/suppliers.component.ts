@@ -9,6 +9,8 @@ import { DataService } from 'src/app/services/data.service';
 import { RequestParams } from 'src/app/models/RequestParams';
 
 import { EditSupplierComponent } from 'src/app/modals/supplier/edit-supplier/edit-supplier.component';
+import { Buffer } from 'buffer/';
+
 @Component({
   selector: 'app-suppliers',
   templateUrl: './suppliers.component.html',
@@ -87,8 +89,12 @@ export class SuppliersComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$suppliers = data.payload;
-        this.$suppliers_copy = data.payload;
+        this.$suppliers = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
+        this.$suppliers_copy = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 

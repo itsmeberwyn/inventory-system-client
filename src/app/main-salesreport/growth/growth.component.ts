@@ -4,6 +4,7 @@ import Annotation from 'chartjs-plugin-annotation';
 import { BaseChartDirective } from 'ng2-charts';
 import { RequestParams } from 'src/app/models/RequestParams';
 import { DataService } from 'src/app/services/data.service';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-growth',
@@ -173,8 +174,12 @@ export class GrowthComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.lineChartDataGrowth['datasets'][0]['data'] = data.payload['2021'];
-        this.lineChartDataGrowth['datasets'][1]['data'] = data.payload['2022'];
+        this.lineChartDataGrowth['datasets'][0]['data'] = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload['2021'];
+        this.lineChartDataGrowth['datasets'][1]['data'] = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload['2022'];
 
         this.chart?.update();
       });
@@ -187,8 +192,12 @@ export class GrowthComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.barChartDataGrowth['datasets'][0]['data'] = data.payload['2021'];
-        this.barChartDataGrowth['datasets'][1]['data'] = data.payload['2022'];
+        this.barChartDataGrowth['datasets'][0]['data'] = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload['2021'];
+        this.barChartDataGrowth['datasets'][1]['data'] = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload['2022'];
 
         this.chart?.update();
       });
@@ -201,7 +210,9 @@ export class GrowthComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.customersData = data.payload;
+        this.customersData = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 

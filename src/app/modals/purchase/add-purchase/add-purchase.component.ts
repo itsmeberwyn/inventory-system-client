@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import Swal from 'sweetalert2';
 import ProgressBar from '@badrap/bar-of-progress';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-add-purchase',
@@ -53,8 +54,12 @@ export class AddPurchaseComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$products = data.payload;
-        this.$products_copy = data.payload;
+        this.$products = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
+        this.$products_copy = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 
@@ -65,8 +70,9 @@ export class AddPurchaseComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$suppliers = data.payload.flat();
-        console.log(this.$suppliers);
+        this.$suppliers = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload.flat();
       });
   }
 

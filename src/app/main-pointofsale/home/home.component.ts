@@ -5,6 +5,7 @@ import { RequestParams } from 'src/app/models/RequestParams';
 
 import Swal from 'sweetalert2';
 import ProgressBar from '@badrap/bar-of-progress';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-home',
@@ -49,8 +50,12 @@ export class HomeComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$products = data.payload;
-        this.$products_copy = data.payload;
+        this.$products = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
+        this.$products_copy = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 
@@ -61,7 +66,9 @@ export class HomeComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$categories = data.payload;
+        this.$categories = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 
