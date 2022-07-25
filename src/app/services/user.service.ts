@@ -9,12 +9,12 @@ export class UserService {
   constructor(private dataService: DataService) {}
 
   public setLoginState() {
-    sessionStorage.setItem('login-state', 'true');
+    localStorage.setItem('login-state', 'true');
   }
 
   public getLoginState() {
     if (
-      sessionStorage.getItem('login-state') == 'true' &&
+      localStorage.getItem('login-state') == 'true' &&
       localStorage.getItem('user') &&
       JSON.parse(localStorage.getItem('user') || '') !== ''
     ) {
@@ -28,6 +28,7 @@ export class UserService {
   }
 
   public logOut() {
+    localStorage.clear();
     sessionStorage.clear();
   }
 
@@ -50,6 +51,7 @@ export class UserService {
   public refreshAccessToken() {
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/refreshtoken`;
+    requestParams.Body = ``;
 
     return this.dataService.httpRequest('POST', requestParams);
   }

@@ -5,8 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TemplateRef } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-products',
@@ -114,8 +114,12 @@ export class ProductsComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$products = data.payload;
-        this.$products_copy = data.payload;
+        this.$products = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
+        this.$products_copy = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 
@@ -126,7 +130,9 @@ export class ProductsComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$categories = data.payload;
+        this.$categories = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 

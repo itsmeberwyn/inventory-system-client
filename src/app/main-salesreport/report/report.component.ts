@@ -1,6 +1,7 @@
 import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-report',
@@ -51,8 +52,12 @@ export class ReportComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.soldItems = data.payload[0]['quantitySold'];
-        this.revenue = data.payload[0]['revenue'];
+        this.soldItems = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload[0]['quantitySold'];
+        this.revenue = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload[0]['revenue'];
       });
   }
 
@@ -63,8 +68,12 @@ export class ReportComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.purhaseCost = data.payload['cost'];
-        this.purchaseQuantity = data.payload['quantity'];
+        this.purhaseCost = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload['cost'];
+        this.purchaseQuantity = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload['quantity'];
       });
   }
 
@@ -75,7 +84,9 @@ export class ReportComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.customers = data.payload[0]['totalCustomers'];
+        this.customers = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload[0]['totalCustomers'];
       });
   }
 
@@ -86,7 +97,9 @@ export class ReportComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.details = data.payload['2022'];
+        this.details = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload['2022'];
       });
   }
 
@@ -97,7 +110,9 @@ export class ReportComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.customersPerMonth = data.payload['2022'];
+        this.customersPerMonth = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload['2022'];
       });
   }
 
@@ -108,7 +123,9 @@ export class ReportComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.expensesPerMonth = data.payload['2022'];
+        this.expensesPerMonth = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload['2022'];
       });
   }
 }

@@ -8,6 +8,8 @@ import { Injectable } from '@angular/core';
 import { RequestParams } from '../models/RequestParams';
 import { environment } from 'src/environments/environment';
 
+import { Buffer } from 'buffer/';
+
 export const AUTH_REQUIRED = new HttpContextToken(() => true);
 
 @Injectable({
@@ -33,7 +35,7 @@ export class DataService {
       case 'POST':
         result = this.http.post(
           `${this.baseURL}${requestParams.EndPoint}`,
-          requestParams.Body,
+          Buffer.from(requestParams.Body).toString('base64'),
           { context: new HttpContext().set(AUTH_REQUIRED, false) }
         );
         break;
@@ -42,7 +44,7 @@ export class DataService {
       case 'PATCH':
         result = this.http.patch(
           `${this.baseURL}${requestParams.EndPoint}`,
-          requestParams.Body,
+          Buffer.from(requestParams.Body).toString('base64'),
           {
             context: new HttpContext().set(AUTH_REQUIRED, false),
           }
@@ -59,7 +61,7 @@ export class DataService {
       case 'POST_REQUIRES_AUTH':
         result = this.http.post(
           `${this.baseURL}${requestParams.EndPoint}`,
-          requestParams.Body,
+          Buffer.from(requestParams.Body).toString('base64'),
           { context: new HttpContext().set(AUTH_REQUIRED, true) }
         );
         break;
@@ -67,7 +69,7 @@ export class DataService {
       case 'PATCH_REQUIRES_AUTH':
         result = this.http.patch(
           `${this.baseURL}${requestParams.EndPoint}`,
-          requestParams.Body,
+          Buffer.from(requestParams.Body).toString('base64'),
           {
             context: new HttpContext().set(AUTH_REQUIRED, true),
           }
@@ -77,6 +79,7 @@ export class DataService {
       default:
         break;
     }
+
     return result;
   }
 

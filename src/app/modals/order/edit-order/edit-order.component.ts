@@ -6,6 +6,7 @@ import { RequestParams } from 'src/app/models/RequestParams';
 
 import ProgressBar from '@badrap/bar-of-progress';
 import Swal from 'sweetalert2';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-edit-order',
@@ -62,8 +63,12 @@ export class EditOrderComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$products = data.payload;
-        this.$products_copy = data.payload;
+        this.$products = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
+        this.$products_copy = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 

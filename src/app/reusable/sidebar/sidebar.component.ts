@@ -72,7 +72,6 @@ export class SidebarComponent implements OnInit {
           }
 
           this.userService.logOut();
-          localStorage.removeItem('user');
           this.progress.finish();
         }, 100);
       },

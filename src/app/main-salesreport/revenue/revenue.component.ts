@@ -11,6 +11,9 @@ import { BaseChartDirective } from 'ng2-charts';
 
 import { default as Annotation } from 'chartjs-plugin-annotation';
 import { RequestParams } from 'src/app/models/RequestParams';
+
+import { Buffer } from 'buffer/';
+
 @Component({
   selector: 'app-revenue',
   templateUrl: './revenue.component.html',
@@ -112,7 +115,9 @@ export class RevenueComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.topSelling = data.payload;
+        this.topSelling = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 
@@ -123,7 +128,9 @@ export class RevenueComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.topSellingCat = data.payload;
+        this.topSellingCat = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
 
         // this.barChartData['labels'] = this.barlabel;
         // this.barChartData['datasets'][0]['data'] = this.barData;
@@ -146,7 +153,9 @@ export class RevenueComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.salesMonth = data.payload[0];
+        this.salesMonth = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload[0];
         this.salesMonthLabel = this.salesMonth.map((day, index) =>
           (index + 1).toString()
         );
@@ -164,22 +173,26 @@ export class RevenueComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
+        const values = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
+
         this.header = [
           {
             text: 'Sold Items',
-            value: data.payload[new Date().getMonth()][0],
+            value: values[new Date().getMonth()][0],
           },
           {
             text: 'Gross Sales',
-            value: data.payload[new Date().getMonth()][3],
+            value: values[new Date().getMonth()][3],
           },
           {
             text: 'Customers',
-            value: data.payload[new Date().getMonth()][1],
+            value: values[new Date().getMonth()][1],
           },
           {
             text: 'Purchases',
-            value: data.payload[new Date().getMonth()][2],
+            value: values[new Date().getMonth()][2],
           },
         ];
       });
@@ -247,7 +260,7 @@ export class RevenueComponent implements OnInit {
     scales: {
       x: {},
       y: {
-        min: 10,
+        min: 1,
       },
     },
     // plugins: {

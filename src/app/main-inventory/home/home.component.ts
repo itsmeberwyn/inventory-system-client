@@ -2,6 +2,7 @@ import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-home',
@@ -34,11 +35,11 @@ export class HomeComponent implements OnInit {
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/get-products`;
 
-    this.dataService
-      .httpRequest('GET_REQUIRES_AUTH', requestParams)
-      .subscribe(async (data: any) => {
-        this.$products = data.payload;
-        console.log(data);
+    this.dataService.httpRequest('GET_REQUIRES_AUTH', requestParams).subscribe(
+      (data: any) => {
+        this.$products = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
 
         // const newData = data.payload.flat().sort(this.compare);
         // this.$products = newData.reduce(
@@ -55,7 +56,11 @@ export class HomeComponent implements OnInit {
         //   },
         //   []
         // );
-      });
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   getCategories() {
@@ -65,7 +70,9 @@ export class HomeComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$categories = data.payload;
+        this.$categories = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 

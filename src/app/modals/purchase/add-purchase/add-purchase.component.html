@@ -2,13 +2,24 @@
     <mat-dialog-content class="mat-typography">
         <div class="modal_body_container">
           <div class="modal_left_container">
-            <div class="modal_left_top_container">
+            <div class="modal_left_top_container" >
 
               <mat-form-field class="example-form-field" appearance="fill">
                 <mat-label>Search by product name</mat-label>
                 <input matInput type="search" placeholder="Enter keyword" [(ngModel)]="search" (ngModelChange)="searchProduct()">
                   <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Page</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01"
+                #mySelect
+                (change)='paginate(mySelect.value)'>
+                  <option *ngFor="let page of [].constructor($products.length); let i=index" [selected]="currentPage == i" value="{{i}}">{{i+1}}</option>
+                </select>
+              </div>
 
               <!-- <mat-form-field class="example-form-field" appearance="fill">
                 <mat-label>Supplier Input</mat-label>
@@ -28,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                  <tr role="button" *ngFor="let product of $products[0]" (click)="addOrder(product)" >
+                  <tr role="button" *ngFor="let product of $products[currentPage]" (click)="addOrder(product)" >
                     <td>{{product.id}}</td>
                     <td>{{product.productName}}</td>
                     <td>{{product.productDescription}}</td>

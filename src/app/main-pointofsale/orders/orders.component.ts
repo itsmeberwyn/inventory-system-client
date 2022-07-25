@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TemplateRef } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
+import { Buffer } from 'buffer/';
 
 @Component({
   selector: 'app-orders',
@@ -72,8 +73,12 @@ export class OrdersComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        this.$transactions = data.payload;
-        this.$transactions_copy = data.payload;
+        this.$transactions = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
+        this.$transactions_copy = JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload;
       });
   }
 
