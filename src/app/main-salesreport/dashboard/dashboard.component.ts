@@ -58,7 +58,9 @@ export class DashboardComponent implements OnInit {
     this.dataService
       .httpRequest('GET_REQUIRES_AUTH', requestParams)
       .subscribe(async (data: any) => {
-        for (let item of data.payload) {
+        for (let item of JSON.parse(
+          JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
+        ).payload) {
           this.revenue += item.sold;
         }
         this.topSelling = JSON.parse(

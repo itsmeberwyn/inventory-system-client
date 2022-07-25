@@ -134,17 +134,9 @@ export class RevenueComponent implements OnInit {
 
         // this.barChartData['labels'] = this.barlabel;
         // this.barChartData['datasets'][0]['data'] = this.barData;
-        this.barData = this.topSellingCat.map(
-          (data: any) =>
-            JSON.parse(
-              JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
-            ).quantitySold
-        );
+        this.barData = this.topSellingCat.map((data: any) => data.quantitySold);
         this.barLabel = this.topSellingCat.map(
-          (data: any) =>
-            JSON.parse(
-              JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
-            ).categoryName
+          (data: any) => data.categoryName
         );
 
         this.barChartData['labels'] = this.barLabel;
@@ -268,7 +260,7 @@ export class RevenueComponent implements OnInit {
     scales: {
       x: {},
       y: {
-        min: 10,
+        min: 1,
       },
     },
     // plugins: {
