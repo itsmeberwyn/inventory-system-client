@@ -180,28 +180,30 @@ export class AddPurchaseComponent implements OnInit {
   }
 
   submitOrder() {
-    this.progress.start();
+    if (this.transactionForm.controls.supplierId.valid) {
+      this.progress.start();
 
-    this.transactionId = new Date().valueOf();
+      this.transactionId = new Date().valueOf();
 
-    const requestParams = new RequestParams();
-    requestParams.EndPoint = `/add-purchases`;
-    requestParams.Body = JSON.stringify({
-      data: this.transactionForm.controls.list.value,
-      supplierId: this.transactionForm.controls.supplierId.value,
-    });
-
-    this.dataService
-      .httpRequest('POST_REQUIRES_AUTH', requestParams)
-      .subscribe(async (data: any) => {
-        if (data.status['remarks'] === 'success') {
-          setTimeout(() => {
-            this.transactionForm.reset();
-            Swal.fire('Awesome!', data.status['message'], 'success');
-            this.progress.finish();
-          }, 200);
-        }
+      const requestParams = new RequestParams();
+      requestParams.EndPoint = `/add-purchases`;
+      requestParams.Body = JSON.stringify({
+        data: this.transactionForm.controls.list.value,
+        supplierId: this.transactionForm.controls.supplierId.value,
       });
+
+      this.dataService
+        .httpRequest('POST_REQUIRES_AUTH', requestParams)
+        .subscribe(async (data: any) => {
+          if (data.status['remarks'] === 'success') {
+            setTimeout(() => {
+              this.transactionForm.reset();
+              Swal.fire('Awesome!', data.status['message'], 'success');
+              this.progress.finish();
+            }, 200);
+          }
+        });
+    }
   }
 
   trackByFn(index: any, item: any) {

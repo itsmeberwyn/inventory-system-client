@@ -31,7 +31,7 @@ export class DeletePurchaseComponent implements OnInit {
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/delete-purchase`;
     requestParams.Body = JSON.stringify({
-      purchaseId: this.data.serial.id,
+      purchaseId: this.data.serial.purchaseSerialId,
       productId: this.data.serial.productId,
       quantity: this.data.serial.quantityBought,
     });
