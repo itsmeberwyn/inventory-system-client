@@ -117,8 +117,17 @@ export class AddPurchaseComponent implements OnInit {
     return this.transactionForm.get('list') as FormArray;
   }
 
+  updateTotal(index: any) {
+    this.totalCost = 0;
+    for (let i = 0; i < this.transactionForm.controls.list.length; i++) {
+      this.totalCost +=
+        this.transactionForm.controls.list.value[i].price *
+        this.transactionForm.controls.list.value[i].quantityBought;
+    }
+  }
+
   newOrder(data: any) {
-    this.totalCost += data.price * 1;
+    this.totalCost += 0 * 1;
 
     return this.formBuilder.group({
       purchaseSerialId: this.transactionId,
@@ -128,7 +137,7 @@ export class AddPurchaseComponent implements OnInit {
       price: 0,
       quantityBought: 1,
       actualQuantity: data.quantity,
-      subTotal: data.price * 1,
+      subTotal: 0 * 1,
     });
   }
 
@@ -171,28 +180,30 @@ export class AddPurchaseComponent implements OnInit {
   }
 
   submitOrder() {
-    this.progress.start();
+    if (this.transactionForm.controls.supplierId.valid) {
+      this.progress.start();
 
-    this.transactionId = new Date().valueOf();
+      this.transactionId = new Date().valueOf();
 
-    const requestParams = new RequestParams();
-    requestParams.EndPoint = `/add-purchases`;
-    requestParams.Body = JSON.stringify({
-      data: this.transactionForm.controls.list.value,
-      supplierId: this.transactionForm.controls.supplierId.value,
-    });
-
-    this.dataService
-      .httpRequest('POST_REQUIRES_AUTH', requestParams)
-      .subscribe(async (data: any) => {
-        if (data.status['remarks'] === 'success') {
-          setTimeout(() => {
-            this.transactionForm.reset();
-            Swal.fire('Awesome!', data.status['message'], 'success');
-            this.progress.finish();
-          }, 200);
-        }
+      const requestParams = new RequestParams();
+      requestParams.EndPoint = `/add-purchases`;
+      requestParams.Body = JSON.stringify({
+        data: this.transactionForm.controls.list.value,
+        supplierId: this.transactionForm.controls.supplierId.value,
       });
+
+      this.dataService
+        .httpRequest('POST_REQUIRES_AUTH', requestParams)
+        .subscribe(async (data: any) => {
+          if (data.status['remarks'] === 'success') {
+            setTimeout(() => {
+              this.transactionForm.reset();
+              Swal.fire('Awesome!', data.status['message'], 'success');
+              this.progress.finish();
+            }, 200);
+          }
+        });
+    }
   }
 
   trackByFn(index: any, item: any) {
