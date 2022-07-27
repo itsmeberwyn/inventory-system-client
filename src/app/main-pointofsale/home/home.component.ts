@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
 
   category: any = '';
   totalCost: number = 0;
+  search: any = '';
 
   orderForm: any = this.formBuilder.group({
     list: this.formBuilder.array([]),
@@ -104,6 +105,21 @@ export class HomeComponent implements OnInit {
     }, []);
 
     console.log(this.$products);
+  }
+
+  searchProduct() {
+    if (this.$products.length === 0 || this.search === '') {
+      this.$products = this.$products_copy;
+      return;
+    }
+
+    const result = this.$products.flat().filter((product: any) => {
+      return new RegExp(this.search.toLowerCase()).test(
+        product.productName.toLowerCase()
+      );
+    });
+
+    this.$products = result;
   }
 
   get formArrOrder() {

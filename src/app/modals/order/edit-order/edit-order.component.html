@@ -6,8 +6,8 @@
               
               <mat-form-field class="example-form-field" appearance="fill">
                 <mat-label>Search</mat-label>
-                <input matInput type="search" placeholder="Enter keyword">
-                  <mat-icon matSuffix>search</mat-icon>
+                <input matInput type="search" placeholder="Enter keyword" [(ngModel)]="search" (ngModelChange)="searchProduct()">
+              <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
             </div>
 
@@ -22,7 +22,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr role="button" *ngFor="let product of $products[0]" (click)="addOrder(product)" >
+                  <tr role="button" *ngFor="let product of $products" (click)="addOrder(product)" >
                     <td>{{product.id}}</td>
                     <td>{{product.productName}}</td>
                     <td>{{product.productDescription}}</td>

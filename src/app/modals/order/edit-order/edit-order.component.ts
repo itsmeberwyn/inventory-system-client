@@ -26,6 +26,7 @@ export class EditOrderComponent implements OnInit {
   $orders: any = [];
 
   totalCost: any = 0;
+  search: any = '';
 
   orderForm: any = this.formBuilder.group({
     list: this.formBuilder.array([]),
@@ -65,11 +66,26 @@ export class EditOrderComponent implements OnInit {
       .subscribe(async (data: any) => {
         this.$products = JSON.parse(
           JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
-        ).payload;
+        ).payload.flat();
         this.$products_copy = JSON.parse(
           JSON.parse(Buffer.from(data['data'], 'base64').toString('ascii'))
-        ).payload;
+        ).payload.flat();
       });
+  }
+
+  searchProduct() {
+    if (this.$products.length === 0 || this.search === '') {
+      this.$products = this.$products_copy;
+      return;
+    }
+
+    const result = this.$products.filter((product: any) => {
+      return new RegExp(this.search.toLowerCase()).test(
+        product.productName.toLowerCase()
+      );
+    });
+
+    this.$products = result;
   }
 
   get formArrOrder() {
