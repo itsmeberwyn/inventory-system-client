@@ -75,7 +75,6 @@ export class ProductsComponent implements OnInit {
     let result = [];
     for (let i = 0; i < this.$products.length; i++) {
       for (let j = 0; j < this.$products[i].length; j++) {
-        console.log(this.$products[i][j].categoryId, event);
         if (this.$products[i][j].categoryId === parseInt(event)) {
           result.push(this.$products[i][j]);
         }
@@ -93,8 +92,6 @@ export class ProductsComponent implements OnInit {
 
       return resultArray;
     }, []);
-
-    console.log(this.$products);
   }
 
   paginate(page: any) {

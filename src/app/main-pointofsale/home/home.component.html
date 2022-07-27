@@ -10,6 +10,12 @@
               <mat-option *ngFor="let category of $categories" value="{{category.id}}" >{{category.categoryName | titlecase}}</mat-option>
             </mat-select>
           </mat-form-field>
+                    
+          <mat-form-field class="example-form-field ms-3" appearance="fill">
+            <mat-label>Search</mat-label>
+            <input matInput type="search" placeholder="Enter keyword" [(ngModel)]="search" (ngModelChange)="searchProduct()">
+          <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
         </div>
 
     <div class="left_bot_container">

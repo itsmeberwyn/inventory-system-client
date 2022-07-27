@@ -26,15 +26,22 @@ export class DataService {
     switch (requestType) {
       //get data
       case 'GET':
-        result = this.http.get(`${this.baseURL}${requestParams.EndPoint}`, {
-          context: new HttpContext().set(AUTH_REQUIRED, false),
-        });
+        result = this.http.get(
+          `${this.baseURL}/${Buffer.from(requestParams.EndPoint).toString(
+            'base64'
+          )}`,
+          {
+            context: new HttpContext().set(AUTH_REQUIRED, false),
+          }
+        );
         break;
 
       //post data
       case 'POST':
         result = this.http.post(
-          `${this.baseURL}${requestParams.EndPoint}`,
+          `${this.baseURL}/${Buffer.from(requestParams.EndPoint).toString(
+            'base64'
+          )}`,
           Buffer.from(requestParams.Body).toString('base64'),
           { context: new HttpContext().set(AUTH_REQUIRED, false) }
         );
@@ -43,7 +50,9 @@ export class DataService {
       //put data
       case 'PATCH':
         result = this.http.patch(
-          `${this.baseURL}${requestParams.EndPoint}`,
+          `${this.baseURL}/${Buffer.from(requestParams.EndPoint).toString(
+            'base64'
+          )}`,
           Buffer.from(requestParams.Body).toString('base64'),
           {
             context: new HttpContext().set(AUTH_REQUIRED, false),
@@ -53,14 +62,21 @@ export class DataService {
 
       //get data requires authentication
       case 'GET_REQUIRES_AUTH':
-        result = this.http.get(`${this.baseURL}${requestParams.EndPoint}`, {
-          context: new HttpContext().set(AUTH_REQUIRED, true),
-        });
+        result = this.http.get(
+          `${this.baseURL}/${Buffer.from(requestParams.EndPoint).toString(
+            'base64'
+          )}`,
+          {
+            context: new HttpContext().set(AUTH_REQUIRED, true),
+          }
+        );
         break;
 
       case 'POST_REQUIRES_AUTH':
         result = this.http.post(
-          `${this.baseURL}${requestParams.EndPoint}`,
+          `${this.baseURL}/${Buffer.from(requestParams.EndPoint).toString(
+            'base64'
+          )}`,
           Buffer.from(requestParams.Body).toString('base64'),
           { context: new HttpContext().set(AUTH_REQUIRED, true) }
         );
@@ -68,7 +84,9 @@ export class DataService {
 
       case 'PATCH_REQUIRES_AUTH':
         result = this.http.patch(
-          `${this.baseURL}${requestParams.EndPoint}`,
+          `${this.baseURL}/${Buffer.from(requestParams.EndPoint).toString(
+            'base64'
+          )}`,
           Buffer.from(requestParams.Body).toString('base64'),
           {
             context: new HttpContext().set(AUTH_REQUIRED, true),
