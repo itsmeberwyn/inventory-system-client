@@ -1,5 +1,5 @@
 import { DataService } from './../../../services/data.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { RequestParams } from 'src/app/models/RequestParams';
 
@@ -20,6 +20,7 @@ export class DeleteOrderComponent implements OnInit {
   });
 
   constructor(
+    public dialogRef: MatDialogRef<DeleteOrderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dataService: DataService
   ) {}
@@ -45,6 +46,7 @@ export class DeleteOrderComponent implements OnInit {
           setTimeout(() => {
             Swal.fire('Awesome!', data.status['message'], 'success');
             this.progress.finish();
+            this.dialogRef.close();
           }, 200);
         }
       });

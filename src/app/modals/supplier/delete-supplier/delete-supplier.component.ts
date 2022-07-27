@@ -55,9 +55,8 @@ export class DeleteSupplierComponent implements OnInit {
 
                   return resultArray;
                 }, []);
-
-              this.dialogRef.close({ $suppliers: this.data.$suppliers });
             }
+            this.dialogRef.close({ $suppliers: this.data.$suppliers });
           }, 200);
         }
       });
