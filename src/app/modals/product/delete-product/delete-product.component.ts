@@ -30,7 +30,7 @@ export class DeleteProductComponent implements OnInit {
 
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/delete-product`;
-    requestParams.Body = { productId: this.data.productId };
+    requestParams.Body = JSON.stringify({ productId: this.data.productId });
 
     this.dataService
       .httpRequest('PATCH_REQUIRES_AUTH', requestParams)
@@ -40,9 +40,6 @@ export class DeleteProductComponent implements OnInit {
             Swal.fire('Awesome!', data.status['message'], 'success');
             this.progress.finish();
           }, 200);
-          if (this.data.index > -1) {
-            this.data.$products[this.data.page].splice(this.data.index, 1);
-          }
         }
       });
   }

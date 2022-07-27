@@ -33,8 +33,10 @@ export class DeleteOrderComponent implements OnInit {
 
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/delete-order`;
-    requestParams.Body = { orderId: this.data[0].id, data: this.data };
-    console.log(this.data);
+    requestParams.Body = JSON.stringify({
+      orderId: this.data[0].id,
+      data: this.data,
+    });
 
     this.dataService
       .httpRequest('PATCH_REQUIRES_AUTH', requestParams)

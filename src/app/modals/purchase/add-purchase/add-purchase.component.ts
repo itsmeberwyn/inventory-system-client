@@ -117,8 +117,17 @@ export class AddPurchaseComponent implements OnInit {
     return this.transactionForm.get('list') as FormArray;
   }
 
+  updateTotal(index: any) {
+    this.totalCost = 0;
+    for (let i = 0; i < this.transactionForm.controls.list.length; i++) {
+      this.totalCost +=
+        this.transactionForm.controls.list.value[i].price *
+        this.transactionForm.controls.list.value[i].quantityBought;
+    }
+  }
+
   newOrder(data: any) {
-    this.totalCost += data.price * 1;
+    this.totalCost += 0 * 1;
 
     return this.formBuilder.group({
       purchaseSerialId: this.transactionId,
@@ -128,7 +137,7 @@ export class AddPurchaseComponent implements OnInit {
       price: 0,
       quantityBought: 1,
       actualQuantity: data.quantity,
-      subTotal: data.price * 1,
+      subTotal: 0 * 1,
     });
   }
 

@@ -31,7 +31,7 @@ export class DeleteSupplierComponent implements OnInit {
 
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/delete-supplier`;
-    requestParams.Body = { supplierId: this.data.supplierId };
+    requestParams.Body = JSON.stringify({ supplierId: this.data.supplierId });
 
     this.dataService
       .httpRequest('PATCH_REQUIRES_AUTH', requestParams)

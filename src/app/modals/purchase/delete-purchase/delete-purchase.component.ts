@@ -30,11 +30,11 @@ export class DeletePurchaseComponent implements OnInit {
 
     const requestParams = new RequestParams();
     requestParams.EndPoint = `/delete-purchase`;
-    requestParams.Body = {
+    requestParams.Body = JSON.stringify({
       purchaseId: this.data.serial.id,
       productId: this.data.serial.productId,
       quantity: this.data.serial.quantityBought,
-    };
+    });
 
     this.dataService
       .httpRequest('PATCH_REQUIRES_AUTH', requestParams)
